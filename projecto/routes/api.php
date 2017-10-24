@@ -16,5 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('listarPorAluno','MensalidadeController@listarPorAluno')->name('listarPorAluno');
+Route::get('listarPorAluno','MensalidadeController@listarPorAluno')->name('listarPorAluno');
 Route::post('listarPorMes','MensalidadeController@listarPorMes')->name('listarPorMes');
+//Route::post('listarPorAluno2','MensalidadeController@listarPorAluno2')->name('listarPorAluno2');

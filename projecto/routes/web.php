@@ -11,8 +11,13 @@
 |
 */
 Route::get('/','HomeController@index');
-Route::get('mensalidade','MensalidadeController@index');
 Route::get('/logon','HomeController@logon');
+
+Route::group(['prefix'=>'mensalidade'], function (){
+    Route::get('/','MensalidadeController@index');
+    Route::get('/registar','MensalidadeController@registarMensalidade');
+});
+
 Route::group(['prefix'=>'extras'], function (){
     Route::get('/','HomeController@lock');
 });

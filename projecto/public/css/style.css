@@ -31,9 +31,11 @@ option{
 .alunuDetalhes{
     background-color: #f2f2f2;
     border-radius: 6px;
-    padding: 0px 25px;
-    /*width: 100%;*/
+    padding: 10px 10px 10px 12px;
     height: auto;
+}
+.item{
+    min-height: 435px;
 }
 #painelBody{
     padding-left: 45px;
@@ -320,16 +322,19 @@ select.material-control-login:hover{
 #log{
     min-height: 60px;
     width: 210px;
-    padding: 1em 0 0 0;
+    /*padding: 1em 0 0 0;*/
     margin: 0 15px 0 0;
-    background-color: #deebf2;;
-    /*border-bottom: 1px solid #f2f2f2;*/
+    background-color: white;;
+    border-bottom: 1px solid #f2f2f2;
 }
 #log p{
     color: #797979;
     font-size: 26px;
     text-align: center;
+    margin: 0;
 }
+
+
 /* BASIC THEME CONFIGURATION */
 body {
     color: #797979;
@@ -753,6 +758,7 @@ ul.sidebar-menu li a.active i {
     padding-bottom: 15px;
     padding-top: 0px;
     width: 100%;
+    min-height: 580px;
 }
 
 

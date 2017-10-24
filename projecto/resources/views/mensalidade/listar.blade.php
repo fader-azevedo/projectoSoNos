@@ -86,40 +86,10 @@
                         {{--<input type="checkbox" checked="" data-toggle="switch" />--}}
                     {{--</div>--}}
                     {{--<div class="col-sm-6 text-center">--}}
-                        {{--<input type="checkbox" data-toggle="switch" />--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="row mt">--}}
-                    {{--<div class="col-sm-6 text-center">--}}
-                        {{--<div class="switch switch-square"--}}
-                             {{--data-on-label="<i class=' fa fa-check'></i>"--}}
                              {{--data-off-label="<i class='fa fa-times'></i>">--}}
                             {{--<input type="checkbox" />--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-sm-6 text-center">--}}
-                        {{--<div class="switch switch-square"--}}
-                             {{--data-on-label="<i class=' fa fa-check'></i>"--}}
-                             {{--data-off-label="<i class='fa fa-times'></i>">--}}
-                            {{--<input type="checkbox" checked="" />--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="row mt">--}}
-                    {{--<div class="col-sm-6 text-center">--}}
-                        {{--<input type="checkbox" disabled data-toggle="switch" />--}}
-                    {{--</div>--}}
-                    {{--<div class="col-sm-6 text-center">--}}
-                        {{--<input type="checkbox" checked disabled data-toggle="switch" />--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-
         <section class="panel">
             <header class="panel-heading tab-bg-dark-navy-blue">
-
-
                 <ul class="nav nav-tabs">
                     <li style="width: 100px;" class="tooltipped" data-tooltip="Selecione o Ano">
                         <div >
@@ -132,125 +102,126 @@
                         </div>
                     </li>
 
-                    <li class="active">
-                        <a data-toggle="tab" href="#tabPorAluno">Por Aluno</a>
+                    <li class="active" id="alunos">
+                        <a data-slide-to="0" href="#carousellDiv" data-toggle="tab" >Por Aluno</a>
                     </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#tabPorMes">Por Mês</a>
+                    <li>
+                        <a data-slide-to="1" href="#carousellDiv" data-toggle="tab" >Por Mês</a>
                     </li>
                 </ul>
             </header>
             <div class="panel-body" id="painelBody">
-                <div class="tab-content">
-                    <div id="tabPorAluno" class="tab-pane active">
-                        <div class="col-md-3 col-sm-3 col-lg-3">
-                            <div class="input-field">
-                                <i class="zmdi zmdi-account-circle prefix"></i>
-                                <input id="selectAluno" placeholder="Aluno"  type="text" list="listaAluno">
-                                <datalist id="listaAluno">
-                                    @foreach($alunos  as $ms)
-                                        <option data-costa="" id="{{$ms->id}}" value="{{$ms->nome}}">{{$ms->nome}}</option>
-                                    @endforeach
-                                </datalist>
-                            </div>
-                            <div class=" alunuDetalhes row">
-                                <div class="col-md-12 col-sm-12 col-lg-12"  >
-                                    <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class=" centered img-circle" width="165" height="160">
+                <div id="carousellDiv" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div  class="carousel-inner">
+                        <div id="" class="item active"  >
+                            <div class="col-md-3 col-sm-3 col-lg-3 ">
+                                <div class="input-field">
+                                    <i class="zmdi zmdi-account-circle prefix"></i>
+                                    <input id="selectAluno" placeholder="Aluno"  type="text" list="listaAluno">
+                                    <datalist id="listaAluno">
+                                        @foreach($alunos  as $ms)
+                                            <option data-costa="" id="{{$ms->id}}" value="{{$ms->nome}}">{{$ms->nome}}</option>
+                                        @endforeach
+                                    </datalist>
                                 </div>
-                                {{--<div class="col-md-6 col-sm-6 col-lg-6" id="divDados">--}}
-                                    {{--<p>&nbsp;Nome:<span class="progress progress-bar" id="apelido"></span></p>--}}
-                                    {{--<p>&nbsp;Sexo:<span class="progress progress-bar" id="sexo"></span></p>--}}
-                                    {{--<p>&nbsp;Idade:<span class="progress progress-bar" id="idade"></span></p>--}}
-                                {{--</div>--}}
-                            </div>
-
-                            <div class="col-md-122 col-sm-12 col-log-12">
-                                <div class="progress progress-striped ">
-                                    <div id="barWidth" class="progress-bar tooltipped"  role="progressbar"   aria-valuemin="0" aria-valuemax="100" data-tooltip="% de Pagamento Feito">
-                                        <span class="centered" style="font-size: 13px;"  id="percPago"></span>
+                                <div class=" alunuDetalhes row">
+                                    <div class="col-md-12 col-sm-12 col-lg-12"  >
+                                        <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class="materialboxed centered img-rounded" width="175" height="170">
                                     </div>
+                                    {{--<div class="col-md-6 col-sm-6 col-lg-6" id="divDados">--}}
+                                        {{--<p>&nbsp;Nome:<span class="progress progress-bar" id="apelido"></span></p>--}}
+                                        {{--<p>&nbsp;Sexo:<span class="progress progress-bar" id="sexo"></span></p>--}}
+                                        {{--<p>&nbsp;Idade:<span class="progress progress-bar" id="idade"></span></p>--}}
+                                    {{--</div>--}}
                                 </div>
-                            </div>
 
-                            <div class="row" >
-                                <div class="col-md-4 col-sm-4 col-log-4 ">
-                                    <div class="sm-st tooltipped" data-tooltip="Valor Pago">
-                                        <p class="centered">
-                                            <span class="sm-st-icon st-blue"><i class="fa fa-money"></i></span>
-                                        </p>
-                                        <div class="sm-st-info centered">
-                                            <p id="valorPago">0</p>
+                                <div class="col-md-122 col-sm-12 col-log-12">
+                                    <div class="progress progress-striped ">
+                                        <div id="barWidth" class="progress-bar tooltipped"  role="progressbar"   aria-valuemin="0" aria-valuemax="100" data-tooltip="% de Pagamento Feito">
+                                            <span class="centered" style="font-size: 13px;"  id="percPago"></span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 col-sm-4 col-lg-4 ">
-                                    <div class="sm-st  tooltipped"  data-tooltip="Divida">
-                                        <p class="centered">
-                                            <span class="sm-st-icon st-red"><i class="fa fa-money"></i></span>
-                                        </p>
-                                        <div class="sm-st-info centered">
-                                            <p id="valorDivida">0</p>
+                                <div class="row" >
+                                    <div class="col-md-4 col-sm-4 col-log-4 ">
+                                        <div class="sm-st tooltipped" data-tooltip="Valor Pago">
+                                            <p class="centered">
+                                                <span class="sm-st-icon st-blue"><i class="fa fa-money"></i></span>
+                                            </p>
+                                            <div class="sm-st-info centered">
+                                                <p id="valorPago">0</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-4 col-sm-4 col-lg-4 ">
-                                    <div class="sm-st tooltipped" data-tooltip="Total a Pagar" >
-                                        <p class="centered">
-                                            <span class="sm-st-icon st-violet"><i class="fa fa-money"></i></span>
-                                        </p>
-                                        <div class="sm-st-info centered">
-                                            <p>5600</p>
+                                    <div class="col-md-4 col-sm-4 col-lg-4 ">
+                                        <div class="sm-st  tooltipped"  data-tooltip="Divida">
+                                            <p class="centered">
+                                                <span class="sm-st-icon st-red"><i class="fa fa-money"></i></span>
+                                            </p>
+                                            <div class="sm-st-info centered">
+                                                <p id="valorDivida">0</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4 col-lg-4 ">
+                                        <div class="sm-st tooltipped" data-tooltip="Total a Pagar" >
+                                            <p class="centered">
+                                                <span class="sm-st-icon st-violet"><i class="fa fa-money"></i></span>
+                                            </p>
+                                            <div class="sm-st-info centered">
+                                                <p>5600</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-8 col-sm-8 col-lg-8" style="padding-top: 15px;">
-                            <table class="striped" id="IDtabela1">
-                                <thead>
-                                <tr>
-                                    <th data-field="id">Mês</th>
-                                    <th data-field="price">Data de Pagamento</th>
-                                    <th data-field="name">Estado</th>
-                                    <th data-field="price">Valor Pag<i class="zmdi zmdi-money"></i></th>
-                                </tr>
-                                </thead>
-                                <tbody id="tabela">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div id="tabPorMes" class="tab-pane ">
-                        <!--Mes-->
-                        <div class="col-md-3 col-sm-3 col-lg-3" style="padding-top: 15px" >
-                            <div class="group-material">
-                                <a class="icon"><i class="zmdi zmdi-calendar"></i></a>
-                                <select class="material-control tooltipped" data-tooltip="Mês" name="" id="selectMes">
-                                    <option value="" disabled="" selected=""  >Selecione Mês</option>
-                                    @foreach($meses as $mes)
-                                        <option value="{{$mes}}">{{$mes}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-8 col-sm-8 col-lg-8" style="padding-top: 15px;">
-                            <table class="striped" id="IDtabela2">
-                                <thead>
+                            <div class="col-md-8 col-sm-8 col-lg-8 " style="padding-top: 15px;">
+                                <table class="striped" id="IDtabela1">
+                                    <thead>
                                     <tr>
-                                        <th data-field="">Aluno</th>
-                                        <th data-field="">Data de Pagamento</th>
-                                        <th data-field="">Estado</th>
-                                        <th data-field="">Valor Pag<i class="zmdi zmdi-money"></i></th>
+                                        <th data-field="id">Mês</th>
+                                        <th data-field="price">Data de Pagamento</th>
+                                        <th data-field="name">Estado</th>
+                                        <th data-field="price">Valor Pag<i class="zmdi zmdi-money"></i></th>
                                     </tr>
-                                </thead>
-                                <tbody id="tabela2">
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody id="tabela">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <!--Mes-->
+                            <div class="col-md-3 col-sm-3 col-lg-3" style="padding-top: 15px" >
+                                <div class="group-material">
+                                    <a class="icon"><i class="zmdi zmdi-calendar"></i></a>
+                                    <select class="material-control tooltipped" data-tooltip="Mês" name="" id="selectMes">
+                                        <option value="" disabled="" selected=""  >Selecione Mês</option>
+                                        @foreach($meses as $mes)
+                                            <option value="{{$mes}}">{{$mes}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8 col-sm-8 col-lg-8" style="padding-top: 15px;">
+                                <table class="striped" id="IDtabela2">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="">Aluno</th>
+                                            <th data-field="">Data de Pagamento</th>
+                                            <th data-field="">Estado</th>
+                                            <th data-field="">Valor Pag<i class="zmdi zmdi-money"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabela2">
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -263,6 +234,7 @@
 @section('scripts')
     <script type="text/javascript">
         $(document).ready(function() {
+
             /*Inicio Metodos de Listar por alunos*/
 
             function getCor(){
@@ -303,7 +275,7 @@
                 }
                 $.ajax({
                     url: 'api/listarPorAluno',
-                    type: 'POST',
+                    type: 'GET',
                     data: {'idAluno':idAluno,'ano':ano},
                     success: function (rs) {
                         document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.aluno.foto);
@@ -365,7 +337,11 @@
                 })
 
             });
-        })
+
+            $('.materialboxed').materialbox();
+//            $('.carousel').carousel();
+        });
     </script>
+
 @endsection
 

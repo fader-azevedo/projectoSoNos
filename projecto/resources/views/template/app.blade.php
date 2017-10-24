@@ -9,10 +9,6 @@
 
         <title>Gestão de Mensalidades</title>
 
-
-
-        {{--<link rel="stylesheet" type="text/css" href="{!! asset('css/materialize.min.css')!!}"/>--}}
-
         <link rel="stylesheet" type="text/css" href="{!! asset('css/bootstrap.css') !!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.css')!!}"  />
         <link rel="stylesheet" type="text/css" href="{!! asset('css/zabuto_calendar.css')!!}"/>
@@ -23,20 +19,21 @@
         <link rel="stylesheet" type="text/css" href="{!! asset('css/style.css')!!}" />
         <link rel="stylesheet" type="text/css" href="{!! asset('css/style-responsive.css')!!}"/>
 
+        {{--<link rel="stylesheet" type="text/css" href="{!! asset('materialize/css/materialize.css')!!}"/>--}}
         <link rel="stylesheet" type="text/css" href="{!! asset('css/materialize.min.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/normalize.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/material-design-iconic-font.min.css')!!}"/>
 
         {{--<link rel="stylesheet" type="text/css" href="{!! asset('css/sweetalert.css')!!}"/>--}}
-
-{{--        <script type="text/javascript" src="{!! asset('js/chart-master/Chart.js') !!}/"></script>--}}
+        {{--<script type="text/javascript" src="{!! asset('js/chart-master/Chart.js') !!}/"></script>--}}
     </head>
 
     <body onload="lerDados()">
         <section id="container" >
             <header class="header black-bg">
                 <div id="log" class="col-md-2">
-                    <p href="" class="logo"><b>Só Nós</b></p>
+                    {{--<p href="" class="logo"><b>Só Nós</b></p>--}}
+                    <p class="centered"><a href="{{url('/')}}"><img src="{!! asset('img/logo1.jpg')!!}" class="" width="95"></a></p>
                 </div>
 
                 <div class="top-menu">
@@ -134,7 +131,6 @@
                             </div>
                         </a>
                     </section>
-                    {{--</div>--}}
                 </section>
             </section>
 
@@ -146,10 +142,8 @@
                     </a>
                 </div>
             </footer>
-            <!--footer end-->
         </section>
 
-        {{--<script src="{!! asset('js/jquery.js')!!}"></script>--}}
         <script src="{!! asset('js/jquery-2.2.0.min.js')!!}" type="text/javascript"></script>
         <script src="{!! asset('js/bootstrap.min.js')!!}"></script>
 
@@ -160,14 +154,14 @@
 
         {{--<script src="{!! asset('js/js/jquery-easy-pie-chart/jquery.easy-pie-chart.js')!!}"></script>--}}
 
-        <script type="text/javascript" src="{!! asset('js/gritter/js/jquery.gritter.js')!!}"></script>
-        <script type="text/javascript" src="{!! asset('js/gritter-conf.js')!!}"></script>
+        {{--<script type="text/javascript" src="{!! asset('js/gritter/js/jquery.gritter.js')!!}"></script>--}}
+        {{--<script type="text/javascript" src="{!! asset('js/gritter-conf.js')!!}"></script>--}}
 
         <!--script for this page-->
         <script src="{!! asset('js/sparkline-chart.js')!!}"></script>
         <script src="{!! asset('js/zabuto_calendar.js')!!}"></script>
         <script src="{!! asset('js/common-scripts.js')!!}"></script>
-        {{--<script src="{!! asset('js/sweetalert.min.js')!!}"></script>--}}
+        <script src="{!! asset('js/sweetalert.min.js')!!}"></script>
         <script src="{!! asset('js/materialize.min.js')!!}"></script>
         <script src="{!! asset('js/jquery.mCustomScrollbar.concat.min.js')!!}"></script>
         <script src="{!! asset('js/jquery.waypoints.js')!!}"></script>
