@@ -6,12 +6,55 @@ Website: http://blacktie.co
 Premium: http://www.gridgum.com
 */
 
+.input-field i{
+    color: #00b0ff;
+}
+
+.tooltippy {
+    position: relative;
+    /*display: inline-block;*/
+    /*border-bottom: 1px dotted black; !* If you want dots under the hoverable text *!*/
+}
 
 
+.tooltippy .tooltippytext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #424a5d;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
 
-/* Import fonts */
-/*@import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);*/
-/*Noto*/
+
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+
+.tooltippy .tooltippytext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltippy:hover .tooltippytext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
 tr, td{
     cursor: hand;
 }
@@ -33,6 +76,18 @@ option{
     border-radius: 6px;
     padding: 10px 10px 10px 12px;
     height: auto;
+    /*border-radius: 50%;*/
+}
+
+.alunuDetalhes p{
+    background-color: #deebf2;
+    border-radius: 10px;
+}
+.alunuDetalhes p span{
+    float: right;
+    font-size: 14px;
+    margin-bottom: 0;
+    /*margin: 0;*/
 }
 .item{
     min-height: 435px;
@@ -47,17 +102,6 @@ option{
     /*float: right;*/
 }
 
-.alunuDetalhes p{
-    background-color: #deebf2;
-    border-radius: 10px;
-}
-.alunuDetalhes p span{
-    float: right;
-    font-size: 14px;
-    margin-bottom: 0;
-    /*margin: 0;*/
-}
-
 .sm-st {
     background: #e4e5ff;
     /*background: #51ff6d;*/
@@ -70,7 +114,7 @@ option{
     box-shadow: 0 1px 0px rgba(0,0,0,0.05);
 }
 .myIcon{
-    margin: 0px;
+    margin: 0;
     color: #00c5de;
     width: 40px;
     height: 40px;
@@ -91,9 +135,61 @@ option{
     margin-top:5px;
     color:#fff;
 }
-/*.sm-st-info {*/
-    /*font-size:13px;*/
-/*}*/
+/*Registar Mensalidades*/
+.inicio{
+    background-color: white;
+    border: 2px solid #b0d4ff;
+    margin-right: -6px;
+    position: relative;
+    height: 35px;
+    width: 36px;
+    border-radius: 50%
+}
+
+#actual{
+    background-color: white;
+    border: 2px solid #34a1ff;
+    margin-left: -10px;
+    margin-right: -10px;
+    height: 35px;
+    width: 36px;
+    border-radius: 50%;
+    position: relative;
+}
+.fim{
+    background-color: white;
+    border: 2px solid #3a5fff;
+    margin-left: -10px;
+    height: 35px;
+    width: 36px;
+    border-radius: 50%
+}
+.mesesPagos{
+    background-color: #76c3f0 !important;
+    margin: 10px 5px 0 0;
+    height: 15px;
+    width: 12.5%;
+}
+.mesesNaoPagos{
+    background-color: #87939a !important;
+    margin: 10px 5px 0 0;
+    height: 15px;
+    width: 12.5%;
+}
+
+.mesesAPagar{
+    background-color: #76c3f0;
+    color: white;
+    margin: 2px 1px 2px 0;
+}
+.mesesAPagar p{
+    font-size: 17px;
+}
+#divMesesAPAGAR{
+    margin-top: -10px;
+    background-color: #f2f2f2;
+}
+
 .sm-st-info p {
     /*display:block;*/
     font-size:20px;

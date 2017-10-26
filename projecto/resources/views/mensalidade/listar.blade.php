@@ -69,25 +69,6 @@
             <span class=""><i class="fa fa-money"></i></span>
             Mensalidades
         </h5>
-        {{--<div class="col-sm-1" style="background-color: yellow">--}}
-            {{--<a style="float: left" class="icon"><i class="zmdi zmdi-calendar"></i></a>--}}
-            {{--<select class="material-control2 tooltipped" data-tooltip="Ano" id="selectAno">--}}
-                {{--@foreach($anos as $ano)--}}
-                    {{--<option value="{{$ano}}">{{$ano}}</option>--}}
-                {{--@endforeach--}}
-            {{--</select>--}}
-        {{--</div>--}}
-
-        {{--<div class="col-lg-12">--}}
-            {{--<div class="form-panel">--}}
-                {{--<h4 class="mb"><i class="fa fa-angle-right"></i> Custom Toggles</h4>--}}
-                {{--<div class="row mt">--}}
-                    {{--<div class="col-sm-6 text-center">--}}
-                        {{--<input type="checkbox" checked="" data-toggle="switch" />--}}
-                    {{--</div>--}}
-                    {{--<div class="col-sm-6 text-center">--}}
-                             {{--data-off-label="<i class='fa fa-times'></i>">--}}
-                            {{--<input type="checkbox" />--}}
         <section class="panel">
             <header class="panel-heading tab-bg-dark-navy-blue">
                 <ul class="nav nav-tabs">
@@ -199,7 +180,7 @@
                             <div class="col-md-3 col-sm-3 col-lg-3" style="padding-top: 15px" >
                                 <div class="group-material">
                                     <a class="icon"><i class="zmdi zmdi-calendar"></i></a>
-                                    <select class="material-control tooltipped" data-tooltip="Mês" name="" id="selectMes">
+                                    <select class="material-control tooltipped" data-tooltip="Mês" id="selectMes">
                                         <option value="" disabled="" selected=""  >Selecione Mês</option>
                                         @foreach($meses as $mes)
                                             <option value="{{$mes}}">{{$mes}}</option>
@@ -248,12 +229,10 @@
             $('#selectAno').change(function () {
                 ano = $(this).val()
             });
-            var meses = ['Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
             for (var j = 0; j < meses.length; j++) {
                 $('#tabela').append(" <tr class='tr'><td>" + meses[j] + "</td> <td>--------------------------</td><td>--------</td><td>---------</td>");
             }
-
 
             var numAl = JSON.parse("{{json_encode($numAluno)}}");
             for( var k = 0; k< numAl; k++){
@@ -274,8 +253,8 @@
                     return;
                 }
                 $.ajax({
-                    url: 'api/listarPorAluno',
-                    type: 'GET',
+                    url: '/api/listarPorAluno',
+                    type: 'POST',
                     data: {'idAluno':idAluno,'ano':ano},
                     success: function (rs) {
                         document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.aluno.foto);

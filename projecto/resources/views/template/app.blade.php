@@ -166,7 +166,7 @@
         <script src="{!! asset('js/jquery.mCustomScrollbar.concat.min.js')!!}"></script>
         <script src="{!! asset('js/jquery.waypoints.js')!!}"></script>
         <script src="{!! asset('js/jquery.counterup.min.js')!!}"></script>
-        <script src="{!! asset('js/form-component.js')!!}"></script>
+        {{--<script src="{!! asset('js/form-component.js')!!}"></script>--}}
         <script src="{!! asset('js/bootstrap-switch.js')!!}"></script>
         <script src="{!! asset('js/jquery.tagsinput.js')!!}"></script>
 
@@ -185,6 +185,7 @@
             lerDados = function () {
 
             }
+            var meses = ['Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
         </script>
         @yield('scripts')
 

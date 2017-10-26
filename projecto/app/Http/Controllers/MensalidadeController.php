@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Aluno;
 use App\Mensalidade;
+use App\Inscricao;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,9 +32,15 @@ class MensalidadeController extends Controller{
     public function listarPorAluno(){
         $aluno = Aluno::query()->find($_POST['idAluno']);
         $mensalidade = Mensalidade::query()->select('*')->where('idAluno',$_POST['idAluno'])->where('ano',$_POST['ano'])->get();
-        return  response()->json(array('aluno' =>$aluno,'mensal'=> $mensalidade));
-    }
 
+        /*buscar dados de inscricao*/
+        $inscricao = Inscricao::query()->join('disciplinas','inscricaos.idDisciplina','=','disciplinas.id')
+            ->join('alunos','inscricaos.idAluno','=','alunos.id')
+            ->select('disciplinas.*')->where('idAluno',$_POST['idAluno'])->get();
+
+
+        return  response()->json(array('aluno' =>$aluno,'mensal'=> $mensalidade,'inscricao'=> $inscricao));
+    }
 
     public function listarPorMes(){
         $mensalidade = Mensalidade::query()

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Aluno;
+use App\Inscricao;
 use App\Mensalidade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class AlunoController extends Controller{
@@ -24,6 +26,12 @@ class AlunoController extends Controller{
 
 
     public function listar(Request $request){
+
+    }
+
+    public function getDisciplinasAluno(){
+
+
 
     }
 
