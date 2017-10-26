@@ -260,10 +260,6 @@ option{
 }
 
 
-
-
-
-
 .top-menu ul li{    border:0px solid #424a5d; ;
     min-width: 40px;
     /*color: #c7407f;*/
@@ -750,14 +746,14 @@ hr {
     display: inline;
 }
 
-ul.sidebar-menu , ul.sidebar-menu li ul.sub{
-    margin: -2px 0 0;
-    padding: 0;
-}
+/*ul.sidebar-menu , ul.sidebar-menu li ul.sub{*/
+    /*margin: -2px 0 0;*/
+    /*padding: 0;*/
+/*}*/
 
-ul.sidebar-menu {
-    margin-top: 75px;
-}
+/*ul.sidebar-menu {*/
+    /*margin-top: 75px;*/
+/*}*/
 
 #sidebar > ul > li > ul.sub {
     display: none;
@@ -774,10 +770,10 @@ ul.sidebar-menu {
     /*margin-right: 0;*/
 /*}*/
 
-ul.sidebar-menu li ul.sub li:last-child{
-    border-radius: 0 0 4px 4px;
-    -webkit-border-radius: 0 0 4px 4px;
-}
+/*ul.sidebar-menu li ul.sub li:last-child{*/
+    /*border-radius: 0 0 4px 4px;*/
+    /*-webkit-border-radius: 0 0 4px 4px;*/
+/*}*/
 
 
 
@@ -787,7 +783,6 @@ ul.sidebar-menu li{
     margin-left:10px;
     margin-right:10px;
 }
-
 
 
 ul.sidebar-menu li a{

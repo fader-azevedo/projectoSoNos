@@ -26,6 +26,7 @@
 
         <link rel="stylesheet" type="text/css" href="{!! asset('css/_all-skins.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/AdminLTE.css')!!}"/>
+        <link rel="stylesheet" type="text/css" href="{!! asset('charts/morris.css')!!}"/>
 
 
 
@@ -39,14 +40,8 @@
         <header class="main-header">
             <!-- Logo -->
             <a href="" class="logo" style="position: fixed">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>S</b>N</span>
-                <!-- logo for regular state and mobile devices -->
+                <span class="logo-mini"><img src="{!! asset('img/logo1.jpg')!!}" class="" width="50"></span>
                 <span class="logo-lg"><img src="{!! asset('img/logo1.jpg')!!}" class="" width="70"></span>
-
-                {{--<p href="" class="logo"><b>Só Nós</b></p>--}}
-                {{--<p class="centered"><a href="{{url('/')}}"><img src="{!! asset('img/logo1.jpg')!!}" class="" width="95"></a></p>--}}
-
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <div class="navbar navbar-fixed-top">
@@ -108,7 +103,7 @@
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="{{asset('img/logo1.jpg')}}" class="img-circle" alt="User Image">
-                                    <p>
+                                    <p style="color: #3c3f41">
                                        So Nos
                                         <small>Member since Nov. 2012</small>
                                     </p>
@@ -179,8 +174,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
-                            <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
+                            <li><a href=""><i class="fa fa-pencil"></i>Alunos</a></li>
+                            <li><a href=""><i class="fa fa-money"></i> Mensalidade</a></li>
                         </ul>
                     </li>
 
@@ -194,7 +189,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href=""><i class="fa fa-users"></i> Alunos</a></li>
-                            <li><a href=""><i class="fa fa-money"></i> Mensais</a></li>
+                            <li><a href=""><i class="fa fa-money"></i> Mensalidades</a></li>
                         </ul>
                     </li>
 
@@ -285,25 +280,19 @@
 
                 <div class="row">
                     <!-- Left col -->
-                    <section class="col-lg-7 connectedSortable">
+                    <section class="col-lg-8 connectedSortable">
                         <!-- Custom tabs (Charts with tabs)-->
                         <div class="nav-tabs-custom">
-                            <!-- Tabs within a box -->
                             <ul class="nav nav-tabs pull-right">
-                                <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                                <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-                                <li class="pull-left header"><i class="fa fa-inbox"></i> Mensalidades</li>
+                                <li class="pull-left header"><i class="fa fa-bar-chart-o"></i> Mensalidades</li>
+                                {{--<li class="pull-right header"><i class="fa fa-inbox"></i> deas</li>--}}
                             </ul>
-                            <div class="tab-content no-padding">
-                                <!-- Morris chart - Sales -->
-                                <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-                                <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
-                            </div>
+                            <canvas id="barChart" style="margin: auto; height:220px"></canvas>
                         </div>
                     </section>
 
-                    <section class="col-lg-5 connectedSortable">
-                        <div class="box box-default">
+                    <section class="col-lg-4 connectedSortable">
+                        <div class="box box-danger">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Alunos</h3>
 
@@ -313,72 +302,112 @@
                                     <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="chart-responsive">
-                                            <canvas id="pieChart" height="150"></canvas>
-                                        </div>
-                                        <!-- ./chart-responsive -->
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-md-4">
-                                        <ul class="chart-legend clearfix">
-                                            <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
-                                            <li><i class="fa fa-circle-o text-green"></i> IE</li>
-                                            <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
-                                            <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
-                                            <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
-                                            <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
-                                        </ul>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
+                            <div class="box-body chart-responsive">
+                                <div class="chart" id="sales-chart" style="height: 340px; position: relative;"></div>
                             </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer no-padding">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="#">United States of America
-                                            <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-                                    <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a>
-                                    </li>
-                                    <li><a href="#">China
-                                            <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-                                </ul>
-                            </div>
-                            <!-- /.footer -->
                         </div>
                     </section>
                 </div>
-
             </section>
-
-
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.4.0
             </div>
-            <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-            reserved.
+            <strong>Sistema de Gestão de Mensalidades<a href=""></a>.</strong>
         </footer>
-
-        <!-- Control Sidebar -->
-        <!-- /.control-sidebar -->
-        <!-- Add the sidebar's background. This div must be placed
-             immediately after the control sidebar -->
     </div>
-    {{--<script src="bower_components/jquery/dist/jquery.min.js"></script>--}}
-    {{--<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>--}}
-    {{--<script src="dist/js/adminlte.min.js"></script>--}}
-
     <script src="{!! asset('js/jquery-2.2.0.min.js')!!}" type="text/javascript"></script>
     <script src="{!! asset('js/bootstrap.min.js')!!}"></script>
     <script src="{!! asset('js/adminlte.min.js')!!}"></script>
+    <script src="{!! asset('charts/Chart.js')!!}"></script>
+    <script src="{!! asset('charts/raphael.min.js')!!}"></script>
+    <script src="{!! asset('charts/morris.min.js')!!}"></script>
 
+
+
+    <script>
+
+        var areaChartData = {
+            labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [
+                {
+                    label               : 'Electronics',
+                    fillColor           : 'rgba(210, 214, 222, 1)',
+                    strokeColor         : 'rgba(210, 214, 222, 1)',
+                    pointColor          : 'rgba(210, 214, 222, 1)',
+                    pointStrokeColor    : '#c1c7d1',
+                    pointHighlightFill  : '#fff',
+                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                    data                : [80, 59, 80, 81, 56, 55, 40]
+                },
+                {
+                    label               : 'Digital Goods',
+                    fillColor           : 'rgba(60,141,188,0.9)',
+                    strokeColor         : 'rgba(60,141,188,0.8)',
+                    pointColor          : '#3b8bba',
+                    pointStrokeColor    : 'rgba(60,141,188,1)',
+                    pointHighlightFill  : '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data                : [28, 48, 40, 19, 86, 27, 90]
+                }
+            ]
+        }
+
+
+        var barChartCanvas                   = $('#barChart').get(0).getContext('2d');
+        var barChart                         = new Chart(barChartCanvas);
+        var barChartData                     = areaChartData;
+        barChartData.datasets[1].fillColor   = '#00a65a';
+        barChartData.datasets[1].strokeColor = '#00a65a';
+        barChartData.datasets[1].pointColor  = '#00a65a';
+        var barChartOptions                  = {
+            //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+            scaleBeginAtZero        : true,
+            //Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines      : true,
+            //String - Colour of the grid lines
+            scaleGridLineColor      : 'rgba(0,0,0,.05)',
+            //Number - Width of the grid lines
+            scaleGridLineWidth      : 1,
+            //Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+            //Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines  : true,
+            //Boolean - If there is a stroke on each bar
+            barShowStroke           : true,
+            //Number - Pixel width of the bar stroke
+            barStrokeWidth          : 2,
+            //Number - Spacing between each of the X value sets
+            barValueSpacing         : 5,
+            //Number - Spacing between data sets within X values
+            barDatasetSpacing       : 1,
+            //String - A legend template
+            {{--legendTemplate          : '<ul class='<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',--}}
+      //Boolean - whether to make the chart responsive
+            responsive              : true,
+            maintainAspectRatio     : true
+    };
+
+        barChartOptions.datasetFill = false;
+        barChart.Bar(barChartData, barChartOptions)
+
+
+        /*grafico de alunos*/
+
+        var donut = new Morris.Donut({
+            element: 'sales-chart',
+            resize: true,
+            colors: ["#3c8dbc", "#f56954", "#00a65a"],
+            data: [
+                {label: "Alunos Não Devedores", value: 40},
+                {label: "Alunos Devedores", value: 60},
+            ],
+            hideHover: 'auto'
+        });
+
+    </script>
     </body>
 
     {{--<body onload="lerDados()">--}}
