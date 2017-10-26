@@ -70,9 +70,9 @@
         <span class="tooltippytext">tooltippy Fader</span>
     </h5>
 
-    <section class="row" style="padding-left: 40px" id="DivRegistarMensalidade">
+    <section class="row"  id="DivRegistarMensalidade">
         {{--<div class="row">--}}
-            <div class="col-md-3 col-sm-3 col-lg-3 ">
+            <div class="col-md-4 col-sm-4 col-lg-4 ">
                 <div class="input-field">
                     <i class="zmdi zmdi-account-circle prefix"></i>
                     <input id="selectAluno2" placeholder="Aluno"  type="text" list="listaAluno">
@@ -84,26 +84,31 @@
                 </div>
                 <div class=" alunuDetalhes row">
                     <div class="col-md-12 col-sm-12 col-lg-12"  >
-                        <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class="materialboxed centered img-circle" width="175" height="170">
+                        <img style="margin-left: 10px" id="idFoto" src="{!! asset('img/logo.jpg')!!}" class="materialboxed img-responsive img-circle" width="175" height="170">
                     </div>
                 </div>
+
+                <div class="alunuDetalhes row">
+                    <a class="dropdown-button btnn" data-activates="dropdown1">Disciplinas Inscritas</a>
+                    <ul id="dropdown1" class="dropdown-content">
+                    </ul>
+                </div>
             </div>
-            <div  class="col-md-2 col-sm-2 col-lg-2" >
+            <div  class="col-md-3 col-sm-3 col-lg-3" >
                 <div class="input-field" style="background-color: #ffffff;">
                     <i class="zmdi zmdi-format-list-numbered prefix"></i>
                     <input id="numb" type="number" min="1" >
-                    <label for="numb">Quantidade</label>
+                    <label for="numb">Meses</label>
                 </div>
 
                 <a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>
-                <div id="divMesesAPAGAR">
-                </div>
+                <ul class="mesesList">
+
+                </ul>
             </div>
 
             <div class="col-sm-3 col-md-3 col-lg-3">
-                <div id="divDisciplinas" style="display: flex; padding-top: 30px">
-                    <h6>Disciplinas</h6>
-                </div>
+
             </div>
             <div class="col-md-12 col-sm-12 col-lg-12" style="padding-top: 10px;  border-radius: 6px; margin: 10px; background-color:#f2f2f2;height: 60px; display: flex">
                 <div class="inicio"><p style="color: #00b0ff" class="centered"><i class="fa fa-check fa-2x"></i></p></div>
@@ -125,7 +130,7 @@
             }
 
             var contaMeses;
-            var numMesesqFaltam;
+            var numMesesqFaltam =0;
             var ano = new Date().getFullYear();
 
             var valorAPagar=0;
@@ -148,6 +153,8 @@
                         $('.mesesNaoPagos').remove();
                         $('#actual').remove();
                         $('.mesesAPagar').remove();
+                        $('.li').remove();
+                        $('.li2').remove();
 
                         for (var i=0; i< rs.mensal.length; i++){
                             $('#DivMeses').append(' <div class="mesesPagos "></div>');
@@ -165,27 +172,44 @@
                         /*Buscar dados de inscricao*/
                         for(var q=0; q < rs.inscricao.length;q++){
 //                            alert(rs.inscricao[q].valorMensal);
-                            $('#divDisciplinas').append(' <p>'+rs.inscricao[q].nome+'</p>')
+                            $('#dropdown1').append('<li class="li"> <a>'+rs.inscricao[q].nome+'</a> </li>')
                         }
 
                         document.getElementById('numb').setAttribute('max',numMesesqFaltam);
                         document.getElementById('numb').setAttribute('min','1');
                         document.getElementById('numb').setAttribute('value','1');
-                        $('#divMesesAPAGAR').append('<div class="mesesAPagar"><p class="centered">'+meses[contaMeses]+'</p></div>');
+                        $('.mesesList').append('<li class="li2"><a class="centered">'+meses[contaMeses]+'</a></li>');
                     }
                 })
             });
 
 
             $('#numb').change(function () {
-                if(numMesesqFaltam.isUndefined)
-                    return;
+                var name = document.getElementById('selectAluno2').value;
                 var valu = $(this).val();
-                $('.mesesAPagar').remove();
+                if(valu > numMesesqFaltam || name === '') {
+                    return;
+                }
+                $('.li2').remove();
                 for( var w= 0;w < valu;w++){
-                   $('#divMesesAPAGAR').append('<div class="mesesAPagar"><p class="centered">'+meses[contaMeses+w]+'</p></div>');
+                   $('.mesesList').append('<li class="li2"><a class="centered">'+meses[contaMeses+w]+'</a></li>');
                }
             });
+
+            /*Disciplinas*/
+            $('.dropdown-button').dropdown({
+                inDuration:30,
+                outDuration: 225,
+                constrainWidth: false,
+                hover: true,
+                gutter:0,
+                belowOrigin: false,
+                alignment: 'left',
+                stopPropagation: false
+            });
+//
+//            $('.dropdown-button').dropdown('open');
+//            $('.dropdown-button').dropdown('close');
         })
     </script>
 @endsection
