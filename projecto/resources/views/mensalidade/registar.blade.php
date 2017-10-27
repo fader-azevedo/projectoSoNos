@@ -1,65 +1,81 @@
 @extends('template.app')
 @section('menu')
-    <li class="mt">
+    <li class="" href="">
         <a href="{{url('/')}}">
             <i class="fa fa-home"></i>
-            <span>Inicio</span>
+            <span >Inicio</span>
         </a>
     </li>
 
-    <li class="sub-menu">
-        <a class="active" href="javascript:;" >
+    <li class="treeview">
+        <a href="#">
             <i class="fa fa-money"></i>
             <span>Mensalidades</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
-        <ul class="sub">
-            <li class="active"><a  href="{!! url('/mensalidade/registar') !!}">Registar</a></li>
-            <li><a  href="{!! url('/mensalidade') !!}">Listar</a></li>
+        <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
+            <li><a href="{{url('/mensalidade')}}"><i class="fa fa-list"></i> Listar</a></li>
         </ul>
     </li>
-
-    <li class="sub-menu">
-        <a href="javascript:;" >
+    <li class="treeview">
+        <a href="#">
             <i class="fa fa-users"></i>
             <span>Alunos</span>
+            <span class="pull-right-container">
+                                 <i class="fa fa-angle-left pull-right"></i>
+                            </span>
         </a>
-        <ul class="sub">
-            <li><a  href="{!! url('/aluno') !!}">Todos</a></li>
-            <li><a  href="">Inscritos</a></li>
-            <li><a  href="">Não Inscritos</a></li>
+        <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
+            <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
         </ul>
     </li>
 
-    <li class="sub-menu">
-        <a href="javascript:;" >
-            <i class="fa fa-history"></i>
-            <span>Historico</span>
-        </a>
-        <ul class="sub">
-            <li><a  href="">Aluno</a></li>
-            <li><a  href="">Todos</a></li>
-        </ul>
-    </li>
-
-    <li class="sub-menu">
-        <a href="javascript:;" >
-            <i class=" fa fa-bar-chart-o"></i>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-bar-chart-o"></i>
             <span>Estatísticas</span>
+            <span class="pull-right-container">
+                                 <i class="fa fa-angle-left pull-right"></i>
+                            </span>
         </a>
-        <ul class="sub">
-            <li><a  >Chartjs</a></li>
+        <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-pencil"></i>Alunos</a></li>
+            <li><a href=""><i class="fa fa-money"></i> Mensalidade</a></li>
         </ul>
     </li>
 
-    <li class="sub-menu">
-        <a href="javascript:;" >
-            <i class=" fa fa-book"></i>
-            <span>Extras</span>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-history"></i>
+            <span>Históricos</span>
+            <span class="pull-right-container">
+                                 <i class="fa fa-angle-left pull-right"></i>
+                            </span>
         </a>
-        <ul class="sub">
-            <li><a>Lock</a></li>
+        <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-users"></i> Alunos</a></li>
+            <li><a href=""><i class="fa fa-money"></i> Mensalidades</a></li>
         </ul>
     </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-book"></i>
+            <span>Extras</span>
+            <span class="pull-right-container">
+                                 <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-lock"></i> Bloquear Tela</a></li>
+            <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
+        </ul>
+    </li>
+
 
 @endsection
 @section('content')
@@ -84,7 +100,7 @@
                 </div>
                 <div class=" alunuDetalhes row">
                     <div class="col-md-12 col-sm-12 col-lg-12"  >
-                        <img style="margin-left: 10px" id="idFoto" src="{!! asset('img/logo.jpg')!!}" class="materialboxed img-responsive img-circle" width="175" height="170">
+                        <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class="materialboxed profile-user-img img-responsive img-circle" >
                     </div>
                 </div>
 
@@ -101,6 +117,7 @@
                     <label for="numb">Meses</label>
                 </div>
 
+
                 <a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>
                 <ul class="mesesList">
 
@@ -108,7 +125,14 @@
             </div>
 
             <div class="col-sm-3 col-md-3 col-lg-3">
-
+                <div class="form-group">
+                    {{--<label>Meses A Pagar</label>--}}
+                    <select class="form-control select2" multiple="multiple" data-placeholder="Selecione os Meses">
+                            @for($b=1;$b<=count($meses);$b++)
+                                <option id="Mes{{$b}}">{{$meses[$b-1]}}</option>
+                            @endfor
+                    </select>
+                </div>
             </div>
             <div class="col-md-12 col-sm-12 col-lg-12" style="padding-top: 10px;  border-radius: 6px; margin: 10px; background-color:#f2f2f2;height: 60px; display: flex">
                 <div class="inicio"><p style="color: #00b0ff" class="centered"><i class="fa fa-check fa-2x"></i></p></div>
@@ -123,7 +147,6 @@
 @section('scripts')
     <script type="text/javascript">
         $(document).ready(function() {
-
 
             for(var l = 0; l < meses.length; l++){
                 $('#DivMeses').append('<div class="mesesNaoPagos"></div>');
@@ -168,17 +191,29 @@
                             $('#DivMeses').append(' <div class="mesesNaoPagos"></div>');
                             numMesesqFaltam +=1;
                         }
+                        for (var y=1;y<contaMeses+1; y++ ){
+                            document.getElementById('Mes'+y.toString()).setAttribute('disabled','disabled');
+                        }
+
 
                         /*Buscar dados de inscricao*/
                         for(var q=0; q < rs.inscricao.length;q++){
 //                            alert(rs.inscricao[q].valorMensal);
-                            $('#dropdown1').append('<li class="li"> <a>'+rs.inscricao[q].nome+'</a> </li>')
+                            $('#dropdown1').append('<li class="li"> <a>'+rs.inscricao[q].nome+'</a> </li>');
+//                            $('.select2').append('<option>'+meses[contaMeses]+'</option>');
                         }
+
+                        /*preencher meses*/
+//                        for(var z=0; z<numMesesqFaltam; z++){
+//                            $('.select2').append('<option value="fader">fader</option>');
+//                        }
+
 
                         document.getElementById('numb').setAttribute('max',numMesesqFaltam);
                         document.getElementById('numb').setAttribute('min','1');
                         document.getElementById('numb').setAttribute('value','1');
                         $('.mesesList').append('<li class="li2"><a class="centered">'+meses[contaMeses]+'</a></li>');
+
                     }
                 })
             });

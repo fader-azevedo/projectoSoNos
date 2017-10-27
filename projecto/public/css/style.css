@@ -74,7 +74,7 @@ option{
 .alunuDetalhes{
     background-color: #f2f2f2;
     border-radius: 6px;
-    padding: 10px 10px 10px 12px;
+    /*padding: 10px 10px 10px 12px;*/
     height: auto;
     /*border-radius: 50%;*/
 }
@@ -777,27 +777,6 @@ hr {
 
 
 
-ul.sidebar-menu li{
-    /*line-height: 20px !important;*/
-    margin-bottom: 5px;
-    margin-left:10px;
-    margin-right:10px;
-}
-
-
-ul.sidebar-menu li a{
-    color: #b72dad;
-    text-decoration: none;
-    display: block;
-    padding: 10px 0 15px 10px;
-    font-size: 14px;
-    outline: none;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
 
 
 /* MAIN CONTENT CONFIGURATION */

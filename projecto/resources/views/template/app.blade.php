@@ -27,6 +27,8 @@
         <link rel="stylesheet" type="text/css" href="{!! asset('css/_all-skins.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/AdminLTE.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('charts/morris.css')!!}"/>
+        <link rel="stylesheet" type="text/css" href="{!! asset('select2/css/select2.min.css')!!}"/>
+
 
 
 
@@ -34,7 +36,7 @@
         {{--<script type="text/javascript" src="{!! asset('js/chart-master/Chart.js') !!}/"></script>--}}
     </head>
 <!-- sidebar-collapse-->
-    <body class="hold-transition skin-black sidebar-mini ">
+    <body class="hold-transition skin-black sidebar-mini sidebar-collapse">
     <div class="wrapper">
 
         <header class="main-header">
@@ -102,7 +104,7 @@
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="{{asset('img/logo1.jpg')}}" class="img-circle" alt="User Image">
+                                    <img src="{{asset('img/logo1.jpg')}}" class="img-circle" alt="">
                                     <p style="color: #3c3f41">
                                        So Nos
                                         <small>Member since Nov. 2012</small>
@@ -131,283 +133,95 @@
         <aside class="main-sidebar" style="position: fixed">
             <section class="sidebar">
                 <ul class="sidebar-menu" data-widget="tree" style="margin-top: 50px">
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-home"></i>
-                            <span>Inicio</span>
-                        </a>
-                    </li>
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-money"></i>
-                            <span>Mensalidades</span>
-                            <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
-                            <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-users"></i>
-                            <span>Alunos</span>
-                            <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
-                            <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-bar-chart-o"></i>
-                            <span>Estatísticas</span>
-                            <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href=""><i class="fa fa-pencil"></i>Alunos</a></li>
-                            <li><a href=""><i class="fa fa-money"></i> Mensalidade</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-history"></i>
-                            <span>Históricos</span>
-                            <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href=""><i class="fa fa-users"></i> Alunos</a></li>
-                            <li><a href=""><i class="fa fa-money"></i> Mensalidades</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-book"></i>
-                            <span>Extras</span>
-                            <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href=""><i class="fa fa-lock"></i> Bloquear Tela</a></li>
-                            <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
-                        </ul>
-                    </li>
+                    @yield('menu')
 
                 </ul>
             </section>
         </aside>
 
+        <div class="lock-screen">
+            <div class="modal fade" id="myModalLogOut"  role="dialog" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h5 class="modal-title">Logout</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p class="centered"><img class="img-circle" width="80" src="{!! asset('img/logo.jpg')!!}"></p>
+                            <p>Desejas Sair do Sistema ???</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button style="float: left" data-dismiss="modal" class="btn btn-danger" type="button">Nao</button>
+                            <button class="btn btn-theme" type="button"><a href="{{url('/logon')}}">Sim</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-
             <section class="content" style="padding-top: 80px">
                 <div class="row">
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-aqua">
-                            <div class="inner">
-                                <h3>150</h3>
-
-                                <p>New Orders</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-bag"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-green">
-                            <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                <p>Pagamento do Mes</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">Mais info <i class="fa fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-yellow">
-                            <div class="inner">
-                                <h3>44</h3>
-
-                                <p>Alunos Incritos</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-person-add"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">Mais info <i class="fa fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-red">
-                            <div class="inner">
-                                <h3>65</h3>
-
-                                <p>Unique Visitors</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                </div>
-
-                <div class="row">
-                    <!-- Left col -->
-                    <section class="col-lg-8 connectedSortable">
-                        <!-- Custom tabs (Charts with tabs)-->
-                        <div class="nav-tabs-custom">
-                            <ul class="nav nav-tabs pull-right">
-                                <li class="pull-left header"><i class="fa fa-bar-chart-o"></i> Mensalidades</li>
-                                {{--<li class="pull-right header"><i class="fa fa-inbox"></i> deas</li>--}}
-                            </ul>
-                            <canvas id="barChart" style="margin: auto; height:220px"></canvas>
-                        </div>
-                    </section>
-
-                    <section class="col-lg-4 connectedSortable">
-                        <div class="box box-danger">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Alunos</h3>
-
-                                <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>
-                            </div>
-                            <div class="box-body chart-responsive">
-                                <div class="chart" id="sales-chart" style="height: 340px; position: relative;"></div>
-                            </div>
-                        </div>
-                    </section>
+                    @yield('content')
                 </div>
             </section>
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 2.4.0
+                <b>Versão</b> 0.1
             </div>
             <strong>Sistema de Gestão de Mensalidades<a href=""></a>.</strong>
         </footer>
     </div>
+
+
     <script src="{!! asset('js/jquery-2.2.0.min.js')!!}" type="text/javascript"></script>
     <script src="{!! asset('js/bootstrap.min.js')!!}"></script>
+    <script type="text/javascript" src="{!! asset('js/jquery.dcjqaccordion.2.7.js')!!}"></script>
+    <script src="{!! asset('js/jquery.scrollTo.min.js')!!}"></script>
+    <script src="{!! asset('js/jquery.nicescroll.js')!!}" type="text/javascript"></script>
+    <script src="{!! asset('js/jquery.sparkline.js')!!}"></script>
+
+    {{--<script src="{!! asset('js/js/jquery-easy-pie-chart/jquery.easy-pie-chart.js')!!}"></script>--}}
+
+    <script type="text/javascript" src="{!! asset('js/gritter/js/jquery.gritter.js')!!}"></script>
+    <script type="text/javascript" src="{!! asset('js/gritter-conf.js')!!}"></script>
+
+    <!--script for this page-->
+    <script src="{!! asset('js/sparkline-chart.js')!!}"></script>
+    <script src="{!! asset('js/zabuto_calendar.js')!!}"></script>
+    <script src="{!! asset('js/common-scripts.js')!!}"></script>
+    <script src="{!! asset('js/sweetalert.min.js')!!}"></script>
+    <script src="{!! asset('js/materialize.min.js')!!}"></script>
+    <script src="{!! asset('js/jquery.mCustomScrollbar.concat.min.js')!!}"></script>
+    <script src="{!! asset('js/jquery.waypoints.js')!!}"></script>
+    <script src="{!! asset('js/jquery.counterup.min.js')!!}"></script>
+    <script src="{!! asset('js/form-component.js')!!}"></script>
+    <script src="{!! asset('js/bootstrap-switch.js')!!}"></script>
+    <script src="{!! asset('js/jquery.tagsinput.js')!!}"></script>
+
+
+
     <script src="{!! asset('js/adminlte.min.js')!!}"></script>
     <script src="{!! asset('charts/Chart.js')!!}"></script>
     <script src="{!! asset('charts/raphael.min.js')!!}"></script>
     <script src="{!! asset('charts/morris.min.js')!!}"></script>
-
-
+    <script src="{!! asset('select2/js/select2.full.min.js')!!}"></script>
 
     <script>
 
-        var areaChartData = {
-            labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [
-                {
-                    label               : 'Electronics',
-                    fillColor           : 'rgba(210, 214, 222, 1)',
-                    strokeColor         : 'rgba(210, 214, 222, 1)',
-                    pointColor          : 'rgba(210, 214, 222, 1)',
-                    pointStrokeColor    : '#c1c7d1',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(220,220,220,1)',
-                    data                : [80, 59, 80, 81, 56, 55, 40]
-                },
-                {
-                    label               : 'Digital Goods',
-                    fillColor           : 'rgba(60,141,188,0.9)',
-                    strokeColor         : 'rgba(60,141,188,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(60,141,188,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data                : [28, 48, 40, 19, 86, 27, 90]
-                }
-            ]
-        }
-
-
-        var barChartCanvas                   = $('#barChart').get(0).getContext('2d');
-        var barChart                         = new Chart(barChartCanvas);
-        var barChartData                     = areaChartData;
-        barChartData.datasets[1].fillColor   = '#00a65a';
-        barChartData.datasets[1].strokeColor = '#00a65a';
-        barChartData.datasets[1].pointColor  = '#00a65a';
-        var barChartOptions                  = {
-            //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-            scaleBeginAtZero        : true,
-            //Boolean - Whether grid lines are shown across the chart
-            scaleShowGridLines      : true,
-            //String - Colour of the grid lines
-            scaleGridLineColor      : 'rgba(0,0,0,.05)',
-            //Number - Width of the grid lines
-            scaleGridLineWidth      : 1,
-            //Boolean - Whether to show horizontal lines (except X axis)
-            scaleShowHorizontalLines: true,
-            //Boolean - Whether to show vertical lines (except Y axis)
-            scaleShowVerticalLines  : true,
-            //Boolean - If there is a stroke on each bar
-            barShowStroke           : true,
-            //Number - Pixel width of the bar stroke
-            barStrokeWidth          : 2,
-            //Number - Spacing between each of the X value sets
-            barValueSpacing         : 5,
-            //Number - Spacing between data sets within X values
-            barDatasetSpacing       : 1,
-            //String - A legend template
-            {{--legendTemplate          : '<ul class='<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',--}}
-      //Boolean - whether to make the chart responsive
-            responsive              : true,
-            maintainAspectRatio     : true
-    };
-
-        barChartOptions.datasetFill = false;
-        barChart.Bar(barChartData, barChartOptions)
-
-
-        /*grafico de alunos*/
-
-        var donut = new Morris.Donut({
-            element: 'sales-chart',
-            resize: true,
-            colors: ["#3c8dbc", "#f56954", "#00a65a"],
-            data: [
-                {label: "Alunos Não Devedores", value: 40},
-                {label: "Alunos Devedores", value: 60},
-            ],
-            hideHover: 'auto'
+        $('.tooltipped').tooltip({delay: 50});
+        $(".counter").counterUp({
+            delay: 100,
+            time: 1200
         });
-
+        var meses = ['Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        $('.select2').select2();
     </script>
+    @yield('scripts')
     </body>
 
     {{--<body onload="lerDados()">--}}

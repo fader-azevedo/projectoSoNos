@@ -37,8 +37,6 @@ class MensalidadeController extends Controller{
         $inscricao = Inscricao::query()->join('disciplinas','inscricaos.idDisciplina','=','disciplinas.id')
             ->join('alunos','inscricaos.idAluno','=','alunos.id')
             ->select('disciplinas.*')->where('idAluno',$_POST['idAluno'])->get();
-
-
         return  response()->json(array('aluno' =>$aluno,'mensal'=> $mensalidade,'inscricao'=> $inscricao));
     }
 
@@ -52,7 +50,8 @@ class MensalidadeController extends Controller{
 
     public function registarMensalidade(){
         $aluno = Aluno::all();
-        return view('mensalidade.registar',['aluno'=>$aluno]);
+        $meses = array('Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
+        return view('mensalidade.registar',['aluno'=>$aluno,'meses'=>$meses]);
 
     }
 

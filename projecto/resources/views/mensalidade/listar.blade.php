@@ -1,101 +1,105 @@
 @extends('template.app')
 @section('menu')
-    <li class="mt">
+    <li class="treeview">
         <a href="{{url('/')}}">
             <i class="fa fa-home"></i>
             <span>Inicio</span>
         </a>
     </li>
 
-    <li class="sub-menu">
-        <a class="active" href="javascript:;" >
+    <li class="treeview">
+        <a href="#">
             <i class="fa fa-money"></i>
             <span>Mensalidades</span>
+            <span class="pull-right-container">
+                                 <i class="fa fa-angle-left pull-right"></i>
+                            </span>
         </a>
-        <ul class="sub">
-            <li><a  href="{!! url('/mensalidade/registar') !!}">Registar</a></li>
-            <li class="active"><a  href="{!! url('/mensalidade') !!}">Listar</a></li>
+        <ul class="treeview-menu">
+            <li><a href="{{url('/mensalidade/registar')}}"><i class="fa fa-pencil"></i> Registar</a></li>
+            <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
         </ul>
     </li>
-
-    <li class="sub-menu">
-        <a href="javascript:;" >
+    <li class="treeview">
+        <a href="#">
             <i class="fa fa-users"></i>
             <span>Alunos</span>
+            <span class="pull-right-container">
+                                 <i class="fa fa-angle-left pull-right"></i>
+                            </span>
         </a>
-        <ul class="sub">
-            <li><a  href="{!! url('/aluno') !!}">Todos</a></li>
-            <li><a  href="">Inscritos</a></li>
-            <li><a  href="">Não Inscritos</a></li>
+        <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
+            <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
         </ul>
     </li>
 
-    <li class="sub-menu">
-        <a href="javascript:;" >
-            <i class="fa fa-history"></i>
-            <span>Historico</span>
-        </a>
-        <ul class="sub">
-            <li><a  href="">Aluno</a></li>
-            <li><a  href="">Todos</a></li>
-        </ul>
-    </li>
-
-    <li class="sub-menu">
-        <a href="javascript:;" >
-            <i class=" fa fa-bar-chart-o"></i>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-bar-chart-o"></i>
             <span>Estatísticas</span>
+            <span class="pull-right-container">
+                                 <i class="fa fa-angle-left pull-right"></i>
+                            </span>
         </a>
-        <ul class="sub">
-            <li><a  >Chartjs</a></li>
+        <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-pencil"></i>Alunos</a></li>
+            <li><a href=""><i class="fa fa-money"></i> Mensalidade</a></li>
         </ul>
     </li>
 
-    <li class="sub-menu">
-        <a href="javascript:;" >
-            <i class=" fa fa-book"></i>
-            <span>Extras</span>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-history"></i>
+            <span>Históricos</span>
+            <span class="pull-right-container">
+                                 <i class="fa fa-angle-left pull-right"></i>
+                            </span>
         </a>
-        <ul class="sub">
-            <li><a>Lock</a></li>
+        <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-users"></i> Alunos</a></li>
+            <li><a href=""><i class="fa fa-money"></i> Mensalidades</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-book"></i>
+            <span>Extras</span>
+            <span class="pull-right-container">
+                                 <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-lock"></i> Bloquear Tela</a></li>
+            <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
         </ul>
     </li>
 
 @endsection
 @section('content')
-
-
-        <h5 class="center-align">
-            <span class=""><i class="fa fa-money"></i></span>
-            Mensalidades
-        </h5>
-        <section class="panel">
-            <header class="panel-heading tab-bg-dark-navy-blue">
-                <ul class="nav nav-tabs">
-                    <li style="width: 100px;" class="tooltipped" data-tooltip="Selecione o Ano">
-                        <div >
-                            <a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>
-                            <select class="material-control2"  id="selectAno">
-                                @foreach($anos as $ano)
-                                    <option value="{{$ano}}">{{$ano}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </li>
-
-                    <li class="active" id="alunos">
-                        <a data-slide-to="0" href="#carousellDiv" data-toggle="tab" >Por Aluno</a>
-                    </li>
-                    <li>
-                        <a data-slide-to="1" href="#carousellDiv" data-toggle="tab" >Por Mês</a>
-                    </li>
-                </ul>
-            </header>
-            <div class="panel-body" id="painelBody">
+        <div class="nav-tabs-custom" style="background-color: #f2f2f2">
+            <ul class="nav nav-tabs pull-right">
+                <li class="active"><a data-slide-to="0" href="#carousellDiv" data-toggle="tab">Por Aluno</a></li>
+                <li><a data-slide-to="1" href="#carousellDiv" data-toggle="tab">Por Mês</a></li>
+                <li style="font-size: 30px" class="pull-left header"><i class="fa fa-money"></i> Mensalidades</li>
+                <li style="width: 100px;" class="tooltipped" data-tooltip="Selecione o Ano">
+                    <div >
+                        <a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>
+                        <select class="material-control2"  id="selectAno">
+                            @foreach($anos as $ano)
+                                <option value="{{$ano}}">{{$ano}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </li>
+            </ul>
+            <div class="tab-content no-padding">
+                <!-- Morris chart - Sales -->
                 <div id="carousellDiv" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div  class="carousel-inner">
-                        <div id="" class="item active"  >
-                            <div class="col-md-3 col-sm-3 col-lg-3 ">
+                        <div class="item active row">
+                            <div class="col-md-4 col-sm-4 col-lg-4 ">
                                 <div class="input-field">
                                     <i class="zmdi zmdi-account-circle prefix"></i>
                                     <input id="selectAluno" placeholder="Aluno"  type="text" list="listaAluno">
@@ -106,14 +110,10 @@
                                     </datalist>
                                 </div>
                                 <div class=" alunuDetalhes row">
-                                    <div class="col-md-12 col-sm-12 col-lg-12"  >
-                                        <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class="materialboxed centered img-rounded" width="175" height="170">
+                                    <div class="col-md-12 col-sm-12 col-lg-12 box-profile"  >
+                                        <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class=" profile-user-img img-responsive img-circle" >
+                                        {{--<p class="centered">So Faculdade</p>--}}
                                     </div>
-                                    {{--<div class="col-md-6 col-sm-6 col-lg-6" id="divDados">--}}
-                                        {{--<p>&nbsp;Nome:<span class="progress progress-bar" id="apelido"></span></p>--}}
-                                        {{--<p>&nbsp;Sexo:<span class="progress progress-bar" id="sexo"></span></p>--}}
-                                        {{--<p>&nbsp;Idade:<span class="progress progress-bar" id="idade"></span></p>--}}
-                                    {{--</div>--}}
                                 </div>
 
                                 <div class="col-md-122 col-sm-12 col-log-12">
@@ -192,12 +192,12 @@
                             <div class="col-md-8 col-sm-8 col-lg-8" style="padding-top: 15px;">
                                 <table class="striped" id="IDtabela2">
                                     <thead>
-                                        <tr>
-                                            <th data-field="">Aluno</th>
-                                            <th data-field="">Data de Pagamento</th>
-                                            <th data-field="">Estado</th>
-                                            <th data-field="">Valor Pag<i class="zmdi zmdi-money"></i></th>
-                                        </tr>
+                                    <tr>
+                                        <th data-field="">Aluno</th>
+                                        <th data-field="">Data de Pagamento</th>
+                                        <th data-field="">Estado</th>
+                                        <th data-field="">Valor Pag<i class="zmdi zmdi-money"></i></th>
+                                    </tr>
                                     </thead>
                                     <tbody id="tabela2">
                                     </tbody>
@@ -207,7 +207,8 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
     {{--</div>--}}
 
 @endsection
@@ -282,7 +283,7 @@
                         var prc = (valorPago * 100)/5600;
                         document.getElementById('valorPago').innerHTML = valorPago;
                         document.getElementById('valorDivida').innerHTML = 5600-valorPago;
-                        document.getElementById('percPago').innerHTML = prc+'%';
+                        document.getElementById('percPago').innerHTML = prc.toFixed(2)+'%';
                         document.getElementById('barWidth').style.width = prc+'%';
 
                         /*Adiciona os meses em faltam*/
@@ -317,7 +318,7 @@
 
             });
 
-            $('.materialboxed').materialbox();
+//            $('.materialboxed').materialbox();
 //            $('.carousel').carousel();
         });
     </script>

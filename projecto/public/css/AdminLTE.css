@@ -24,6 +24,21 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+
+ul.sidebar-menu li a{
+  text-decoration: none;
+  display: block;
+  padding: 10px 0 15px 10px;
+  line-height: 30px;
+  font-size: 14px;
+  outline: none;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  /*-ms-transition: all 0.3s ease;*/
+  transition: all 0.3s ease;
+}
 /* Layout */
 .wrapper {
   height: 100%;
@@ -3494,7 +3509,7 @@ table.text-center th {
  */
 .profile-user-img {
   margin: 0 auto;
-  width: 100px;
+  width: 150px;
   padding: 3px;
   border: 3px solid #d2d6de;
 }
