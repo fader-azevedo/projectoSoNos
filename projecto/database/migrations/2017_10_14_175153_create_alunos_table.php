@@ -8,7 +8,6 @@ class CreateAlunosTable extends Migration{
 
     public function up(){
         Schema::create('alunos', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('apelido');
             $table->string('nome');
@@ -20,12 +19,10 @@ class CreateAlunosTable extends Migration{
             $table->string('estado');
             $table->integer('idencarregado')->unsigned();
             $table->integer('iduser')->unsigned();
-            $table->timestamps();
-        });
-
-        Schema::table('alunos',function ($table){
+            $table->integer('idContacto')->unsigned();
             $table->foreign('idencarregado')->references('id')->on('encarregados');
             $table->foreign('iduser')->references('id')->on('users');
+            $table->foreign('idContacto')->references('id')->on('contactos')->onDelete('cascade');;
         });
     }
 

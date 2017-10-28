@@ -14,7 +14,7 @@ class Mensalidade extends Model{
         return $this->belongsTo(Aluno::class ,'idAluno');
     }
 
-//    public function getAll(){
-//        $t = DB::table('mensalidades')->
-//    }
+    public function getNaoDevedores($mes){
+        return Aluno::all()->count()-Mensalidade::query()->where('mes',$mes)->count();
+    }
 }

@@ -105,32 +105,26 @@
                 </div>
 
                 <div class="alunuDetalhes row">
-                    <a class="dropdown-button btnn" data-activates="dropdown1">Disciplinas Inscritas</a>
+                    <a class="dropdown-button btnn" data-activates="dropdown1">Disciplinas</a>
                     <ul id="dropdown1" class="dropdown-content">
                     </ul>
                 </div>
             </div>
-            <div  class="col-md-3 col-sm-3 col-lg-3" >
-                <div class="input-field" style="background-color: #ffffff;">
-                    <i class="zmdi zmdi-format-list-numbered prefix"></i>
-                    <input id="numb" type="number" min="1" >
-                    <label for="numb">Meses</label>
-                </div>
+            {{--<div  class="col-md-3 col-sm-3 col-lg-3" >--}}
+                {{--<div class="input-field" style="background-color: #ffffff;">--}}
+                    {{--<i class="zmdi zmdi-format-list-numbered prefix"></i>--}}
+                    {{--<input id="numb" type="number" min="1" >--}}
+                    {{--<label for="numb">Meses</label>--}}
+                {{--</div>--}}
 
-
-                <a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>
-                <ul class="mesesList">
-
-                </ul>
-            </div>
+                {{--<a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>--}}
+                {{--<ul class="mesesList">--}}
+                {{--</ul>--}}
+            {{--</div>--}}
 
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <div class="form-group">
-                    {{--<label>Meses A Pagar</label>--}}
-                    <select class="form-control select2" multiple="multiple" data-placeholder="Selecione os Meses">
-                            @for($b=1;$b<=count($meses);$b++)
-                                <option id="Mes{{$b}}">{{$meses[$b-1]}}</option>
-                            @endfor
+                    <select id="Months" class="form-control select2" multiple="multiple" data-placeholder="Selecione os Meses">
                     </select>
                 </div>
             </div>
@@ -185,51 +179,47 @@
                             contaMeses +=1;
                         }
 
+
                         $('#DivMeses').append('<div id="actual" class="tooltippy" data-tooltip="fader" >' +
                             '<p style="color: #3a5fff" class="centered"><i  class="fa fa-check fa-2x"></i></p><span class="tooltippytext">'+mesess+'</span> </div>');
                         for(var k = contaMeses; k < meses.length; k++){
                             $('#DivMeses').append(' <div class="mesesNaoPagos"></div>');
+                           /*Lista Meses a pagar*/
+                            $('#Months').append('<option>' + meses[k] + '</option>');
                             numMesesqFaltam +=1;
                         }
-                        for (var y=1;y<contaMeses+1; y++ ){
-                            document.getElementById('Mes'+y.toString()).setAttribute('disabled','disabled');
-                        }
-
+//                        for (var y=1;y<contaMeses+1; y++ ){
+////                            document.getElementById('Mes'+y.toString()).setAttribute('disabled','disabled');
+////                            document.getElementById('Mes'+y.toString()).append('<i class=""></i>');
+//                        }
 
                         /*Buscar dados de inscricao*/
                         for(var q=0; q < rs.inscricao.length;q++){
 //                            alert(rs.inscricao[q].valorMensal);
                             $('#dropdown1').append('<li class="li"> <a>'+rs.inscricao[q].nome+'</a> </li>');
-//                            $('.select2').append('<option>'+meses[contaMeses]+'</option>');
                         }
 
-                        /*preencher meses*/
-//                        for(var z=0; z<numMesesqFaltam; z++){
-//                            $('.select2').append('<option value="fader">fader</option>');
-//                        }
-
-
-                        document.getElementById('numb').setAttribute('max',numMesesqFaltam);
-                        document.getElementById('numb').setAttribute('min','1');
-                        document.getElementById('numb').setAttribute('value','1');
-                        $('.mesesList').append('<li class="li2"><a class="centered">'+meses[contaMeses]+'</a></li>');
+//                        document.getElementById('numb').setAttribute('max',numMesesqFaltam);
+//                        document.getElementById('numb').setAttribute('min','1');
+//                        document.getElementById('numb').setAttribute('value','1');
+//                        $('.mesesList').append('<li class="li2"><a class="centered">'+meses[contaMeses]+'</a></li>');
 
                     }
                 })
             });
 
 
-            $('#numb').change(function () {
-                var name = document.getElementById('selectAluno2').value;
-                var valu = $(this).val();
-                if(valu > numMesesqFaltam || name === '') {
-                    return;
-                }
-                $('.li2').remove();
-                for( var w= 0;w < valu;w++){
-                   $('.mesesList').append('<li class="li2"><a class="centered">'+meses[contaMeses+w]+'</a></li>');
-               }
-            });
+//            $('#numb').change(function () {
+//                var name = document.getElementById('selectAluno2').value;
+//                var valu = $(this).val();
+//                if(valu > numMesesqFaltam || name === '') {
+//                    return;
+//                }
+//                $('.li2').remove();
+//                for( var w= 0;w < valu;w++){
+//                   $('.mesesList').append('<li class="li2"><a class="centered">'+meses[contaMeses+w]+'</a></li>');
+//               }
+//            });
 
             /*Disciplinas*/
             $('.dropdown-button').dropdown({

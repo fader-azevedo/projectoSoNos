@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Aluno;
 use App\Mensalidade;
 use App\Inscricao;
+use App\PagamntoMensalidade;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,11 +22,39 @@ class MensalidadeController extends Controller{
     }
 
     public function index(){
-        $mensalidade = Mensalidade::all();
-        $aluno = Aluno::all();
-        $anos = Mensalidade::query()->distinct()->pluck('ano');
+//        $mensalidade = Mensalidade::all();
+//        $aluno = Aluno::all(); :query()->distinct()->pluck('mes');
+//        $anos = Mensalidade::query()->distinct()->pluck('ano');
+//        $meses = Mensalidade::query()->distinct()->pluck('mes');
+//        return view('mensalidade.listar',['mensalidade'=>$mensalidade, 'alunos' => $aluno,'anos'=>$anos,'meses'=>$meses,'numAluno'=>$aluno->count()]);
+//
         $meses = Mensalidade::query()->distinct()->pluck('mes');
-        return view('mensalidade.listar',['mensalidade'=>$mensalidade, 'alunos' => $aluno,'anos'=>$anos,'meses'=>$meses,'numAluno'=>$aluno->count()]);
+        $mensalidade = Mensalidade::all();
+        return view('mensalidade.listar',['meses'=>$meses,'mensalidade'=>$mensalidade]);
+    }
+
+    public function listarTodasMensalidades(){
+//        $mensalidade = Mensalidade::all();
+//        $aluno = Aluno::all();
+//        $anos = Mensalidade::query()->distinct()->pluck('ano');
+//        $meses = Mensalidade::query()->distinct()->pluck('mes');
+//        return view('mensalidade.listar',['mensalidade'=>$mensalidade, 'alunos' => $aluno,'anos'=>$anos,'meses'=>$meses,'numAluno'=>$aluno->count()]);
+//
+//        $rowMensal = Mensalidade::all()->count();
+        //        $mensalidade = PagamntoMensalidade::query()->join('pagamentos','pagamnto_mensalidades.idPagamento','=','pagamentos.id')
+//         ->join('mensalidades','pagamnto_mensalidades.idMensalidade','=','mensalidades.id')
+//         ->join('alunos','mensalidades.idAluno','=','alunos.id')
+//         ->select('pagamnto_mensalidades.*','mensalidades.*','alunos.nome')->get();
+
+
+//        $mensalidade = Mensalidade::query()->distinct()->pluck('mes');
+//        return response()->json(array('mensalidade' => $mensalidade));
+    }
+
+
+    public function devedoresEnao(){
+        $naoDevedores = Mensalidade::query()->where('mes',$_POST['mes'])->count();
+        return response()->json(array('naoDevedores'=>$naoDevedores));
     }
 
 
@@ -55,5 +84,18 @@ class MensalidadeController extends Controller{
 
     }
 
+    public function getDevedores(){
+        $idAlunos = Mensalidade::query()->where('mes','=',$_POST['mes'])->select('idAluno')->get();
+        $ids='';
+        foreach ($idAlunos as $i){
+            $ids = $i->idAluno.' '.$ids;
+        }
+        $arrayIds = explode(' ',trim(rtrim($ids)));
+//        $idDevedores = Mensalidade::query()->select('idAluno')->whereNotIn('idAluno',$arrayIds)->get();
+        $idDevedores = Aluno::query()->select('nome')->whereNotIn('id',$arrayIds)->get();
+
+
+        return response()->json(array('ids'=>$idDevedores));
+    }
 
 }

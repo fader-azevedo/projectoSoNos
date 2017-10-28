@@ -12,7 +12,8 @@ class CreateEncarregadosTable extends Migration{
             $table->string('apelido');
             $table->string('nome');
             $table->enum('sexo',['Masculino','Feminino']);
-            $table->string('contacto');
+            $table->integer('idContacto')->unsigned();
+            $table->foreign('idContacto')->references('id')->on('contactos');
             $table->timestamps();
         });
     }

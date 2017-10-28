@@ -14,43 +14,37 @@ class DisciplinaTableSeeder extends Seeder
         DB::table('disciplinas')->insert([
 
             'nome' =>'Português',
-            'valorInscricao'=>'350',
-            'valorMensal'=>'700'
+            'abreviatura'=>'PT',
         ]);
 
         DB::table('disciplinas')->insert([
 
             'nome' =>'História',
-            'valorInscricao'=>'350',
-            'valorMensal'=>'700'
+            'abreviatura'=>'HS',
         ]);
 
         DB::table('disciplinas')->insert([
 
             'nome' =>'Matemática',
-            'valorInscricao'=>'350',
-            'valorMensal'=>'700'
+            'abreviatura'=>'MT',
         ]);
 
         DB::table('disciplinas')->insert([
 
             'nome' =>'Química',
-            'valorInscricao'=>'350',
-            'valorMensal'=>'700'
+            'abreviatura'=>'QI',
         ]);
 
         DB::table('disciplinas')->insert([
 
             'nome' =>'Física',
-            'valorInscricao'=>'350',
-            'valorMensal'=>'700'
+            'abreviatura'=>'FS',
         ]);
 
         DB::table('disciplinas')->insert([
 
             'nome' =>'Biologia',
-            'valorInscricao'=>'350',
-            'valorMensal'=>'700'
+            'abreviatura'=>'BO',
         ]);
     }
 }

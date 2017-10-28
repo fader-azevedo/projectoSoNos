@@ -36,7 +36,7 @@
         {{--<script type="text/javascript" src="{!! asset('js/chart-master/Chart.js') !!}/"></script>--}}
     </head>
 <!-- sidebar-collapse-->
-    <body class="hold-transition skin-black sidebar-mini sidebar-collapse">
+    <body class="hold-transition skin-black sidebar-mini sidebar-collapse" >
     <div class="wrapper">
 
         <header class="main-header">
@@ -220,6 +220,16 @@
         });
         var meses = ['Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
         $('.select2').select2();
+
+//        function buscarDados() {
+//            $.ajax({
+//                url: '/api/listarTodasMensalidades',
+//                type: 'POST',
+//                success: function (rs) {
+//                    alert(rs);
+//                }
+//            });
+//        }
     </script>
     @yield('scripts')
     </body>

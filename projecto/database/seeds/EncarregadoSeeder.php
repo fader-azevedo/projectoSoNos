@@ -10,14 +10,14 @@ class EncarregadoSeeder extends Seeder{
            'apelido' => 'Macuvele',
             'nome' => 'Azevedo Elias',
             'sexo' => 'Masculino',
-            'contacto' => '824262180'
+            'idContacto' => '1'
         ]);
 
         DB::table('encarregados')->insert([
            'apelido' => 'Mandlate',
             'nome' => 'Julio ',
             'sexo' => 'Masculino',
-            'contacto' => '823993664'
+            'idContacto' => '2'
         ]);
     }
 }

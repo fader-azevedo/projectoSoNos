@@ -7,13 +7,13 @@ use Illuminate\Database\Migrations\Migration;
 class CreateInscricaosTable extends Migration{
     public function up(){
         Schema::create('inscricaos', function (Blueprint $table) {
-            $table->integer('idAluno')->unsigned();;
-            $table->integer('idDisciplina')->unsigned();;
+            $table->increments('id');
+            $table->integer('idAluno')->unsigned();
+            $table->integer('idCurso')->unsigned();
+            $table->integer('ano');
             $table->dateTime('dataInsc');
-            $table->enum('turno',['manha','tarde','noite']);
             $table->foreign('idAluno')->references('id')->on('alunos');
-            $table->foreign('idDisciplina')->references('id')->on('disciplinas');
-            $table->timestamps();
+            $table->foreign('idCurso')->references('id')->on('cursos');
         });
     }
 

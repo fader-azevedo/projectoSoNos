@@ -4,6 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Classe extends Model{
+class Mes extends Model{
 
 }

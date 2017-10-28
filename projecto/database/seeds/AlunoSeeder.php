@@ -15,7 +15,8 @@ class AlunoSeeder extends Seeder{
 //            'foto' => 'foto01.jpg',
 //            'estado' => 'inscrito',
 //            'idEncarregado' => '1',
-//            'iduser' => '1'
+//            'iduser' => '1',
+//            'idContacto' => '3'
 //        ]);
 
         DB::table('alunos')->insert([
@@ -28,7 +29,8 @@ class AlunoSeeder extends Seeder{
             'foto' => 'foto02.jpg',
             'estado' => 'inscrito',
             'idEncarregado' =>'2',
-            'iduser' =>'2'
+            'iduser' =>'2',
+            'idContacto' => '4'
         ]);
     }
 }
