@@ -115,17 +115,58 @@
                                                 <td class="">{{$ms}}</td>
                                                 <td><a data-mes="{{$ms}}" class="btnn btn-info btn-nao-devedor">{{\App\Mensalidade::query()->where('mes',$ms)->count()}}</a></td>
                                                 <td><a data-mes="{{$ms}}" class="btnn btn-warning btn-devedor">{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ms)->count()}}</a></td>
-                                                <td><a class="btnn btn-primary"><i class="zmdi zmdi-library"></i>&nbsp;Mais Detalhes</a></td>
+                                                <td><a class="btnn btn-primary"><i class="zmdi zmdi-library"></i>&nbsp;Mais </a></td>
                                             </tr>
                                         @endforeach
 
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-sm-5">
-                                <div class="">
-                                </div>
+                            <div class="col-sm-5" style="background-color: #bbbbbb; padding: 10px">
+                                <h5 class="centered">Devedores</h5>
 
+                                <button class="btn btn-default dropdown-toggle pull-right" type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <span class="glyphicon glyphicon-th-list"></span> Dropdown
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a >JSON</a></li>
+                                    <li class="divider"></li>
+                                    <li><a> XML</a></li>
+                                    <li class="divider"></li>
+                                    <li><a > CSV</a></li>
+                                    <li><a> TXT</a></li>
+                                    <li class="divider"></li>
+                                    <li><a> Word</a></li>
+                                    <li><a > PowerPoint</a></li>
+                                    <li class="divider"></li>
+                                    <li><a> PNG</a></li>
+                                    <li><a > PDF</a></li>
+
+                                </ul>
+                                <table class="striped" style="width: 70%">
+                                    <thead>
+                                        <tr>
+                                            <th>Aluno</th>
+                                            <th>Valor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Fader</td>
+                                            <td>1500</td>
+                                        </tr>
+                                    </tbody>   <tbody>
+                                        <tr>
+                                            <td>Fader</td>
+                                            <td>1500</td>
+                                        </tr>
+                                    </tbody>   <tbody>
+                                        <tr>
+                                            <td>Fader</td>
+                                            <td>1500</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="item row">
