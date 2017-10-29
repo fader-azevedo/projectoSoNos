@@ -6,6 +6,13 @@ Website: http://blacktie.co
 Premium: http://www.gridgum.com
 */
 
+li a{
+    color: #00c5de;
+    font-size: 18px;
+}
+
+
+
 .input-field i{
     color: #00b0ff;
 }

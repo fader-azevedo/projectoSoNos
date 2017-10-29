@@ -17,7 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('listarTodasMensalidades','MensalidadeController@listarTodasMensalidades')->name('listarTodasMensalidades');
-Route::post('getDevedores','MensalidadeController@getDevedores')->name('getDevedores');
+Route::post('getDevedoresMes','MensalidadeController@getDevedoresMes')->name('getDevedoresMes');
 //Route::post('getDiv','MensalidadeController@getDiv')->name('getDiv');
 Route::post('listarPorAluno','MensalidadeController@listarPorAluno')->name('listarPorAluno');
 Route::post('listarPorMes','MensalidadeController@listarPorMes')->name('listarPorMes');
+Route::post('getMesAPagar','MensalidadeController@getMesAPagar')->name('getMesAPagar');

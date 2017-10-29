@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Aluno;
+use App\Def_Mensalidade;
 use App\Mensalidade;
 use App\Inscricao;
+use App\Mes;
 use App\PagamntoMensalidade;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -28,9 +30,10 @@ class MensalidadeController extends Controller{
 //        $meses = Mensalidade::query()->distinct()->pluck('mes');
 //        return view('mensalidade.listar',['mensalidade'=>$mensalidade, 'alunos' => $aluno,'anos'=>$anos,'meses'=>$meses,'numAluno'=>$aluno->count()]);
 //
-        $meses = Mensalidade::query()->distinct()->pluck('mes');
+        /*Mes que pelo menos um aluno pagou mensalidade*/
+        $mesesPagos = Mensalidade::query()->distinct()->pluck('mes');
         $mensalidade = Mensalidade::all();
-        return view('mensalidade.listar',['meses'=>$meses,'mensalidade'=>$mensalidade]);
+        return view('mensalidade.listar',['mesesPagos'=>$mesesPagos,'mensalidade'=>$mensalidade,'mesesAPagar'=>$this->getMesAPagar()]);
     }
 
     public function listarTodasMensalidades(){
@@ -84,18 +87,39 @@ class MensalidadeController extends Controller{
 
     }
 
-    public function getDevedores(){
+    public function getDevedoresMes(){
         $idAlunos = Mensalidade::query()->where('mes','=',$_POST['mes'])->select('idAluno')->get();
         $ids='';
         foreach ($idAlunos as $i){
             $ids = $i->idAluno.' '.$ids;
         }
         $arrayIds = explode(' ',trim(rtrim($ids)));
-//        $idDevedores = Mensalidade::query()->select('idAluno')->whereNotIn('idAluno',$arrayIds)->get();
-        $idDevedores = Aluno::query()->select('nome')->whereNotIn('id',$arrayIds)->get();
-
-
+//        $idDevedores = Aluno::query()->select('*')->whereNotIn('id',$arrayIds)->get();
+        $idDevedores = Aluno::query()->join('turma_alunos','turma_alunos.idAluno','=','alunos.id')
+            ->join('turmas','turma_alunos.idTurma','=','turmas.id')
+            ->select('turmas.nome as nomeTurma','alunos.nome as nomeAluno')->whereNotIn('idAluno',$arrayIds)->get();
         return response()->json(array('ids'=>$idDevedores));
+    }
+
+    public function getMesAPagar(){
+        $mesesApaga='';
+        $defin =Def_Mensalidade::all();
+        $mesesKexis = Mensalidade::query()->distinct()->pluck('mes')->count();
+        foreach ($defin as $df){
+            $mesIncial = $df->mescomeco;
+            $mesFim = $df->mesfim;
+
+            for ($b =$mesIncial+$mesesKexis;$b<=$mesFim;$b++){
+                $getMeses = Mes::query()->where('numero',$b)->get();
+                foreach ($getMeses as $r){
+                    $mesesApaga = $mesesApaga.' '.$r->nome;
+                }
+            }
+        }
+        $mesesAP = explode(' ',trim(rtrim($mesesApaga)));
+        return $mesesAP;
+//        return $mesesApaga;
+//        return response()->json(array('mesesAPagar'=>explode(' ',trim(rtrim($mesesApaga)))));
     }
 
 }

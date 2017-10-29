@@ -14,20 +14,25 @@
         <link rel="stylesheet" type="text/css" href="{!! asset('ionicons/css/ionicons.min.css')!!}"  />
         {{--<link rel="stylesheet" type="text/css" href="{!! asset('js/gritter/css/jquery.gritter.css')!!}" />--}}
         {{--<link rel="stylesheet" type="text/css" href="{!! asset('lineicons/style.css')!!}"/>--}}
+        {{--<link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">--}}
 
 
         <link rel="stylesheet" type="text/css" href="{!! asset('css/style.css')!!}" />
-{{--        <link rel="stylesheet" type="text/css" href="{!! asset('css/style-responsive.css')!!}"/>--}}
+        <link rel="stylesheet" type="text/css" href="{!! asset('css/style-responsive.css')!!}"/>
 
-        {{--<link rel="stylesheet" type="text/css" href="{!! asset('materialize/css/materialize.css')!!}"/>--}}
+        <link rel="stylesheet" type="text/css" href="{!! asset('materialize/css/materialize.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/materialize.min.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/normalize.css')!!}"/>
-        <link rel="stylesheet" type="text/css" href="{!! asset('css/material-design-iconic-font.min.css')!!}"/>
+    /    <link rel="stylesheet" type="text/css" href="{!! asset('css/material-design-iconic-font.min.css')!!}"/>
 
-        <link rel="stylesheet" type="text/css" href="{!! asset('css/_all-skins.css')!!}"/>
+        <link rel="stylesheet" type="text/css" href="{!! asset('datatables.net-bs/css/dataTables.bootstrap.min.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/AdminLTE.css')!!}"/>
+        <link rel="stylesheet" type="text/css" href="{!! asset('css/_all-skins.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('charts/morris.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('select2/css/select2.min.css')!!}"/>
+
+        {{--Tabelelas css--}}
+{{--        <link rel="stylesheet" type="text/css" href="{!! asset('datatables/css/dataTables.bootstrap.min.css')!!}"/>--}}
 
 
 
@@ -177,31 +182,32 @@
         </footer>
     </div>
 
-
-    <script src="{!! asset('js/jquery-2.2.0.min.js')!!}" type="text/javascript"></script>
-    <script src="{!! asset('js/bootstrap.min.js')!!}"></script>
-    <script type="text/javascript" src="{!! asset('js/jquery.dcjqaccordion.2.7.js')!!}"></script>
-    <script src="{!! asset('js/jquery.scrollTo.min.js')!!}"></script>
-    <script src="{!! asset('js/jquery.nicescroll.js')!!}" type="text/javascript"></script>
-    <script src="{!! asset('js/jquery.sparkline.js')!!}"></script>
+    {{--<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>--}}
+    {{--<script src="{!! asset('js/jquery-2.2.0.min.js')!!}" type="text/javascript"></script>--}}
+    <script src="{!! asset('jquery/dist/jquery.min.js')!!}" type="text/javascript"></script>
+    <script src="{!! asset('bootstrap/dist/js/bootstrap.min.js')!!}"></script>
+    {{--<script type="text/javascript" src="{!! asset('js/jquery.dcjqaccordion.2.7.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/jquery.scrollTo.min.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/jquery.nicescroll.js')!!}" type="text/javascript"></script>--}}
+    {{--<script src="{!! asset('js/jquery.sparkline.js')!!}"></script>--}}
 
     {{--<script src="{!! asset('js/js/jquery-easy-pie-chart/jquery.easy-pie-chart.js')!!}"></script>--}}
 
-    <script type="text/javascript" src="{!! asset('js/gritter/js/jquery.gritter.js')!!}"></script>
-    <script type="text/javascript" src="{!! asset('js/gritter-conf.js')!!}"></script>
+    {{--<script type="text/javascript" src="{!! asset('js/gritter/js/jquery.gritter.js')!!}"></script>--}}
+    {{--<script type="text/javascript" src="{!! asset('js/gritter-conf.js')!!}"></script>--}}
 
     <!--script for this page-->
-    <script src="{!! asset('js/sparkline-chart.js')!!}"></script>
-    <script src="{!! asset('js/zabuto_calendar.js')!!}"></script>
-    <script src="{!! asset('js/common-scripts.js')!!}"></script>
-    <script src="{!! asset('js/sweetalert.min.js')!!}"></script>
-    <script src="{!! asset('js/materialize.min.js')!!}"></script>
-    <script src="{!! asset('js/jquery.mCustomScrollbar.concat.min.js')!!}"></script>
-    <script src="{!! asset('js/jquery.waypoints.js')!!}"></script>
-    <script src="{!! asset('js/jquery.counterup.min.js')!!}"></script>
-    <script src="{!! asset('js/form-component.js')!!}"></script>
-    <script src="{!! asset('js/bootstrap-switch.js')!!}"></script>
-    <script src="{!! asset('js/jquery.tagsinput.js')!!}"></script>
+    {{--<script src="{!! asset('js/sparkline-chart.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/zabuto_calendar.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/common-scripts.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/sweetalert.min.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/materialize.min.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/jquery.mCustomScrollbar.concat.min.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/jquery.waypoints.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/jquery.counterup.min.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/form-component.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/bootstrap-switch.js')!!}"></script>--}}
+    {{--<script src="{!! asset('js/jquery.tagsinput.js')!!}"></script>--}}
 
 
 
@@ -211,15 +217,30 @@
     <script src="{!! asset('charts/morris.min.js')!!}"></script>
     <script src="{!! asset('select2/js/select2.full.min.js')!!}"></script>
 
-    <script>
 
-        $('.tooltipped').tooltip({delay: 50});
-        $(".counter").counterUp({
-            delay: 100,
-            time: 1200
+    <script src="{!! asset('datatables.net/js/jquery.dataTables.min.js')!!}"></script>
+    <script src="{!! asset('datatables.net-bs/js/dataTables.bootstrap.min.js')!!}"></script>
+
+    <script>
+        $(function () {
+
+//            $('#IDtabela1').DataTable({
+//                'paging'      : false,
+//                'lengthChange': false,
+//                'searching'   : false,
+//                'ordering'    : false,
+//                'info'        : false,
+//                'autoWidth'   : false
+//            })
         });
-        var meses = ['Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-        $('.select2').select2();
+
+//        $('.tooltipped').tooltip({delay: 50});
+//        $(".counter").counterUp({
+//            delay: 100,
+//            time: 1200
+////        });
+//        var meses = ['Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+//        $('.select2').select2();
 
 //        function buscarDados() {
 //            $.ajax({

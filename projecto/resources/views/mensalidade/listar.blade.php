@@ -79,10 +79,9 @@
 @endsection
 @section('content')
         <div class="nav-tabs-custom" style="background-color: #f2f2f2">
-            <ul class="nav nav-tabs pull-right">
-                <li class="active"><a data-slide-to="0" href="#carousellDiv" data-toggle="tab">Por Aluno</a></li>
-                <li><a data-slide-to="1" href="#carousellDiv" data-toggle="tab">Por Mês</a></li>
-                <li style="font-size: 30px" class="pull-left header" data-toggle="tab"><i class="fa fa-money"></i> Mensalidades</li>
+            <ul class="nav nav-tabs ">
+                <li class="pull-left active"><a data-slide-to="0" href="#carousellDiv" data-toggle="tab"><i class="fa fa-money"></i>&nbsp;Todas Mensalidades</a></li>
+                <li><a data-slide-to="1" href="#carousellDiv" data-toggle="tab"><i class="fa fa-users"></i>&nbsp;Por Aluno</a></li>
                 <li style="width: 100px;" class="tooltipped" data-tooltip="Selecione o Ano">
                     <div >
                         <a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>
@@ -94,80 +93,82 @@
                     </div>
                 </li>
             </ul>
-            <div class="tab-content no-padding">
+            <div class="tab-content">
                 <!-- Morris chart - Sales -->
                 <div id="carousellDiv" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div  class="carousel-inner">
                         <div id="" class="item active">
-                            <div class="item col-sm-7">
-                                <table class="striped" id="IDtabela1">
-                                    <thead>
-                                        <tr>
-                                            <th data-field="id">Mês</th>
-                                            <th data-field="price">Não Devedores</th>
-                                            <th data-field="name">Devedores</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tabela">
 
-                                        @foreach($meses  as $ms)
-                                            <tr>
-                                                <td class="">{{$ms}}</td>
-                                                <td><a data-mes="{{$ms}}" class="btnn btn-info btn-nao-devedor">{{\App\Mensalidade::query()->where('mes',$ms)->count()}}</a></td>
-                                                <td><a data-mes="{{$ms}}" class="btnn btn-warning btn-devedor">{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ms)->count()}}</a></td>
-                                                <td><a class="btnn btn-primary"><i class="zmdi zmdi-library"></i>&nbsp;Mais </a></td>
-                                            </tr>
-                                        @endforeach
+                            <section class="item col-sm-7">
+                                <div class="box box-info">
+                                    <div class="box-body">
+                                        <table class="table  table-striped" id="tabela1">
+                                            <thead>
+                                                <tr>
+                                                    <th >Mês</th>
+                                                    <th >Não Devedores</th>
+                                                    <th >Devedores</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tabela1Corpo">
+                                                @foreach($mesesPagos  as $ms)
+                                                    <tr>
+                                                        <td class="">{{$ms}}</td>
+                                                        <td><a data-mes="{{$ms}}" class="btn btn-info btn-nao-devedor"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ms)->count()}}</a></td>
+                                                        <td><a data-mes="{{$ms}}" class="btn btn-danger btn-devedor"><i class="zmdi zmdi-close"></i>&nbsp;{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ms)->count()}}</a></td>
+                                                        <td><a class="btnn btn-primary"><i class="zmdi zmdi-library"></i>&nbsp;Mais </a></td>
+                                                    </tr>
+                                                @endforeach
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-sm-5" style="background-color: #bbbbbb; padding: 10px">
-                                <h5 class="centered">Devedores</h5>
+                                                @foreach($mesesAPagar as $ot)
+                                                    <tr>
+                                                        <td>{{$ot}}</td>
+                                                        <td><a data-mes="{{$ot}}" class="btn btn-info btn-nao-devedor"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ot)->count()}}</a></td>
+                                                        <td><a data-mes="{{$ot}}" class="btn btn-danger btn-devedor"><i class="zmdi zmdi-close"></i>&nbsp;{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ot)->count()}}</a></td>
+                                                        <td><a class="btnn btn-primary"><i class="zmdi zmdi-library"></i>&nbsp;Mais </a></td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
 
-                                <button class="btn btn-default dropdown-toggle pull-right" type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <span class="glyphicon glyphicon-th-list"></span> Dropdown
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a >JSON</a></li>
-                                    <li class="divider"></li>
-                                    <li><a> XML</a></li>
-                                    <li class="divider"></li>
-                                    <li><a > CSV</a></li>
-                                    <li><a> TXT</a></li>
-                                    <li class="divider"></li>
-                                    <li><a> Word</a></li>
-                                    <li><a > PowerPoint</a></li>
-                                    <li class="divider"></li>
-                                    <li><a> PNG</a></li>
-                                    <li><a > PDF</a></li>
+                            <section class="col-lg-5 ">
+                                <div class="box box-danger">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><i class="fa fa-users"></i>&nbsp;Devedores</h3>
+                                        <h3 class="box-title pull-right"><i class="fa fa-calendar-o"></i>&nbsp;<label style="min-width: 60px; font-size: 14px" id="tiluloMes"></label></h3>
+                                    </div>
+                                    <div class="box-body">
 
-                                </ul>
-                                <table class="striped" style="width: 70%">
-                                    <thead>
-                                        <tr>
-                                            <th>Aluno</th>
-                                            <th>Valor</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Fader</td>
-                                            <td>1500</td>
-                                        </tr>
-                                    </tbody>   <tbody>
-                                        <tr>
-                                            <td>Fader</td>
-                                            <td>1500</td>
-                                        </tr>
-                                    </tbody>   <tbody>
-                                        <tr>
-                                            <td>Fader</td>
-                                            <td>1500</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        <div class="btn-group pull-right">
+                                            <button type="button" class="btn btn-primary">Exportar</button>
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">Excel</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">Pdf</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <table class="striped" id="tabelaDevedores">
+                                            <thead>
+                                                <tr>
+                                                    <th>Aluno</th>
+                                                    <th>Turma</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tabelaDivida">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                         <div class="item row">
                             <div class="col-md-4 col-sm-4 col-lg-4 ">
@@ -183,7 +184,7 @@
                                 <div class=" alunuDetalhes row">
                                     <div class="col-md-12 col-sm-12 col-lg-12 box-profile"  >
                                         <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class=" profile-user-img img-responsive img-circle" >
-                                        {{--<p class="centered">So Faculdade</p>--}}
+                                        <p class="centered">So Faculdade</p>
                                         <input id="ok" value="">
                                         <button class="btnn" onclick="lolo()"> cansado</button>
                                     </div>
@@ -236,10 +237,10 @@
 
 
 
-                                {{--<form id="frm">--}}
-                                    {{--<input type="text" id="txt">--}}
-                                    {{--<input type="submit">--}}
-                                {{--</form>--}}
+                                <form id="frm">
+                                    <input type="text" id="txt">
+                                    <input type="submit">
+                                </form>
                             </div>
                         </div>
 
@@ -277,36 +278,49 @@
             </div>
         </div>
 
-        <input id="ok" value="">
-
-    {{--</div>--}}
-
 @endsection
 
 @section('scripts')
-    <script type="text/javascript">
+    <script>
         $(document).ready(function() {
 
-            var tf=0;
-                $('.btn-devedor').on('click', function(){
-                    var mes= $(this).attr('data-mes');
-                    $.ajax({
-                        url: '/api/getDevedores',
-                        type: 'POST',
-                        data: 'mes=' +mes,
-                        success: function (rs) {
-                            if(rs.ids.length<=0){
-                                return;
-                            }
-                            for(var k =0; k < rs.ids.length; k++){
-                                alert(rs.ids[k].nome);
-                            }
+//            $.ajax({
+//                url: '/api/getMesAPagar',
+//                type: 'POST',
+//                success: function (rs) {
+//                    var array = rs.split(' ');
+//                    for(var i=array.length-2; i>=0; i--){
+//                        $('#tabela').append('<tr> <td>'+array[i]+'</td> <td><a data-mes="" class="btn btn-default"><i class="fa fa-check"></i>&nbsp;0</a></td> <td><a  class="btn btn-default"><i class="zmdi zmdi-close"></i>&nbsp;0</a></td> <td><a class="btnn btn-default"><i class="zmdi zmdi-library"></i>&nbsp;Ainda </a></td> </tr>');
+//                    }
+//                }
+//            });
+
+            $('.btn-devedor').on('click', function(){
+                var mes= $(this).attr('data-mes');
+                $.ajax({
+                    url: '/api/getDevedoresMes',
+                    type: 'POST',
+                    data: 'mes=' +mes,
+                    success: function (rs) {
+                        if(rs.ids.length<=0){
+                            return;
                         }
-                    })
-                });
+                        $('.rm').remove();
+                        document.getElementById('tiluloMes').innerHTML = mes;
+                        for(var k =0; k < rs.ids.length; k++){
+                            $('<tr class="rm"><td>'+rs.ids[k].nomeAluno+'</td><td>'+rs.ids[k].nomeTurma+'</td></tr>').hide().appendTo('#tabelaDivida').fadeIn(1000);
+                        }
+                    }
+                })
+            });
+//            var rowCount = document.getElementById('IDtabela1').rows.length - 1;
+//            alert(meses[rowCount]);
 
 
-//
+
+
+
+            //
 ////            var d=0;
 //            var f = 'Fevereiro';var j=0; var t;
 //                $.ajax({
@@ -375,7 +389,7 @@
         });
 
 
-                        {{--/*Inicio Metodos de Listar por alunos*/--}}
+                        /*Inicio Metodos de Listar por alunos*/
 
             {{--function getCor(){--}}
                 {{--var rgb = [];--}}
@@ -476,8 +490,8 @@
 
             {{--});--}}
 
-//            $('.materialboxed').materialbox();
-//            $('.carousel').carousel();
+{{--//            $('.materialboxed').materialbox();--}}
+{{--//            $('.carousel').carousel();--}}
 //        });
     </script>
 

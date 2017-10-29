@@ -162,7 +162,6 @@
                     </div>
                 </div>
             </div>
-
         </section>
 
         <section class="col-lg-3 connectedSortable">
