@@ -423,13 +423,13 @@ table {
 
 td,
 th {
-  height: 38px;
-  padding: 5px;
+  height: 34px;
+  padding: 2px;
   text-align: center;
 }
 
 thead tr th{
-  background-color: #ffffff;
+  background-color: #f2f2f2;
   border-radius: 1px;
 }thead tr2 th{
   /*background-color: #f0408f;*/

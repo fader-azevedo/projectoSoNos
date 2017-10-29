@@ -33,7 +33,8 @@ class MensalidadeController extends Controller{
         /*Mes que pelo menos um aluno pagou mensalidade*/
         $mesesPagos = Mensalidade::query()->distinct()->pluck('mes');
         $mensalidade = Mensalidade::all();
-        return view('mensalidade.listar',['mesesPagos'=>$mesesPagos,'mensalidade'=>$mensalidade,'mesesAPagar'=>$this->getMesAPagar()]);
+        $anos  = Def_Mensalidade::query()->pluck('ano');
+        return view('mensalidade.listar',['anos'=>$anos,'mesesPagos'=>$mesesPagos,'mensalidade'=>$mensalidade,'mesesAPagar'=>$this->getMesAPagar($anos->first())]);
     }
 
     public function listarTodasMensalidades(){
@@ -94,16 +95,15 @@ class MensalidadeController extends Controller{
             $ids = $i->idAluno.' '.$ids;
         }
         $arrayIds = explode(' ',trim(rtrim($ids)));
-//        $idDevedores = Aluno::query()->select('*')->whereNotIn('id',$arrayIds)->get();
         $idDevedores = Aluno::query()->join('turma_alunos','turma_alunos.idAluno','=','alunos.id')
             ->join('turmas','turma_alunos.idTurma','=','turmas.id')
-            ->select('turmas.nome as nomeTurma','alunos.nome as nomeAluno')->whereNotIn('idAluno',$arrayIds)->get();
+            ->select('turmas.nome as nomeTurma','alunos.nome as nomeAluno','alunos.*')->whereNotIn('idAluno',$arrayIds)->where('ano','=',$_POST['ano'])->get();
         return response()->json(array('ids'=>$idDevedores));
     }
 
-    public function getMesAPagar(){
+    public function getMesAPagar($ano){
         $mesesApaga='';
-        $defin =Def_Mensalidade::all();
+        $defin =Def_Mensalidade::query()->where('ano',$ano)->get();
         $mesesKexis = Mensalidade::query()->distinct()->pluck('mes')->count();
         foreach ($defin as $df){
             $mesIncial = $df->mescomeco;

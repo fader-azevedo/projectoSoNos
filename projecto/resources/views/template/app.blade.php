@@ -12,175 +12,162 @@
         <link rel="stylesheet" type="text/css" href="{!! asset('css/bootstrap.css') !!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.css')!!}"  />
         <link rel="stylesheet" type="text/css" href="{!! asset('ionicons/css/ionicons.min.css')!!}"  />
-        {{--<link rel="stylesheet" type="text/css" href="{!! asset('js/gritter/css/jquery.gritter.css')!!}" />--}}
-        {{--<link rel="stylesheet" type="text/css" href="{!! asset('lineicons/style.css')!!}"/>--}}
-        {{--<link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">--}}
-
+{{--        <link rel="stylesheet" type="text/css" href="{!! asset('js/gritter/css/jquery.gritter.css')!!}" />--}}
+        <link rel="stylesheet" type="text/css" href="{!! asset('lineicons/style.css')!!}"/>
+        <link rel="stylesheet" type="text/css" href="{!! asset('css/AdminLTE.css')!!}"/>
 
         <link rel="stylesheet" type="text/css" href="{!! asset('css/style.css')!!}" />
-        <link rel="stylesheet" type="text/css" href="{!! asset('css/style-responsive.css')!!}"/>
+        {{--<link rel="stylesheet" type="text/css" href="{!! asset('css/style-responsive.css')!!}"/>--}}
 
-        <link rel="stylesheet" type="text/css" href="{!! asset('materialize/css/materialize.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/materialize.min.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/normalize.css')!!}"/>
-    /    <link rel="stylesheet" type="text/css" href="{!! asset('css/material-design-iconic-font.min.css')!!}"/>
+        <link rel="stylesheet" type="text/css" href="{!! asset('css/material-design-iconic-font.min.css')!!}"/>
 
-        <link rel="stylesheet" type="text/css" href="{!! asset('datatables.net-bs/css/dataTables.bootstrap.min.css')!!}"/>
-        <link rel="stylesheet" type="text/css" href="{!! asset('css/AdminLTE.css')!!}"/>
+
         <link rel="stylesheet" type="text/css" href="{!! asset('css/_all-skins.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('charts/morris.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('select2/css/select2.min.css')!!}"/>
-
-        {{--Tabelelas css--}}
-{{--        <link rel="stylesheet" type="text/css" href="{!! asset('datatables/css/dataTables.bootstrap.min.css')!!}"/>--}}
-
-
-
-
-        {{--<link rel="stylesheet" type="text/css" href="{!! asset('css/sweetalert.css')!!}"/>--}}
-        {{--<script type="text/javascript" src="{!! asset('js/chart-master/Chart.js') !!}/"></script>--}}
     </head>
 <!-- sidebar-collapse-->
     <body class="hold-transition skin-black sidebar-mini sidebar-collapse" >
-    <div class="wrapper">
-
-        <header class="main-header">
-            <!-- Logo -->
-            <a href="" class="logo" style="position: fixed">
-                <span class="logo-mini"><img src="{!! asset('img/logo1.jpg')!!}" class="" width="50"></span>
-                <span class="logo-lg"><img src="{!! asset('img/logo1.jpg')!!}" class="" width="70"></span>
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <div class="navbar navbar-fixed-top">
-                <!-- Sidebar toggle button-->
-                <a style="border: none" href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <div class="wrapper">
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="" class="logo" style="position: fixed">
+                    <span class="logo-mini"><img src="{!! asset('img/logo1.jpg')!!}" class="" width="50"></span>
+                    <span class="logo-lg"><img src="{!! asset('img/logo1.jpg')!!}" class="" width="70"></span>
                 </a>
+                <!-- Header Navbar: style can be found in header.less -->
+                <div class="navbar navbar-fixed-top">
+                    <!-- Sidebar toggle button-->
+                    <a style="border: none" href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    </a>
 
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <li style="border: none" class="dropdown notifications-menu">
-                            <a href="#" style="border: none" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                                                page and may cause design problems
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-red"></i> 5 new members joined
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-user text-red"></i> You changed your username
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>
-                        <!-- Tasks: style can be found in dropdown.less -->
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu" style="border: none">
-                            <a style="border: none" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <p><img src="{{asset('img/logo1.jpg')}}" class="user-image" alt="User Image"></p>
-                                <span class="hidden-xs"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="{{asset('img/logo1.jpg')}}" class="img-circle" alt="">
-                                    <p style="color: #3c3f41">
-                                       So Nos
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a class="btn btn-default btn-flat" data-toggle="modal" href="#myModalLogOut">Sair</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- Control Sidebar Toggle Button -->
-                        <li>
-                            <a style="border: none" href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
-                    </ul>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li style="border: none" class="dropdown notifications-menu">
+                                <a href="#" style="border: none" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell-o"></i>
+                                    <span class="label label-warning">10</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have 10 notifications</li>
+                                    <li>
+                                        <!-- inner menu: contains the actual data -->
+                                        <ul class="menu">
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                                    page and may cause design problems
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-users text-red"></i> 5 new members joined
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-user text-red"></i> You changed your username
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="footer"><a href="#">View all</a></li>
+                                </ul>
+                            </li>
+                            <!-- Tasks: style can be found in dropdown.less -->
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li class="dropdown user user-menu" style="border: none">
+                                <a style="border: none" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <p><img src="{{asset('img/logo1.jpg')}}" class="user-image" alt="User Image"></p>
+                                    <span class="hidden-xs"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                        <img src="{{asset('img/logo1.jpg')}}" class="img-circle" alt="">
+                                        <p style="color: #3c3f41">
+                                           So Nos
+                                            <small>Member since Nov. 2012</small>
+                                        </p>
+                                    </li>
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a class="btn btn-default btn-flat" data-toggle="modal" href="#myModalLogOut">Sair</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- Control Sidebar Toggle Button -->
+                            <li>
+                                <a style="border: none" href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </header>
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar" style="position: fixed">
-            <section class="sidebar">
-                <ul class="sidebar-menu" data-widget="tree" style="margin-top: 50px">
-                    @yield('menu')
+            </header>
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar" style="position: fixed">
+                <section class="sidebar">
+                    <ul class="sidebar-menu" data-widget="tree" style="margin-top: 50px">
+                        @yield('menu')
 
-                </ul>
-            </section>
-        </aside>
+                    </ul>
+                </section>
+            </aside>
 
-        <div class="lock-screen">
-            <div class="modal fade" id="myModalLogOut"  role="dialog" data-keyboard="false" data-backdrop="static">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h5 class="modal-title">Logout</h5>
-                        </div>
-                        <div class="modal-body">
-                            <p class="centered"><img class="img-circle" width="80" src="{!! asset('img/logo.jpg')!!}"></p>
-                            <p>Desejas Sair do Sistema ???</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button style="float: left" data-dismiss="modal" class="btn btn-danger" type="button">Nao</button>
-                            <button class="btn btn-theme" type="button"><a href="{{url('/logon')}}">Sim</a></button>
+            <div class="lock-screen">
+                <div class="modal fade" id="myModalLogOut"  role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h5 class="modal-title">Logout</h5>
+                            </div>
+                            <div class="modal-body">
+                                <p class="centered"><img class="img-circle" width="80" src="{!! asset('img/logo.jpg')!!}"></p>
+                                <p>Desejas Sair do Sistema ???</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button style="float: left" data-dismiss="modal" class="btn btn-danger" type="button">Nao</button>
+                                <button class="btn btn-theme" type="button"><a href="{{url('/logon')}}">Sim</a></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <section class="content" style="padding-top: 80px">
-                <div class="row">
-                    @yield('content')
-                </div>
-            </section>
-        </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Versão</b> 0.1
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <section class="content" style="padding-top: 60px">
+                    <div class="row">
+                        @yield('content')
+                    </div>
+                </section>
             </div>
-            <strong>Sistema de Gestão de Mensalidades<a href=""></a>.</strong>
-        </footer>
-    </div>
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Versão</b> 0.1
+                </div>
+                <strong>Sistema de Gestão de Mensalidades<a href=""></a>.</strong>
+            </footer>
+        </div>
 
     {{--<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>--}}
     {{--<script src="{!! asset('js/jquery-2.2.0.min.js')!!}" type="text/javascript"></script>--}}
@@ -222,17 +209,8 @@
     <script src="{!! asset('datatables.net-bs/js/dataTables.bootstrap.min.js')!!}"></script>
 
     <script>
-        $(function () {
 
-//            $('#IDtabela1').DataTable({
-//                'paging'      : false,
-//                'lengthChange': false,
-//                'searching'   : false,
-//                'ordering'    : false,
-//                'info'        : false,
-//                'autoWidth'   : false
-//            })
-        });
+
 
 //        $('.tooltipped').tooltip({delay: 50});
 //        $(".counter").counterUp({
