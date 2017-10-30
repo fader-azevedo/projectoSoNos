@@ -245,8 +245,6 @@
                             </div>
 
 
-
-
                             <div class="box box-widget widget-user">
                                 <!-- Add the bg color to the header using any of the bg-* classes -->
                                 <div class="widget-user-header bg-aqua-active">
@@ -255,7 +253,7 @@
                                     <p class="centered">Nome</p>
                                 </div>
                                 <div class="widget-user-image">
-                                    <img id="idFoto" class="img-circle" src="{!! asset('img/upload/foto01.jpg') !!}" alt="">
+                                    <img id="idFoto" class="img-circle" src="{!! asset('img/logo.jpg') !!}" alt="">
                                 </div>
                                 <div class="box-footer">
                                     <div class="row">
@@ -290,7 +288,7 @@
                                                         <span class="sm-st-icon st-violet"><i class="fa fa-money"></i></span>
                                                     </p>
                                                     <div class="sm-st-info centered">
-                                                        <p>5600</p>
+                                                        <p>{{$valorTotal}}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -345,7 +343,6 @@
 
                 var rowCount = document.getElementById('tabelaDivida').rows.length;
                 if(rowCount <= 0){
-//                    alert('Nada a ser Exportado');
                     $('#alertExport').show();
                     return;
                 }
@@ -364,8 +361,8 @@
                         if(rs.ids.length<=0){
                             return;
                         }
-                        $('#boxNaoDevedor').addClass('collapsed-box').slideUp();
                         $('#boxDevedor').removeClass('collapsed-box').slideDown();
+                        $('#boxNaoDevedor').addClass('collapsed-box').slideUp();
                         $('.rm').remove();
                         document.getElementById('tiluloMesDivida').innerHTML = mes;
                         document.getElementById('MesAnoDivida').innerHTML = 'Devedores'+' '+mes+'-'+ano;
@@ -382,8 +379,6 @@
                 $('#boxNaoDevedor').removeClass('collapsed-box').slideDown();
             });
 
-
-
             /*Buscar Dados de Alunos*/
             $('#inPutAluno').on('input',function () {
 
@@ -392,27 +387,15 @@
                 if(idAluno === '' ||  $('#inPutAluno').val().length=== 0){
                     return;
                 }
+                var valorTotal = JSON.parse("{{json_encode($valorTotal)}}");
+                var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");
+
                 $.ajax({
                     url: '/api/listarPorAluno',
                     type: 'POST',
                     data: {'idAluno':idAluno,'ano':ano},
                     success: function (rs) {
                         document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
-                        //                        document.getElementById('apelido').innerHTML = rs.aluno.apelido;
-                        //                        document.getElementById('sexo').innerHTML = rs.aluno.sexo;
-                        //                        document.getElementById('idade').innerHTML = getIdade(rs.aluno.dataNasc) + ' Anos';
-
-//                            document.getElementById('apelido').style.width = k+'%';
-//                            document.getElementById('sexo').style.width = k+'%';
-//                            document.getElementById('idade').style.width = k+'%';
-//
-//                        var corbk = getCor();
-//                        document.getElementById('idade').style.backgroundColor = corbk;
-//                        document.getElementById('sexo').style.backgroundColor = corbk;
-//                        document.getElementById('apelido').style.backgroundColor = corbk;
-
-                        /*prenche a tabela*/
-//                        var valorPago = 0;
                         $('.tr').remove();
                         $('.ss').remove();
                         if(rs.mensal.length <=0){
@@ -420,68 +403,17 @@
                         }else {
                             for (var j = 0; j < rs.mensal.length; j++) {
                                 $('#tabela2Corpo').append(" <tr class='tr'><td>" + rs.mensal[j].mes + "</td> <td>" + rs.mensal[j].dataP + "</td><td>" + rs.mensal[j].estado + "</td></tr>");
-//                            valorPago += rs.mensal[j].valor;
                             }
                         }
-
-
-//                        var prc = (valorPago * 100)/5600;
-//                        document.getElementById('valorPago').innerHTML = valorPago;
-//                        document.getElementById('valorDivida').innerHTML = 5600-valorPago;
-//                        document.getElementById('percPago').innerHTML = prc.toFixed(2)+'%';
-//                        document.getElementById('barWidth').style.width = prc+'%';
-
-                        /*Adiciona os meses em faltam*/
-//                        var rowCount = document.getElementById('IDtabela1').rows.length - 1;
-//                        for (var f = rowCount; f < meses.length; f++) {
-//                            $('#tabela').append(" <tr class='tr'><td>" + meses[f] + "</td> <td>--------------------------</td><td>Nao pago</td><td>0.00</td>");
-//                        }
+                        var rk = document.getElementById('tabela2Corpo').rows.length;
+                        var prc = ((valorMensal*rk) * 100)/valorTotal;
+                        document.getElementById('valorPago').innerHTML = valorMensal*rk;
+                        document.getElementById('valorDivida').innerHTML = valorTotal-(valorMensal*rk);
+                        document.getElementById('percPago').innerHTML = prc.toFixed(2)+'%';
+                        document.getElementById('barWidth').style.width = prc+'%';
                     }
                 });
             });
-
-
-
-
-            //
-////            var d=0;
-//            var f = 'Fevereiro';var j=0; var t;
-//                $.ajax({
-//                    url: '/api/listarTodasMensalidades',
-//                    type: 'POST',
-//                    success: function (rs) {
-//                        for ( var j=0; j < rs.mensalidade.length; j++) {
-////                            alert(rs.mensalidade[j]);
-////                            oka();
-//
-////                            $.ajax({
-////                                url: '/api/devedoresEnao',
-////                                type: 'POST',
-////                                data: 'mes='+rs.mensalidade[j],
-////
-////                                success: function (dev) {
-////                                    t = dev.naoDevedores;
-//////                                    alert('ok');
-//////                                for (var j = 0; j < rs.mensalidade.length; j++) {
-////
-//////                                    $('#tabela').append(" <tr class='tr'><td>" + rs.mensalidade[j] + "</td> <td></td><td></td><td><button class='btnn'>Detalhes</button></td>")
-//////                                }
-////                                }
-////                            });
-////                            alert(t);
-////                            $('#tabela').append(" <tr class='tr'><td>" + rs.mensalidade[j] + "</td> <td>"+rs.dev+"</td><td></td><td><button class='btnn'>Detalhes</button></td>")
-//
-//                        }
-//                    }
-//                });
-
-
-
-
-
-
-
-
         });
 
 

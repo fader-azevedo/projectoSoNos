@@ -32,10 +32,17 @@ class MensalidadeController extends Controller{
 //        return view('mensalidade.listar',['mensalidade'=>$mensalidade, 'alunos' => $aluno,'anos'=>$anos,'meses'=>$meses,'numAluno'=>$aluno->count()]);
 //
         /*Mes que pelo menos um aluno pagou mensalidade*/
+        $def = Def_Mensalidade::query()->where('ano',2017)->get();
+        $valorTotal=0; $valorMensal=0;
+        foreach ($def as $d){
+            $valorTotal = ($d->intervalo+1)*$d->valormensal;
+            $valorMensal = $d->valormensal;
+        }
+
         $mesesPagos = Mensalidade::query()->distinct()->pluck('mes');
         $mensalidade = Mensalidade::all();
         $anos  = Def_Mensalidade::query()->pluck('ano');
-        return view('mensalidade.listar',['alu'=>$alunos,'anos'=>$anos,'mesesPagos'=>$mesesPagos,'mensalidade'=>$mensalidade,'mesesAPagar'=>$this->getMesAPagar($anos->first())]);
+        return view('mensalidade.listar',['valorMensal'=>$valorMensal,'valorTotal'=>$valorTotal,'alu'=>$alunos,'anos'=>$anos,'mesesPagos'=>$mesesPagos,'mensalidade'=>$mensalidade,'mesesAPagar'=>$this->getMesAPagar($anos->first())]);
     }
 
     public function listarTodasMensalidades(){
@@ -123,19 +130,4 @@ class MensalidadeController extends Controller{
 //        return response()->json(array('mesesAPagar'=>explode(' ',trim(rtrim($mesesApaga)))));
     }
 
-
-    public function factura(){
-//        $tabela = $_POST['tabela'];
-        $tabela = '<label>Skubera</label>';
-
-        header("Content-type: application/vnd.ms-excel");
-        header("Content-type: application/force-download");
-        header("Content-Disposition: attachment; filename=fileAKI.xls");
-        header("Pragma: no-cache");
-
-        echo $tabela;
-//        echo '<script>alert("chegou");</script>';
-
-        return view('template.file',['tabela'=>$tabela]);
-    }
 }
