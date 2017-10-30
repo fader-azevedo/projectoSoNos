@@ -80,7 +80,6 @@ class MensalidadeController extends Controller{
         return  response()->json(array('mensal'=> $mensalidade));
     }
 
-
     public function registarMensalidade(){
         $aluno = Aluno::all();
         $meses = array('Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');

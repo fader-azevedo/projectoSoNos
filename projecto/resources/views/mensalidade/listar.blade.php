@@ -81,7 +81,7 @@
 
     <section style="position: relative;">
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Mensalidade</a></li>
+            <li><a href="#"><i class="fa fa-money"></i> Mensalidade</a></li>
             <li class="active">Lista</li>
         </ol>
     </section>
@@ -164,8 +164,7 @@
                                     <h5 class="left"><i class="fa fa-calendar-o"></i>&nbsp;<label style="min-width: 60px; font-size: 14px" id="tiluloMesPago"></label></h5>
 
                                     <div class="btn-group pull-right">
-                                        <button type="button" class="btn btn-default"><i class="fa fa-file"></i>&nbsp;Exportar</button>
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-clipboard"></i>&nbsp;Exportar
                                             <span class="caret"></span>
                                             <span class="sr-only"></span>
                                         </button>
@@ -205,8 +204,7 @@
                                     <h5 class="left"><i class="fa fa-calendar-o"></i>&nbsp;<label style="min-width: 60px; font-size: 14px" id="tiluloMesDivida"></label></h5>
 
                                     <div class="btn-group pull-right">
-                                        <button type="button" class="btn btn-default"><i class="fa fa-file"></i>&nbsp;Exportar</button>
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-clipboard"></i>&nbsp;Exportar
                                             <span class="caret"></span>
                                             <span class="sr-only"></span>
                                         </button>
@@ -246,57 +244,69 @@
                                 </datalist>
                             </div>
 
-                            <div class="alunuDetalhes row">
-                                <div class="col-md-12 col-sm-12 col-lg-12 box-profile"  >
-                                    <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class=" profile-user-img img-responsive img-circle" >
-                                    <p class="centered">So Faculdade</p>
-                                </div>
-                            </div>
 
-                            <div class="col-md-122 col-sm-12 col-log-12">
-                                <div class="progress progress-striped ">
-                                    <div id="barWidth" class="progress-bar tooltipped"  role="progressbar"   aria-valuemin="0" aria-valuemax="100" data-tooltip="% de Pagamento Feito">
-                                        <span class="centered" style="font-size: 13px;"  id="percPago"></span>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row" >
-                                <div class="col-md-4 col-sm-4 col-log-4 ">
-                                    <div class="sm-st tooltipped" data-tooltip="Valor Pago">
-                                        <p class="centered">
-                                            <span class="sm-st-icon st-blue"><i class="fa fa-money"></i></span>
-                                        </p>
-                                        <div class="sm-st-info centered">
-                                            <p id="valorPago">0</p>
+
+                            <div class="box box-widget widget-user">
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="widget-user-header bg-aqua-active">
+                                    {{--<h3 class="widget-user-username">Alexander Pierce</h3>--}}
+                                    {{--<h5 class="widget-user-desc">Founder &amp; CEO</h5>--}}
+                                    <p class="centered">Nome</p>
+                                </div>
+                                <div class="widget-user-image">
+                                    <img id="idFoto" class="img-circle" src="{!! asset('img/upload/foto01.jpg') !!}" alt="">
+                                </div>
+                                <div class="box-footer">
+                                    <div class="row">
+                                        <div class="col-sm-4 border-right">
+                                            <div class="description-block">
+                                                <div class="sm-st tooltipped" data-tooltip="Valor Pago">
+                                                    <p class="centered">
+                                                        <span class="sm-st-icon st-blue"><i class="fa fa-money"></i></span>
+                                                    </p>
+                                                    <div class="sm-st-info centered">
+                                                        <p id="valorPago">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 col-sm-4 col-lg-4 ">
-                                    <div class="sm-st  tooltipped"  data-tooltip="Divida">
-                                        <p class="centered">
-                                            <span class="sm-st-icon st-red"><i class="fa fa-money"></i></span>
-                                        </p>
-                                        <div class="sm-st-info centered">
-                                            <p id="valorDivida">0</p>
+                                        <div class="col-sm-4 border-right">
+                                            <div class="description-block">
+                                                <div class="sm-st  tooltipped"  data-tooltip="Divida">
+                                                    <p class="centered">
+                                                        <span class="sm-st-icon st-red"><i class="fa fa-money"></i></span>
+                                                    </p>
+                                                    <div class="sm-st-info centered">
+                                                        <p id="valorDivida">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 col-sm-4 col-lg-4 ">
-                                    <div class="sm-st tooltipped" data-tooltip="Total a Pagar" >
-                                        <p class="centered">
-                                            <span class="sm-st-icon st-violet"><i class="fa fa-money"></i></span>
-                                        </p>
-                                        <div class="sm-st-info centered">
-                                            <p>5600</p>
+                                        <div class="col-sm-4">
+                                            <div class="description-block">
+                                                <div class="sm-st tooltipped" data-tooltip="Total a Pagar" >
+                                                    <p class="centered">
+                                                        <span class="sm-st-icon st-violet"><i class="fa fa-money"></i></span>
+                                                    </p>
+                                                    <div class="sm-st-info centered">
+                                                        <p>5600</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-122 col-sm-12 col-log-12" style="padding-bottom: 0">
+                                            <div class="progress progress-striped ">
+                                                <div id="barWidth" class="progress-bar tooltipped"  role="progressbar"   aria-valuemin="0" aria-valuemax="100" data-tooltip="% de Pagamento Feito">
+                                                    <span class="centered" style="font-size: 13px;"  id="percPago"></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8 col-sm-8 col-lg-8 " style="padding-top: 15px;">
+                        <div class="col-md-8 col-sm-8 col-lg-8" id="divTabela2" style="padding-top: 15px;">
                             <table id="tabela2" class="table-striped">
                                 <thead>
                                     <tr>
@@ -404,10 +414,16 @@
                         /*prenche a tabela*/
 //                        var valorPago = 0;
                         $('.tr').remove();
-                        for (var j = 0; j < rs.mensal.length; j++) {
-                            $('#tabela2Corpo').append(" <tr class='tr'><td>" + rs.mensal[j].mes + "</td> <td>" + rs.mensal[j].dataP + "</td><td>" + rs.mensal[j].estado + "</td></tr>");
+                        $('.ss').remove();
+                        if(rs.mensal.length <=0){
+                            $('#divTabela2').append('<h1 class="centered ss">Ainda Sem Registo</h1>');
+                        }else {
+                            for (var j = 0; j < rs.mensal.length; j++) {
+                                $('#tabela2Corpo').append(" <tr class='tr'><td>" + rs.mensal[j].mes + "</td> <td>" + rs.mensal[j].dataP + "</td><td>" + rs.mensal[j].estado + "</td></tr>");
 //                            valorPago += rs.mensal[j].valor;
+                            }
                         }
+
 
 //                        var prc = (valorPago * 100)/5600;
 //                        document.getElementById('valorPago').innerHTML = valorPago;

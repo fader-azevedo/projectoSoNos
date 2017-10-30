@@ -3196,16 +3196,17 @@ table.text-center th {
 .widget-user .widget-user-image {
   position: absolute;
   top: 65px;
-  left: 50%;
-  margin-left: -45px;
+  left: 48%;
+  margin-left: -55px;
 }
 .widget-user .widget-user-image > img {
-  width: 90px;
+  width: 120px;
   height: auto;
   border: 3px solid #fff;
 }
 .widget-user .box-footer {
-  padding-top: 30px;
+  padding-top: 75px;
+  padding-bottom: 1px;
 }
 .widget-user-2 .widget-user-header {
   padding: 20px;
