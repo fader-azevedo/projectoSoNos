@@ -6,9 +6,9 @@ Website: http://blacktie.co
 Premium: http://www.gridgum.com
 */
 .anoExport{
-    margin: 0;
+    margin: -5px;
     padding: 0;
-    height: 22px;
+    height: 0;
     visibility: hidden;
 }
 .butExport a i{
@@ -485,14 +485,19 @@ select.material-control-login:hover{
 
 
 /* BASIC THEME CONFIGURATION */
-/*body {*/
+body {
     /*color: #797979;*/
 	/*background: #FFFFFF;!*deebf2*!*/
-    /*font-family: 'Times New Roman', sans-serif;*/
+   // font-family: 'Times New Roman', sans-serif;
     /*padding: 0px !important;*/
     /*margin: 0px !important;*/
     /*font-size:14px;*/
-/*}*/
+}
+
+h3,label{
+    font-family: "Times New Roman", sans-serif;;
+
+}
 
 h5{
     font-size: 20px;

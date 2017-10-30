@@ -64,11 +64,13 @@ class MensalidadeController extends Controller{
 
 
     public function listarPorAluno(){
+        $alun = Aluno::query()->where('id',$_POST['idAluno'])->first();
         $mensalidade = PagamntoMensalidade::query()
             ->join('mensalidades','pagamnto_mensalidades.idMensalidade','=','mensalidades.id')
             ->join('pagamentos','pagamnto_mensalidades.idPagamento','=','pagamentos.id')
-            ->select('mensalidades.*','pagamentos.*')->where('idAluno',$_POST['idAluno'])->where('anoPago',$_POST['ano'])->get();
-        return  response()->json(array('mensal'=> $mensalidade));
+            ->join('alunos','pagamnto_mensalidades.idAluno','=','alunos.id')
+            ->select('mensalidades.*','pagamentos.*','alunos.*')->where('idAluno',$_POST['idAluno'])->where('anoPago',$_POST['ano'])->get();
+        return  response()->json(array('mensal'=> $mensalidade,'foto'=>$alun->foto));
     }
 
     public function listarPorMes(){

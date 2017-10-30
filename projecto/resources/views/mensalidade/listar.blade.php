@@ -105,7 +105,7 @@
             <!-- Morris chart - Sales -->
             <div id="carousellDiv" class="carousel slide" data-ride="carousel" data-interval="false">
                 <div  class="carousel-inner">
-                    <div id="" class="item ">
+                    <div id="" class="item active">
                         <section class="col-sm-7 col-md-7 col-lg-7" style="padding-top: 14px">
                             <table class="table-striped" id="tabela1">
                                 <thead>
@@ -137,43 +137,104 @@
                             </table>
                         </section>
                         <section class=" col-sm-5 col-md-5 col-lg-5 ">
-                            <div class="box box-danger">
+
+                            <div class="box box-danger" id="alertExport" style="background-color: #ff8e87; color: white">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title"><i class="fa fa-users"></i>&nbsp;Devedores</h3>
-                                    <h3 class="box-title pull-right"><i class="fa fa-calendar-o"></i>&nbsp;<label style="min-width: 60px; font-size: 14px" id="tiluloMes"></label></h3>
+                                    <h3 class="box-title">Erro</h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
                                 </div>
                                 <div class="box-body">
 
+                                </div>
+                            </div>
+
+                            {{--tabela Nao Devedores--}}
+                            <div class="box box-info" id="boxNaoDevedor">
+                                <div class="box-header with-border">
+                                    <h3 style="color: #00c0ef" class="box-title"><i class="fa fa-users"></i>&nbsp;Alunos Sem Divida</h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <h5 class="left"><i class="fa fa-calendar-o"></i>&nbsp;<label style="min-width: 60px; font-size: 14px" id="tiluloMesPago"></label></h5>
+
                                     <div class="btn-group pull-right">
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-file"></i>&nbsp;Exportar</button>
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        <button type="button" class="btn btn-default"><i class="fa fa-file"></i>&nbsp;Exportar</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                             <span class="caret"></span>
                                             <span class="sr-only"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a id="ExportExcel"><i style="color: green" class="fa fa-file-excel-o"></i>Excel</a></li>
+                                            <li><a style="cursor: pointer;" id="ExportExcel"><i style="color: green" class="fa fa-file-excel-o"></i>Excel</a></li>
                                             <li class="divider"></li>
-                                            <li><a id="ExportPdf"><i style="color: red" class="fa fa-file-pdf-o"></i>Pdf</a></li>
+                                            <li><a style="cursor: pointer;" id="ExportPdf"><i style="color: red" class="fa fa-file-pdf-o"></i>Pdf</a></li>
+                                        </ul>
+                                    </div>
+                                    <table class="striped" id="tabelaNaoDevedores" >
+                                        <thead>
+                                        <tr>
+                                            <th id="MesAnoNaoDivida" class="anoExport"></th>
+                                        </tr>
+                                        <tr>
+                                            <th>Nome do Aluno</th>
+                                            <th>Turma</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tabelaCorpoNaoDivida">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            {{--tabela de devedores--}}
+                            <div class="box box-danger" id="boxDevedor">
+                                <div class="box-header with-border">
+                                    <h3 style="color: #dd4b39" class="box-title"><i class="fa fa-users"></i>&nbsp;Alunos Devedores</h3>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                        </button>
+                                        {{--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>--}}
+                                    </div>
+                                </div>
+                                <div class="box-body" >
+                                    <h5 class="left"><i class="fa fa-calendar-o"></i>&nbsp;<label style="min-width: 60px; font-size: 14px" id="tiluloMesDivida"></label></h5>
+
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-default"><i class="fa fa-file"></i>&nbsp;Exportar</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a style="cursor: pointer;" id="ExportExcelDevedor"><i style="color: green" class="fa fa-file-excel-o"></i>Excel</a></li>
+                                            <li class="divider"></li>
+                                            <li><a style="cursor: pointer;" id="ExportPdfDevedor"><i style="color: red" class="fa fa-file-pdf-o"></i>Pdf</a></li>
                                         </ul>
                                     </div>
                                     <table class="striped" id="tabelaDevedores" >
                                         <thead>
                                             <tr>
-                                                <th id="MesAno" class="anoExport"></th>
+                                                <th id="MesAnoDivida" class="anoExport"></th>
                                             </tr>
                                             <tr>
                                                 <th>Nome do Aluno</th>
                                                 <th>Turma</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tabelaDivida">
+                                        <tbody id="tabelaCorpoDevedores">
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+
                         </section>
                     </div>
-                    <div class="item row active">
+                    <div class="item row">
                         <div class="col-md-4 col-sm-4 col-lg-4 ">
                             <div class="input-field">
                                 <i class="zmdi zmdi-account-circle prefix"></i>
@@ -259,20 +320,23 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+            /*Action de tabela de devedores*/
+            $('#alertExport').hide();
 
-            $('#ExportExcel').click(function () {
-                var rowCount = document.getElementById('tabelaDivida').rows.length;
+            $('#ExportExcelDevedor').click(function () {
+                var rowCount = document.getElementById('tabelaCorpoDevedores').rows.length;
                 if(rowCount <= 0){
-                    alert('Nada a ser Exportado');
+                    $('#alertExport').slideDown();
                     return;
                 }
                 $('#tabelaDevedores').tableExport({type:'excel',escape:'false'});
             });
-            $('#ExportPdf').click(function () {
+            $('#ExportPdfDevedor').click(function () {
 
                 var rowCount = document.getElementById('tabelaDivida').rows.length;
                 if(rowCount <= 0){
-                    alert('Nada a ser Exportado');
+//                    alert('Nada a ser Exportado');
+                    $('#alertExport').show();
                     return;
                 }
                 $('#tabelaDevedores').tableExport({type:'pdf',escape:'false'});
@@ -285,25 +349,32 @@
                 $.ajax({
                     url: '/api/getDevedoresMes',
                     type: 'POST',
-//                    data: 'mes=' +mes,
                     data: {'mes': mes, 'ano': ano},
                     success: function (rs) {
                         if(rs.ids.length<=0){
                             return;
                         }
+                        $('#boxNaoDevedor').addClass('collapsed-box').slideUp();
+                        $('#boxDevedor').removeClass('collapsed-box').slideDown();
                         $('.rm').remove();
-                        document.getElementById('tiluloMes').innerHTML = mes;
-                        document.getElementById('MesAno').innerHTML = mes+'-'+ano;
+                        document.getElementById('tiluloMesDivida').innerHTML = mes;
+                        document.getElementById('MesAnoDivida').innerHTML = 'Devedores'+' '+mes+'-'+ano;
+                        $('MesAnoDivida').slideDown();
                         for(var k =0; k < rs.ids.length; k++){
-                            $('<tr class="rm"><td>'+rs.ids[k].nomeAluno+' '+ rs.ids[k].apelido+'</td><td>'+rs.ids[k].nomeTurma+'</td></tr>').hide().appendTo('#tabelaDivida').fadeIn(1000);
+                            $('<tr class="rm"><td>'+rs.ids[k].nomeAluno+' '+ rs.ids[k].apelido+'</td><td>'+rs.ids[k].nomeTurma+'</td></tr>').hide().appendTo('#tabelaDevedores').fadeIn(1000);
                         }
                     }
                 })
             });
-//            var rowCount = document.getElementById('IDtabela1').rows.length - 1;
-//            alert(meses[rowCount]);
+            /*lista todos nao devedores*/
+            $('.btn-nao-devedor').on('click', function () {
+                $('#boxDevedor').addClass('collapsed-box').slideUp();
+                $('#boxNaoDevedor').removeClass('collapsed-box').slideDown();
+            });
 
 
+
+            /*Buscar Dados de Alunos*/
             $('#inPutAluno').on('input',function () {
 
                 var op = $('option[value="'+$(this).val()+'"]');
@@ -316,7 +387,7 @@
                     type: 'POST',
                     data: {'idAluno':idAluno,'ano':ano},
                     success: function (rs) {
-                        {{--document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.aluno.foto);--}}
+                        document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
                         //                        document.getElementById('apelido').innerHTML = rs.aluno.apelido;
                         //                        document.getElementById('sexo').innerHTML = rs.aluno.sexo;
                         //                        document.getElementById('idade').innerHTML = getIdade(rs.aluno.dataNasc) + ' Anos';
