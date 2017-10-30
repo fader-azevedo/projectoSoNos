@@ -12,6 +12,7 @@
 */
 Route::get('/','HomeController@index');
 Route::get('/logon','HomeController@logon');
+Route::get('/factura','MensalidadeController@factura');
 
 Route::group(['prefix'=>'mensalidade'], function (){
     Route::get('/','MensalidadeController@index');
@@ -21,6 +22,8 @@ Route::group(['prefix'=>'mensalidade'], function (){
 Route::group(['prefix'=>'extras'], function (){
     Route::get('/','HomeController@lock');
 });
+
+
 
 Auth::routes();
 //Route::post('listar','MensalidadeController@index')->name('listar');

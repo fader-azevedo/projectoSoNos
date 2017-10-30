@@ -204,6 +204,8 @@
     <script src="{!! asset('charts/morris.min.js')!!}"></script>
     <script src="{!! asset('select2/js/select2.full.min.js')!!}"></script>
 
+    <script src="{!! asset('export/tableExport.js')!!}"></script>
+    <script src="{!! asset('export/jquery.base64.js')!!}"></script>
 
     <script src="{!! asset('datatables.net/js/jquery.dataTables.min.js')!!}"></script>
     <script src="{!! asset('datatables.net-bs/js/dataTables.bootstrap.min.js')!!}"></script>

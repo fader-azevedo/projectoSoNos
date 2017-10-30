@@ -151,23 +151,23 @@
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a>Excel</a></li>
+                                            <li><a id="ExportExcel">Excel</a></li>
                                             <li class="divider"></li>
                                             <li><a>Pdf</a></li>
                                         </ul>
                                     </div>
 
-                                    <table class="striped" id="tabelaDevedores">
-                                        <thead>
-                                            <tr>
-                                                <th>Nome do Aluno</th>
-                                                <th>Turma</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tabelaDivida">
+                                        <table class="striped" id="tabelaDevedores">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome do Aluno</th>
+                                                    <th>Turma</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tabelaDivida">
+                                            </tbody>
+                                        </table>
 
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </section>
@@ -236,9 +236,6 @@
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-8 col-lg-8 " style="padding-top: 15px;">
-
-
-
                             <form id="frm">
                                 <input type="text" id="txt">
                                 <input type="submit">
@@ -279,26 +276,23 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('scripts')
     <script>
         $(document).ready(function() {
 
-//            $.ajax({
-//                url: '/api/getMesAPagar',
-//                type: 'POST',
-//                success: function (rs) {
-//                    var array = rs.split(' ');
-//                    for(var i=array.length-2; i>=0; i--){
-//                        $('#tabela').append('<tr> <td>'+array[i]+'</td> <td><a data-mes="" class="btn btn-default"><i class="fa fa-check"></i>&nbsp;0</a></td> <td><a  class="btn btn-default"><i class="zmdi zmdi-close"></i>&nbsp;0</a></td> <td><a class="btnn btn-default"><i class="zmdi zmdi-library"></i>&nbsp;Ainda </a></td> </tr>');
-//                    }
-//                }
-//            });
+            $('#ExportExcel').click(function () {
+
+                var rowCount = document.getElementById('tabelaDivida').rows.length;
+                if(rowCount <= 0){
+                    alert('Nada a ser Exportado');
+                    return;
+                }
+                $('#tabelaDevedores').tableExport({type:'excel',escape:'false'});
+            });
 
             var ano = document.getElementById('selectAno').value;
-
             $('.btn-devedor').on('click', function(){
                 var mes= $(this).attr('data-mes');
                 $.ajax({
@@ -499,6 +493,4 @@
 {{--//            $('.carousel').carousel();--}}
 //        });
     </script>
-
 @endsection
-

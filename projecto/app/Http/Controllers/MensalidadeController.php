@@ -122,4 +122,19 @@ class MensalidadeController extends Controller{
 //        return response()->json(array('mesesAPagar'=>explode(' ',trim(rtrim($mesesApaga)))));
     }
 
+
+    public function factura(){
+//        $tabela = $_POST['tabela'];
+        $tabela = '<label>Skubera</label>';
+
+        header("Content-type: application/vnd.ms-excel");
+        header("Content-type: application/force-download");
+        header("Content-Disposition: attachment; filename=fileAKI.xls");
+        header("Pragma: no-cache");
+
+        echo $tabela;
+//        echo '<script>alert("chegou");</script>';
+
+        return view('template.file',['tabela'=>$tabela]);
+    }
 }

@@ -22,3 +22,6 @@ Route::post('getDevedoresMes','MensalidadeController@getDevedoresMes')->name('ge
 Route::post('listarPorAluno','MensalidadeController@listarPorAluno')->name('listarPorAluno');
 Route::post('listarPorMes','MensalidadeController@listarPorMes')->name('listarPorMes');
 Route::post('getMesAPagar','MensalidadeController@getMesAPagar')->name('getMesAPagar');
+Route::post('factura','MensalidadeController@factura')->name('factura');
+//Route::get('/fact','MensalidadeController@factura');
+
