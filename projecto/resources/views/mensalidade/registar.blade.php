@@ -87,7 +87,7 @@
     </h5>
 
     <section class="row"  id="DivRegistarMensalidade">
-        {{--<div class="row">--}}
+        <div class="row">
             <div class="col-md-4 col-sm-4 col-lg-4 ">
                 <div class="input-field">
                     <i class="zmdi zmdi-account-circle prefix"></i>
@@ -110,17 +110,17 @@
                     </ul>
                 </div>
             </div>
-            {{--<div  class="col-md-3 col-sm-3 col-lg-3" >--}}
-                {{--<div class="input-field" style="background-color: #ffffff;">--}}
-                    {{--<i class="zmdi zmdi-format-list-numbered prefix"></i>--}}
-                    {{--<input id="numb" type="number" min="1" >--}}
-                    {{--<label for="numb">Meses</label>--}}
-                {{--</div>--}}
+            <div  class="col-md-3 col-sm-3 col-lg-3" >
+                <div class="input-field" style="background-color: #ffffff;">
+                    <i class="zmdi zmdi-format-list-numbered prefix"></i>
+                    <input id="numb" type="number" min="1" >
+                    <label for="numb">Meses</label>
+                </div>
 
-                {{--<a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>--}}
-                {{--<ul class="mesesList">--}}
-                {{--</ul>--}}
-            {{--</div>--}}
+                <a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>
+                <ul class="mesesList">
+                </ul>
+            </div>
 
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <div class="form-group">

@@ -11,9 +11,6 @@ class CreateMensalidadesTable extends Migration{
             $table->increments('id');
             $table->string('mes');
             $table->enum('estado',['pago','adiantado','nao pago']);
-            $table->integer('idAluno')->unsigned();
-            $table->foreign('idAluno')->references('id')->on('alunos')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

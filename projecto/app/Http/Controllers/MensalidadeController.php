@@ -25,7 +25,8 @@ class MensalidadeController extends Controller{
 
     public function index(){
 //        $mensalidade = Mensalidade::all();
-//        $aluno = Aluno::all(); :query()->distinct()->pluck('mes');
+        $alunos = Aluno::all();
+// :query()->distinct()->pluck('mes');
 //        $anos = Mensalidade::query()->distinct()->pluck('ano');
 //        $meses = Mensalidade::query()->distinct()->pluck('mes');
 //        return view('mensalidade.listar',['mensalidade'=>$mensalidade, 'alunos' => $aluno,'anos'=>$anos,'meses'=>$meses,'numAluno'=>$aluno->count()]);
@@ -34,7 +35,7 @@ class MensalidadeController extends Controller{
         $mesesPagos = Mensalidade::query()->distinct()->pluck('mes');
         $mensalidade = Mensalidade::all();
         $anos  = Def_Mensalidade::query()->pluck('ano');
-        return view('mensalidade.listar',['anos'=>$anos,'mesesPagos'=>$mesesPagos,'mensalidade'=>$mensalidade,'mesesAPagar'=>$this->getMesAPagar($anos->first())]);
+        return view('mensalidade.listar',['alu'=>$alunos,'anos'=>$anos,'mesesPagos'=>$mesesPagos,'mensalidade'=>$mensalidade,'mesesAPagar'=>$this->getMesAPagar($anos->first())]);
     }
 
     public function listarTodasMensalidades(){
@@ -63,14 +64,11 @@ class MensalidadeController extends Controller{
 
 
     public function listarPorAluno(){
-        $aluno = Aluno::query()->find($_POST['idAluno']);
-        $mensalidade = Mensalidade::query()->select('*')->where('idAluno',$_POST['idAluno'])->where('ano',$_POST['ano'])->get();
-
-        /*buscar dados de inscricao*/
-        $inscricao = Inscricao::query()->join('disciplinas','inscricaos.idDisciplina','=','disciplinas.id')
-            ->join('alunos','inscricaos.idAluno','=','alunos.id')
-            ->select('disciplinas.*')->where('idAluno',$_POST['idAluno'])->get();
-        return  response()->json(array('aluno' =>$aluno,'mensal'=> $mensalidade,'inscricao'=> $inscricao));
+        $mensalidade = PagamntoMensalidade::query()
+            ->join('mensalidades','pagamnto_mensalidades.idMensalidade','=','mensalidades.id')
+            ->join('pagamentos','pagamnto_mensalidades.idPagamento','=','pagamentos.id')
+            ->select('mensalidades.*','pagamentos.*')->where('idAluno',$_POST['idAluno'])->where('anoPago',$_POST['ano'])->get();
+        return  response()->json(array('mensal'=> $mensalidade));
     }
 
     public function listarPorMes(){
@@ -89,7 +87,9 @@ class MensalidadeController extends Controller{
     }
 
     public function getDevedoresMes(){
-        $idAlunos = Mensalidade::query()->where('mes','=',$_POST['mes'])->select('idAluno')->get();
+//        $idAlunos = Mensalidade::query()->where('mes','=',$_POST['mes'])->select('idAluno')->get();
+        $idAlunos = PagamntoMensalidade::query()->join('mensalidades','pagamnto_mensalidades.idMensalidade','=','mensalidades.id')
+            ->select('idAluno')->where('mes',$_POST['mes'])->get();
         $ids='';
         foreach ($idAlunos as $i){
             $ids = $i->idAluno.' '.$ids;

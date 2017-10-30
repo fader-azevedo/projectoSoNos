@@ -213,22 +213,24 @@ THE SOFTWARE.*/
 
 				}else if(defaults.type == 'excel' || defaults.type == 'doc'|| defaults.type == 'powerpoint'  ){
 					//console.log($(this).html());
-					var excel="<table>";
-					// Header
+					var excel="<table border='2' width='40%'>";
+                    // Header
 					$(el).find('thead').find('tr').each(function() {
-						excel += "<tr>";
+
+						excel += "<tr style='font-size: 18px; text-transform: uppercase;'>";
 						$(this).filter(':visible').find('th').each(function(index,data) {
 							if ($(this).css('display') != 'none'){					
 								if(defaults.ignoreColumn.indexOf(index) == -1){
-									excel += "<td>" + parseString($(this))+ "</td>";
+
+                                    excel += "<td>" + parseString($(this))+ "</td>";
 								}
 							}
 						});	
 						excel += '</tr>';						
 						
 					});					
-					
-					
+
+
 					// Row Vs Column
 					var rowCount=1;
 					$(el).find('tbody').find('tr').each(function() {
@@ -277,7 +279,7 @@ THE SOFTWARE.*/
 
 					var base64data = "base64," + $.base64.encode(excelFile);
 					window.open('data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;' + base64data);
-					
+
 				}else if(defaults.type == 'png'){
 					html2canvas($(el), {
 						onrendered: function(canvas) {										

@@ -105,7 +105,7 @@
             <!-- Morris chart - Sales -->
             <div id="carousellDiv" class="carousel slide" data-ride="carousel" data-interval="false">
                 <div  class="carousel-inner">
-                    <div id="" class="item active">
+                    <div id="" class="item ">
                         <section class="col-sm-7 col-md-7 col-lg-7" style="padding-top: 14px">
                             <table class="table-striped" id="tabela1">
                                 <thead>
@@ -121,16 +121,16 @@
                                             <td class="">{{$ms}}</td>
                                             <td><a data-mes="{{$ms}}" class="btn btn-info btn-nao-devedor"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ms)->count()}}</a></td>
                                             <td><a data-mes="{{$ms}}" class="btn btn-danger btn-devedor"><i class="zmdi zmdi-close"></i>&nbsp;{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ms)->count()}}</a></td>
-                                            <td><a class="btnn btn-primary"><i class="zmdi zmdi-library"></i>&nbsp;Mais </a></td>
+                                            <td><a class="btn btn-primary"><i class="zmdi zmdi-library"></i>&nbsp;Mais detalhes </a></td>
                                         </tr>
                                     @endforeach
 
                                     @foreach($mesesAPagar as $ot)
                                         <tr>
                                             <td>{{$ot}}</td>
-                                            <td><a data-mes="{{$ot}}" class="btn btn-info btn-nao-devedor"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ot)->count()}}</a></td>
+                                            <td><a data-mes="{{$ot}}" class="btn btn-info"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ot)->count()}}</a></td>
                                             <td><a data-mes="{{$ot}}" class="btn btn-danger btn-devedor"><i class="zmdi zmdi-close"></i>&nbsp;{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ot)->count()}}</a></td>
-                                            <td><a class="btnn btn-primary"><i class="zmdi zmdi-library"></i>&nbsp;Mais </a></td>
+                                            <td><a disabled="disabled" class="btn btn-default"><i class="zmdi zmdi-library"></i>&nbsp;&nbsp;Sem registo&nbsp;&nbsp;</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -145,50 +145,50 @@
                                 <div class="box-body">
 
                                     <div class="btn-group pull-right">
-                                        <button type="button" class="btn btn-primary">Exportar</button>
+                                        <button type="button" class="btn btn-primary"><i class="fa fa-file"></i>&nbsp;Exportar</button>
                                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                             <span class="caret"></span>
-                                            <span class="sr-only">Toggle Dropdown</span>
+                                            <span class="sr-only"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a id="ExportExcel">Excel</a></li>
+                                            <li><a id="ExportExcel"><i style="color: green" class="fa fa-file-excel-o"></i>Excel</a></li>
                                             <li class="divider"></li>
-                                            <li><a>Pdf</a></li>
+                                            <li><a id="ExportPdf"><i style="color: red" class="fa fa-file-pdf-o"></i>Pdf</a></li>
                                         </ul>
                                     </div>
-
-                                        <table class="striped" id="tabelaDevedores">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nome do Aluno</th>
-                                                    <th>Turma</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tabelaDivida">
-                                            </tbody>
-                                        </table>
-
+                                    <table class="striped" id="tabelaDevedores" >
+                                        <thead>
+                                            <tr>
+                                                <th id="MesAno" class="anoExport"></th>
+                                            </tr>
+                                            <tr>
+                                                <th>Nome do Aluno</th>
+                                                <th>Turma</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabelaDivida">
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </section>
                     </div>
-                    <div class="item row">
+                    <div class="item row active">
                         <div class="col-md-4 col-sm-4 col-lg-4 ">
                             <div class="input-field">
                                 <i class="zmdi zmdi-account-circle prefix"></i>
-                                <input id="selectAluno" placeholder="Aluno"  type="text" list="listaAluno">
+                                <input id="inPutAluno" type="text" list="listaAluno">
                                 <datalist id="listaAluno">
-                                    {{--@foreach($alunos  as $ms)--}}
-                                        {{--<option data-costa="" id="{{$ms->id}}" value="{{$ms->nome}}">{{$ms->nome}}</option>--}}
-                                    {{--@endforeach--}}
+                                    @foreach($alu  as $a)
+                                        <option id="{{$a->id}}" value="{{$a->nome.' '.$a->apelido}}">{{$a->nome.' '.$a->apelido}}</option>
+                                    @endforeach
                                 </datalist>
                             </div>
-                            <div class=" alunuDetalhes row">
+
+                            <div class="alunuDetalhes row">
                                 <div class="col-md-12 col-sm-12 col-lg-12 box-profile"  >
                                     <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class=" profile-user-img img-responsive img-circle" >
                                     <p class="centered">So Faculdade</p>
-                                    <input id="ok" value="">
-                                    <button class="btnn" onclick="lolo()"> cansado</button>
                                 </div>
                             </div>
 
@@ -236,38 +236,16 @@
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-8 col-lg-8 " style="padding-top: 15px;">
-                            <form id="frm">
-                                <input type="text" id="txt">
-                                <input type="submit">
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <!--Mes-->
-                        <div class="col-md-3 col-sm-3 col-lg-3">
-                            <div class="group-material">
-                                <a class="icon"><i class="zmdi zmdi-calendar"></i></a>
-                                <select class="material-control tooltipped" data-tooltip="Mês" id="selectMes">
-                                    <option value="" disabled="" selected=""  >Selecione Mês</option>
-                                    {{--@foreach($meses as $mes)--}}
-                                        {{--<option value="{{$mes}}">{{$mes}}</option>--}}
-                                    {{--@endforeach--}}
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-8 col-sm-8 col-lg-8" >
-                            <table class="striped" id="IDtabela2">
+                            <table id="tabela2" class="table-striped">
                                 <thead>
-                                <tr>
-                                    <th data-field="">Nome do Aluno</th>
-                                    <th data-field="">Data de Pagamento</th>
-                                    <th data-field="">Estado</th>
-                                    <th data-field="">Valor Pag<i class="zmdi zmdi-money"></i></th>
-                                </tr>
+                                    <tr>
+                                        <th>Mes</th>
+                                        <th>Data de Pagamento</th>
+                                        <th>Situação</th>
+                                    </tr>
                                 </thead>
-                                <tbody id="tabela2">
+                                <tbody id="tabela2Corpo">
+
                                 </tbody>
                             </table>
                         </div>
@@ -283,7 +261,6 @@
         $(document).ready(function() {
 
             $('#ExportExcel').click(function () {
-
                 var rowCount = document.getElementById('tabelaDivida').rows.length;
                 if(rowCount <= 0){
                     alert('Nada a ser Exportado');
@@ -291,8 +268,18 @@
                 }
                 $('#tabelaDevedores').tableExport({type:'excel',escape:'false'});
             });
+            $('#ExportPdf').click(function () {
+
+                var rowCount = document.getElementById('tabelaDivida').rows.length;
+                if(rowCount <= 0){
+                    alert('Nada a ser Exportado');
+                    return;
+                }
+                $('#tabelaDevedores').tableExport({type:'pdf',escape:'false'});
+            });
 
             var ano = document.getElementById('selectAno').value;
+            /*Lista todos Devedores de um mes especifico */
             $('.btn-devedor').on('click', function(){
                 var mes= $(this).attr('data-mes');
                 $.ajax({
@@ -306,6 +293,7 @@
                         }
                         $('.rm').remove();
                         document.getElementById('tiluloMes').innerHTML = mes;
+                        document.getElementById('MesAno').innerHTML = mes+'-'+ano;
                         for(var k =0; k < rs.ids.length; k++){
                             $('<tr class="rm"><td>'+rs.ids[k].nomeAluno+' '+ rs.ids[k].apelido+'</td><td>'+rs.ids[k].nomeTurma+'</td></tr>').hide().appendTo('#tabelaDivida').fadeIn(1000);
                         }
@@ -315,6 +303,55 @@
 //            var rowCount = document.getElementById('IDtabela1').rows.length - 1;
 //            alert(meses[rowCount]);
 
+
+            $('#inPutAluno').on('input',function () {
+
+                var op = $('option[value="'+$(this).val()+'"]');
+                var idAluno = op.length ? op.attr('id'):'';
+                if(idAluno === '' ||  $('#inPutAluno').val().length=== 0){
+                    return;
+                }
+                $.ajax({
+                    url: '/api/listarPorAluno',
+                    type: 'POST',
+                    data: {'idAluno':idAluno,'ano':ano},
+                    success: function (rs) {
+                        {{--document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.aluno.foto);--}}
+                        //                        document.getElementById('apelido').innerHTML = rs.aluno.apelido;
+                        //                        document.getElementById('sexo').innerHTML = rs.aluno.sexo;
+                        //                        document.getElementById('idade').innerHTML = getIdade(rs.aluno.dataNasc) + ' Anos';
+
+//                            document.getElementById('apelido').style.width = k+'%';
+//                            document.getElementById('sexo').style.width = k+'%';
+//                            document.getElementById('idade').style.width = k+'%';
+//
+//                        var corbk = getCor();
+//                        document.getElementById('idade').style.backgroundColor = corbk;
+//                        document.getElementById('sexo').style.backgroundColor = corbk;
+//                        document.getElementById('apelido').style.backgroundColor = corbk;
+
+                        /*prenche a tabela*/
+//                        var valorPago = 0;
+                        $('.tr').remove();
+                        for (var j = 0; j < rs.mensal.length; j++) {
+                            $('#tabela2Corpo').append(" <tr class='tr'><td>" + rs.mensal[j].mes + "</td> <td>" + rs.mensal[j].dataP + "</td><td>" + rs.mensal[j].estado + "</td></tr>");
+//                            valorPago += rs.mensal[j].valor;
+                        }
+
+//                        var prc = (valorPago * 100)/5600;
+//                        document.getElementById('valorPago').innerHTML = valorPago;
+//                        document.getElementById('valorDivida').innerHTML = 5600-valorPago;
+//                        document.getElementById('percPago').innerHTML = prc.toFixed(2)+'%';
+//                        document.getElementById('barWidth').style.width = prc+'%';
+
+                        /*Adiciona os meses em faltam*/
+//                        var rowCount = document.getElementById('IDtabela1').rows.length - 1;
+//                        for (var f = rowCount; f < meses.length; f++) {
+//                            $('#tabela').append(" <tr class='tr'><td>" + meses[f] + "</td> <td>--------------------------</td><td>Nao pago</td><td>0.00</td>");
+//                        }
+                    }
+                });
+            });
 
 
 
@@ -351,38 +388,11 @@
 //                    }
 //                });
 
-//                function oka() {
-//                    $.ajax({
-//                        url: '/api/devedoresEnao',
-//                        type: 'POST',
-//                        data: 'mes='+f,
-//                        success: function (dev) {
-//                            alert('ok');
-////                                for (var j = 0; j < rs.mensalidade.length; j++) {
-//
-////                            $('#tabela').append(" <tr class='tr'><td>" + rs.mensalidade[j] + "</td> <td></td><td></td><td><button class='btnn'>Detalhes</button></td>")
-////                                }
-//                        }
-//                    });
-//                }
-////               alert( console.log(d));
 
 
 
 
 
-//            alert(d);
-//            $.ajax({
-//                url: '/api/listarTodasMensalidades',
-//                type: 'POST',
-//                success: function (rs) {
-//                    for (var j = 0; j < rs.mensalidade.length; j++) {
-//
-//                        $('#tabela').append(" <tr class='tr'><td>" + rs.mensalidade[j] + "</td> <td></td><td></td><td><button class='btnn'>Detalhes</button></td>")
-//                    }
-//                }
-//
-//            });
 
 
         });
@@ -390,14 +400,7 @@
 
                         /*Inicio Metodos de Listar por alunos*/
 
-            {{--function getCor(){--}}
-                {{--var rgb = [];--}}
-                {{--for(var i = 0; i < 3; i++)--}}
-                    {{--rgb.push(Math.floor(Math.random() * 255));--}}
-                {{--return 'rgb('+ rgb.join(',') +')';--}}
-            {{--}--}}
 
-            {{--var ano = document.getElementById('selectAno').value;--}}
             {{--$('#selectAno').change(function () {--}}
                 {{--ano = $(this).val()--}}
             {{--});--}}
@@ -417,80 +420,12 @@
                 {{--return dh - dt;--}}
             {{--}--}}
 
-            {{--$('#selectAluno').on('input',function () {--}}
 
-                {{--var op = $('option[value="'+$(this).val()+'"]');--}}
-                {{--var idAluno = op.length ? op.attr('id'):'';--}}
-                {{--if(idAluno === '' ||  $('#selectAluno').val().length=== 0){--}}
-                    {{--return;--}}
-                {{--}--}}
-                {{--$.ajax({--}}
-                    {{--url: '/api/listarPorAluno',--}}
-                    {{--type: 'POST',--}}
-                    {{--data: {'idAluno':idAluno,'ano':ano},--}}
-                    {{--success: function (rs) {--}}
-                        {{--document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.aluno.foto);--}}
-                        {{--document.getElementById('apelido').innerHTML = rs.aluno.apelido;--}}
-                        {{--document.getElementById('sexo').innerHTML = rs.aluno.sexo;--}}
-                        {{--document.getElementById('idade').innerHTML = getIdade(rs.aluno.dataNasc) + ' Anos';--}}
+            /*Fim Metodos de Listar por alunos*/
+            /*Inicio Metodos de Listar por Mes*/
 
-{{--//                            document.getElementById('apelido').style.width = k+'%';--}}
-{{--//                            document.getElementById('sexo').style.width = k+'%';--}}
-{{--//                            document.getElementById('idade').style.width = k+'%';--}}
-{{--//--}}
-                        {{--var corbk = getCor();--}}
-                        {{--document.getElementById('idade').style.backgroundColor = corbk;--}}
-                        {{--document.getElementById('sexo').style.backgroundColor = corbk;--}}
-                        {{--document.getElementById('apelido').style.backgroundColor = corbk;--}}
-
-                        {{--/*prenche a tabela*/--}}
-                        {{--var valorPago = 0;--}}
-                        {{--$('.tr').remove();--}}
-                        {{--for (var j = 0; j < rs.mensal.length; j++) {--}}
-                            {{--$('#tabela').append(" <tr class='tr'><td>" + rs.mensal[j].mes + "</td> <td>" + rs.mensal[j].dataP + "</td><td>" + rs.mensal[j].estado + "</td><td>" + rs.mensal[j].valor.toFixed(2) + "</td>");--}}
-                            {{--valorPago += rs.mensal[j].valor;--}}
-                        {{--}--}}
-
-                        {{--var prc = (valorPago * 100)/5600;--}}
-                        {{--document.getElementById('valorPago').innerHTML = valorPago;--}}
-                        {{--document.getElementById('valorDivida').innerHTML = 5600-valorPago;--}}
-                        {{--document.getElementById('percPago').innerHTML = prc.toFixed(2)+'%';--}}
-                        {{--document.getElementById('barWidth').style.width = prc+'%';--}}
-
-                        {{--/*Adiciona os meses em faltam*/--}}
-                        {{--var rowCount = document.getElementById('IDtabela1').rows.length - 1;--}}
-                        {{--for (var f = rowCount; f < meses.length; f++) {--}}
-                            {{--$('#tabela').append(" <tr class='tr'><td>" + meses[f] + "</td> <td>--------------------------</td><td>Nao pago</td><td>0.00</td>");--}}
-                        {{--}--}}
-                    {{--}--}}
-                {{--});--}}
-            {{--});--}}
-            {{--/*Fim Metodos de Listar por alunos*/--}}
-            {{--/*Inicio Metodos de Listar por Mes*/--}}
-
-            {{--$('#selectMes').change(function lev() {--}}
-
-                {{--if(ano === 0){--}}
-                    {{--alert('Selecione o Ano');--}}
-                    {{--return;--}}
-                {{--}--}}
-                {{--var mes = $(this).val();--}}
-                {{--$.ajax({--}}
-                    {{--url: 'api/listarPorMes',--}}
-                    {{--type: 'POST',--}}
-                    {{--data: {'ano':ano, 'mes':mes},--}}
-                    {{--success: function (rs) {--}}
-                        {{--$('.tr2').remove();--}}
-                        {{--for (var j = 0; j < rs.mensal.length; j++) {--}}
-                            {{--$('#tabela2').append(" <tr class='tr2'><td>" + rs.mensal[j].nome +' '+ rs.mensal[j].apelido +  "</td> <td>" + rs.mensal[j].dataP + "</td><td>" + rs.mensal[j].estado + "</td><td>" + rs.mensal[j].valor + "</td></tr>");--}}
-                        {{--}--}}
-                    {{--}--}}
-                {{--})--}}
-
-            {{--});--}}
-
-{{--//            $('.materialboxed').materialbox();--}}
-{{--//            $('.carousel').carousel();--}}
+//            $('.materialboxed').materialbox();
+//            $('.carousel').carousel();
 //        });
     </script>
 @endsection

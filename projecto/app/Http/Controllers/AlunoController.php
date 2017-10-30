@@ -31,8 +31,6 @@ class AlunoController extends Controller{
 
     public function getDisciplinasAluno(){
 
-
-
     }
 
 }

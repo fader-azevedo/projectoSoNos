@@ -10,8 +10,6 @@ class CreatePagamentosTable extends Migration{
             $table->increments('id');
             $table->double('valor');
             $table->dateTime('dataP');
-            $table->integer('idAluno')->unsigned();
-            $table->foreign('idAluno')->references('id')->on('alunos')->onDelete('cascade');
         });
     }
 

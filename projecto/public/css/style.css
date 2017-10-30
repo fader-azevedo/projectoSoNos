@@ -5,12 +5,20 @@ Author: Carlos Alvarez
 Website: http://blacktie.co
 Premium: http://www.gridgum.com
 */
+.anoExport{
+    margin: 0;
+    padding: 0;
+    height: 22px;
+    visibility: hidden;
+}
+.butExport a i{
+    color: #00a65a;
+}
 
 li a{
     color: #00c5de;
     font-size: 16px;
 }
-
 
 
 .input-field i{
@@ -70,10 +78,6 @@ option{
 
 }
 
-#selectAluno{
-    /*background-color: yellow;*/
-    /*color: black;*/
-}
 
 /*#dados p{*/
     /*font-size: 16px;*/
