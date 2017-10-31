@@ -198,7 +198,8 @@
 
 
 
-    <script src="{!! asset('js/adminlte.min.js')!!}"></script>
+
+        <script src="{!! asset('js/adminlte.min.js')!!}"></script>
     <script src="{!! asset('charts/Chart.js')!!}"></script>
     <script src="{!! asset('charts/raphael.min.js')!!}"></script>
     <script src="{!! asset('charts/morris.min.js')!!}"></script>
@@ -208,12 +209,16 @@
     <script src="{!! asset('export/jquery.base64.js')!!}"></script>
 
 
-    <script src="{!! asset('export/libs/base64.js')!!}"></script>
     <script src="{!! asset('export/libs/sprintf.js')!!}"></script>
     <script src="{!! asset('export/jspdf.js')!!}"></script>
+{{--    <script src="{!! asset('export/jspdf.min.js')!!}"></script>--}}
+    {{--<script src="{!! asset('export/jspdf.debug.js')!!}"></script>--}}
+        <script src="{!! asset('export/libs/base64.js')!!}"></script>
 
-    <script src="{!! asset('datatables.net/js/jquery.dataTables.min.js')!!}"></script>
-    <script src="{!! asset('datatables.net-bs/js/dataTables.bootstrap.min.js')!!}"></script>
+        <script src="{!! asset('datatables.net/js/jquery.dataTables.min.js')!!}"></script>
+    <script src="{!! asset('datatables.net-bs/js/dataTables.bootstrap.min.js')!!}">
+
+    </script>
 
     <script>
 

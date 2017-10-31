@@ -171,7 +171,8 @@
                                         <ul class="dropdown-menu" role="menu">
                                             <li><a style="cursor: pointer;" id="ExportExcel"><i style="color: green" class="fa fa-file-excel-o"></i>Excel</a></li>
                                             <li class="divider"></li>
-                                            <li><a style="cursor: pointer;" id="ExportPdf"><i style="color: red" class="fa fa-file-pdf-o"></i>Pdf</a></li>
+                                            {{--ExportPdf--}}
+                                            <li ><a  style="cursor: pointer;" id=""><i style="color: red" class="fa fa-file-pdf-o"></i>Pdf</a></li>
                                         </ul>
                                     </div>
                                     <table class="striped" id="tabelaNaoDevedores" >
@@ -211,9 +212,11 @@
                                         <ul class="dropdown-menu" role="menu">
                                             <li><a style="cursor: pointer;" id="ExportExcelDevedor"><i style="color: green" class="fa fa-file-excel-o"></i>Excel</a></li>
                                             <li class="divider"></li>
+                                            {{--    href="{{'/pdf'}}"--}}
                                             <li><a style="cursor: pointer;" id="ExportPdfDevedor"><i style="color: red" class="fa fa-file-pdf-o"></i>Pdf</a></li>
                                         </ul>
                                     </div>
+                                    <div id="alunosDiv">
                                     <table class="striped" id="tabelaDevedores" >
                                         <thead>
                                             <tr>
@@ -227,9 +230,9 @@
                                         <tbody id="tabelaCorpoDevedores">
                                         </tbody>
                                     </table>
+                                    </div>
                                 </div>
                             </div>
-
                         </section>
                     </div>
                     <div class="item row">
@@ -247,8 +250,6 @@
                             <div class="box box-widget widget-user">
                                 <!-- Add the bg color to the header using any of the bg-* classes -->
                                 <div class="widget-user-header bg-aqua-active">
-                                    {{--<h3 class="widget-user-username">Alexander Pierce</h3>--}}
-                                    {{--<h5 class="widget-user-desc">Founder &amp; CEO</h5>--}}
                                     <p class="centered">Nome</p>
                                 </div>
                                 <div class="widget-user-image">
@@ -338,15 +339,15 @@
                 }
                 $('#tabelaDevedores').tableExport({type:'excel',escape:'false'});
             });
-            $('#ExportPdfDevedor').click(function () {
-
-                var rowCount = document.getElementById('tabelaDivida').rows.length;
-                if(rowCount <= 0){
-                    $('#alertExport').show();
-                    return;
-                }
-                $('#tabelaDevedores').tableExport({type:'pdf',escape:'false'});
-            });
+//            $('#ExportPdfDevedor').click(function () {
+//
+//                var rowCount = document.getElementById('tabelaDivida').rows.length;
+//                if(rowCount <= 0){
+//                    $('#alertExport').show();
+//                    return;
+//                }
+//                $('#tabelaDevedores').tableExport({type:'pdf',escape:'false'});
+//            });
 
             var ano = document.getElementById('selectAno').value;
             /*Lista todos Devedores de um mes especifico */
@@ -355,7 +356,7 @@
                 $.ajax({
                     url: '/api/getDevedoresMes',
                     type: 'POST',
-                    data: {'mes': mes, 'ano': ano},
+                    data: {'mes': mes, 'ano': ano, 'tipo':'listar'},
                     success: function (rs) {
                         if(rs.ids.length<=0){
                             return;
@@ -413,7 +414,15 @@
                     }
                 });
             });
+
+
+            $('#ExportPdfDevedor').on('click',function () {
+                var mes =  document.getElementById('tiluloMesDivida').innerHTML;
+                window.location ='/'+'exportDevedoresPDF?mes='+mes+'&ano='+ano;
+            });
         });
+
+
 
 
                         /*Inicio Metodos de Listar por alunos*/

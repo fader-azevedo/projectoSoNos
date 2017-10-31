@@ -18,10 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('listarTodasMensalidades','MensalidadeController@listarTodasMensalidades')->name('listarTodasMensalidades');
 Route::post('getDevedoresMes','MensalidadeController@getDevedoresMes')->name('getDevedoresMes');
-//Route::post('getDiv','MensalidadeController@getDiv')->name('getDiv');
 Route::post('listarPorAluno','MensalidadeController@listarPorAluno')->name('listarPorAluno');
 Route::post('listarPorMes','MensalidadeController@listarPorMes')->name('listarPorMes');
 Route::post('getMesAPagar','MensalidadeController@getMesAPagar')->name('getMesAPagar');
-//Route::post('factura','MensalidadeController@factura')->name('factura');
+Route::post('exportaDevedores','MensalidadeController@exportaDevedores')->name('exportaDevedores');
 //Route::get('/fact','MensalidadeController@factura');
 
