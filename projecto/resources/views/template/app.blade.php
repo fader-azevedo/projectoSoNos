@@ -169,36 +169,8 @@
             </footer>
         </div>
 
-    {{--<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>--}}
-    {{--<script src="{!! asset('js/jquery-2.2.0.min.js')!!}" type="text/javascript"></script>--}}
-    <script src="{!! asset('jquery/dist/jquery.min.js')!!}" type="text/javascript"></script>
-    <script src="{!! asset('bootstrap/dist/js/bootstrap.min.js')!!}"></script>
-    {{--<script type="text/javascript" src="{!! asset('js/jquery.dcjqaccordion.2.7.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/jquery.scrollTo.min.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/jquery.nicescroll.js')!!}" type="text/javascript"></script>--}}
-    {{--<script src="{!! asset('js/jquery.sparkline.js')!!}"></script>--}}
-
-    {{--<script src="{!! asset('js/js/jquery-easy-pie-chart/jquery.easy-pie-chart.js')!!}"></script>--}}
-
-    {{--<script type="text/javascript" src="{!! asset('js/gritter/js/jquery.gritter.js')!!}"></script>--}}
-    {{--<script type="text/javascript" src="{!! asset('js/gritter-conf.js')!!}"></script>--}}
-
-    <!--script for this page-->
-    {{--<script src="{!! asset('js/sparkline-chart.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/zabuto_calendar.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/common-scripts.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/sweetalert.min.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/materialize.min.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/jquery.mCustomScrollbar.concat.min.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/jquery.waypoints.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/jquery.counterup.min.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/form-component.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/bootstrap-switch.js')!!}"></script>--}}
-    {{--<script src="{!! asset('js/jquery.tagsinput.js')!!}"></script>--}}
-
-
-
-
+        <script src="{!! asset('jquery/dist/jquery.min.js')!!}" type="text/javascript"></script>
+        <script src="{!! asset('bootstrap/dist/js/bootstrap.min.js')!!}"></script>
         <script src="{!! asset('js/adminlte.min.js')!!}"></script>
         <script src="{!! asset('charts/Chart.js')!!}"></script>
         <script src="{!! asset('charts/raphael.min.js')!!}"></script>
@@ -208,19 +180,13 @@
         <script src="{!! asset('export/tableExport.js')!!}"></script>
         <script src="{!! asset('export/jquery.base64.js')!!}"></script>
 
-
         <script src="{!! asset('export/libs/sprintf.js')!!}"></script>
         <script src="{!! asset('export/jspdf.js')!!}"></script>
-    {{--    <script src="{!! asset('export/jspdf.min.js')!!}"></script>--}}
-        {{--<script src="{!! asset('export/jspdf.debug.js')!!}"></script>--}}
-            <script src="{!! asset('export/libs/base64.js')!!}"></script>
+        <script src="{!! asset('export/libs/base64.js')!!}"></script>
 
         <script src="{!! asset('datatables.net/js/jquery.dataTables.min.js')!!}"></script>
-    <script src="{!! asset('datatables.net-bs/js/dataTables.bootstrap.min.js')!!}">
-
-    </script>
-
-    <script>
+        <script src="{!! asset('datatables.net-bs/js/dataTables.bootstrap.min.js')!!}"></script>
+        <script>
 
 
 
@@ -231,10 +197,9 @@
 ////        });
         //            $('.materialboxed').materialbox();
 
-
-    </script>
-    @yield('scripts')
-    @yield('scripts2')
+        </script>
+        @yield('scripts')
+        @yield('scripts2')
     </body>
 
     {{--<body onload="lerDados()">--}}
@@ -357,9 +322,6 @@
         {{--<script src="{!! asset('js/bootstrap.min.js')!!}"></script>--}}
 
         {{--<script type="text/javascript" src="{!! asset('js/jquery.dcjqaccordion.2.7.js')!!}"></script>--}}
-        {{--<script src="{!! asset('js/jquery.scrollTo.min.js')!!}"></script>--}}
-        {{--<script src="{!! asset('js/jquery.nicescroll.js')!!}" type="text/javascript"></script>--}}
-        {{--<script src="{!! asset('js/jquery.sparkline.js')!!}"></script>--}}
 
         {{--<script src="{!! asset('js/js/jquery-easy-pie-chart/jquery.easy-pie-chart.js')!!}"></script>--}}
 
