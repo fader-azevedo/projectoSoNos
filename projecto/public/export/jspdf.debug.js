@@ -8198,7 +8198,7 @@ AcroForm.internal.setBitPosition = function (variable, position, value) {
 				if (item.options) {
 					if (item.options.pageNumber) {
 						// Explicit Destination
-						//WARNING this assumes page ids are 3,5,7, etc.
+						//WARNING this assumes page devedor are 3,5,7, etc.
 						var info = pdf.internal.getPageInfo(item.options.pageNumber);
 						this.line('/Dest ' + '[' + info.objId + ' 0 R /XYZ 0 ' + this.ctx.pdf.internal.pageSize.height + ' 0]');
 						// this line does not work on all clients (pageNumber instead of page ref)

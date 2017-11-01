@@ -7987,7 +7987,7 @@
 		}, 1 );
 	} );
 	
-	_api_registerPlural( 'rows().ids()', 'row().id()', function ( hash ) {
+	_api_registerPlural( 'rows().devedor()', 'row().id()', function ( hash ) {
 		var a = [];
 		var context = this.context;
 	
@@ -13160,7 +13160,7 @@
 		"aiDisplayMaster": [],
 	
 		/**
-		 * Map of row ids to data indexes
+		 * Map of row devedor to data indexes
 		 *  @type object
 		 *  @default {}
 		 */

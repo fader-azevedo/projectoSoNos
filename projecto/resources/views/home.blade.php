@@ -13,8 +13,8 @@
             <i class="fa fa-money"></i>
             <span>Mensalidades</span>
             <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li><a href="{{'/mensalidade/registar'}}"><i class="fa fa-pencil"></i> Registar</a></li>

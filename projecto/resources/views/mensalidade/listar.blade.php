@@ -169,10 +169,9 @@
                                             <span class="sr-only"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a style="cursor: pointer;" id="ExportExcel"><i style="color: green" class="fa fa-file-excel-o"></i>Excel</a></li>
+                                            <li><a style="cursor: pointer;" id="ExportExcelNaoDevedor"><i style="color: green" class="fa fa-file-excel-o"></i>Excel</a></li>
                                             <li class="divider"></li>
-                                            {{--ExportPdf--}}
-                                            <li ><a  style="cursor: pointer;" id=""><i style="color: red" class="fa fa-file-pdf-o"></i>Pdf</a></li>
+                                            <li ><a  style="cursor: pointer;" id="ExportPdfNaoDevedor"><i style="color: red" class="fa fa-file-pdf-o"></i>Pdf</a></li>
                                         </ul>
                                     </div>
                                     <table class="striped" id="tabelaNaoDevedores" >
@@ -185,7 +184,7 @@
                                             <th>Turma</th>
                                         </tr>
                                         </thead>
-                                        <tbody id="tabelaCorpoNaoDivida">
+                                        <tbody id="tabelaCorpoNaoDevedor">
                                         </tbody>
                                     </table>
                                 </div>
@@ -212,11 +211,9 @@
                                         <ul class="dropdown-menu" role="menu">
                                             <li><a style="cursor: pointer;" id="ExportExcelDevedor"><i style="color: green" class="fa fa-file-excel-o"></i>Excel</a></li>
                                             <li class="divider"></li>
-                                            {{--    href="{{'/pdf'}}"--}}
                                             <li><a style="cursor: pointer;" id="ExportPdfDevedor"><i style="color: red" class="fa fa-file-pdf-o"></i>Pdf</a></li>
                                         </ul>
                                     </div>
-                                    <div id="alunosDiv">
                                     <table class="striped" id="tabelaDevedores" >
                                         <thead>
                                             <tr>
@@ -230,94 +227,95 @@
                                         <tbody id="tabelaCorpoDevedores">
                                         </tbody>
                                     </table>
-                                    </div>
                                 </div>
                             </div>
                         </section>
                     </div>
                     <div class="item row">
-                        <div class="col-md-4 col-sm-4 col-lg-4 ">
-                            <div class="input-field">
-                                <i class="zmdi zmdi-account-circle prefix"></i>
-                                <input id="inPutAluno" type="text" list="listaAluno">
-                                <datalist id="listaAluno">
-                                    @foreach($alu  as $a)
-                                        <option id="{{$a->id}}" value="{{$a->nome.' '.$a->apelido}}">{{$a->nome.' '.$a->apelido}}</option>
-                                    @endforeach
-                                </datalist>
-                            </div>
+                        {{--@section('filho')--}}
+                            @include('mensalidade.aluno')
+                        {{--@endsection--}}
+                        {{--<div class="col-md-4 col-sm-4 col-lg-4 ">--}}
+                            {{--<div class="input-field">--}}
+                                {{--<i class="zmdi zmdi-account-circle prefix"></i>--}}
+                                {{--<input id="inPutAluno" type="text" list="listaAluno">--}}
+                                {{--<datalist id="listaAluno">--}}
+                                    {{--@foreach($alu  as $a)--}}
+                                        {{--<option id="{{$a->id}}" value="{{$a->nome.' '.$a->apelido}}">{{$a->nome.' '.$a->apelido}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</datalist>--}}
+                            {{--</div>--}}
 
-                            <div class="box box-widget widget-user">
-                                <!-- Add the bg color to the header using any of the bg-* classes -->
-                                <div class="widget-user-header bg-aqua-active">
-                                    <p class="centered">Nome</p>
-                                </div>
-                                <div class="widget-user-image">
-                                    <img id="idFoto" class="img-circle" src="{!! asset('img/logo.jpg') !!}" alt="">
-                                </div>
-                                <div class="box-footer">
-                                    <div class="row">
-                                        <div class="col-sm-4 border-right">
-                                            <div class="description-block">
-                                                <div class="sm-st tooltipped" data-tooltip="Valor Pago">
-                                                    <p class="centered">
-                                                        <span class="sm-st-icon st-blue"><i class="fa fa-money"></i></span>
-                                                    </p>
-                                                    <div class="sm-st-info centered">
-                                                        <p id="valorPago">0</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 border-right">
-                                            <div class="description-block">
-                                                <div class="sm-st  tooltipped"  data-tooltip="Divida">
-                                                    <p class="centered">
-                                                        <span class="sm-st-icon st-red"><i class="fa fa-money"></i></span>
-                                                    </p>
-                                                    <div class="sm-st-info centered">
-                                                        <p id="valorDivida">0</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="description-block">
-                                                <div class="sm-st tooltipped" data-tooltip="Total a Pagar" >
-                                                    <p class="centered">
-                                                        <span class="sm-st-icon st-violet"><i class="fa fa-money"></i></span>
-                                                    </p>
-                                                    <div class="sm-st-info centered">
-                                                        <p>{{$valorTotal}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-122 col-sm-12 col-log-12" style="padding-bottom: 0">
-                                            <div class="progress progress-striped ">
-                                                <div id="barWidth" class="progress-bar tooltipped"  role="progressbar"   aria-valuemin="0" aria-valuemax="100" data-tooltip="% de Pagamento Feito">
-                                                    <span class="centered" style="font-size: 13px;"  id="percPago"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8 col-sm-8 col-lg-8" id="divTabela2" style="padding-top: 15px;">
-                            <table id="tabela2" class="table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Mes</th>
-                                        <th>Data de Pagamento</th>
-                                        <th>Situação</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabela2Corpo">
-
-                                </tbody>
-                            </table>
-                        </div>
+                            {{--<div class="box box-widget widget-user">--}}
+                                {{--<!-- Add the bg color to the header using any of the bg-* classes -->--}}
+                                {{--<div class="widget-user-header bg-aqua-active">--}}
+                                    {{--<p class="centered">Nome</p>--}}
+                                {{--</div>--}}
+                                {{--<div class="widget-user-image">--}}
+                                    {{--<img id="idFoto" class="img-circle" src="{!! asset('img/logo.jpg') !!}" alt="">--}}
+                                {{--</div>--}}
+                                {{--<div class="box-footer">--}}
+                                    {{--<div class="row">--}}
+                                        {{--<div class="col-sm-4 border-right">--}}
+                                            {{--<div class="description-block">--}}
+                                                {{--<div class="sm-st tooltipped" data-tooltip="Valor Pago">--}}
+                                                    {{--<p class="centered">--}}
+                                                        {{--<span class="sm-st-icon st-blue"><i class="fa fa-money"></i></span>--}}
+                                                    {{--</p>--}}
+                                                    {{--<div class="sm-st-info centered">--}}
+                                                        {{--<p id="valorPago">0</p>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-sm-4 border-right">--}}
+                                            {{--<div class="description-block">--}}
+                                                {{--<div class="sm-st  tooltipped"  data-tooltip="Divida">--}}
+                                                    {{--<p class="centered">--}}
+                                                        {{--<span class="sm-st-icon st-red"><i class="fa fa-money"></i></span>--}}
+                                                    {{--</p>--}}
+                                                    {{--<div class="sm-st-info centered">--}}
+                                                        {{--<p id="valorDivida">0</p>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-sm-4">--}}
+                                            {{--<div class="description-block">--}}
+                                                {{--<div class="sm-st tooltipped" data-tooltip="Total a Pagar" >--}}
+                                                    {{--<p class="centered">--}}
+                                                        {{--<span class="sm-st-icon st-violet"><i class="fa fa-money"></i></span>--}}
+                                                    {{--</p>--}}
+                                                    {{--<div class="sm-st-info centered">--}}
+                                                        {{--<p>{{$valorTotal}}</p>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-122 col-sm-12 col-log-12" style="padding-bottom: 0">--}}
+                                            {{--<div class="progress progress-striped ">--}}
+                                                {{--<div id="barWidth" class="progress-bar tooltipped"  role="progressbar"   aria-valuemin="0" aria-valuemax="100" data-tooltip="% de Pagamento Feito">--}}
+                                                    {{--<span class="centered" style="font-size: 13px;"  id="percPago"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-8 col-sm-8 col-lg-8" id="divTabela2" style="padding-top: 15px;">--}}
+                            {{--<table id="tabela2" class="table-striped">--}}
+                                {{--<thead>--}}
+                                    {{--<tr>--}}
+                                        {{--<th>Mes</th>--}}
+                                        {{--<th>Data de Pagamento</th>--}}
+                                        {{--<th>Situação</th>--}}
+                                    {{--</tr>--}}
+                                {{--</thead>--}}
+                                {{--<tbody id="tabela2Corpo">--}}
+                                {{--</tbody>--}}
+                            {{--</table>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
             </div>
@@ -330,129 +328,98 @@
         $(document).ready(function() {
             /*Action de tabela de devedores*/
             $('#alertExport').hide();
-
-            $('#ExportExcelDevedor').click(function () {
-                var rowCount = document.getElementById('tabelaCorpoDevedores').rows.length;
-                if(rowCount <= 0){
-                    $('#alertExport').slideDown();
-                    return;
-                }
-                $('#tabelaDevedores').tableExport({type:'excel',escape:'false'});
-            });
-//            $('#ExportPdfDevedor').click(function () {
-//
-//                var rowCount = document.getElementById('tabelaDivida').rows.length;
-//                if(rowCount <= 0){
-//                    $('#alertExport').show();
-//                    return;
-//                }
-//                $('#tabelaDevedores').tableExport({type:'pdf',escape:'false'});
-//            });
-
             var ano = document.getElementById('selectAno').value;
+
             /*Lista todos Devedores de um mes especifico */
             $('.btn-devedor').on('click', function(){
                 var mes= $(this).attr('data-mes');
                 $.ajax({
                     url: '/api/getDevedoresMes',
                     type: 'POST',
-                    data: {'mes': mes, 'ano': ano, 'tipo':'listar'},
+                    data: {'mes': mes, 'ano': ano, 'tabela':'devedor'},
                     success: function (rs) {
-                        if(rs.ids.length<=0){
+                        if(rs.devedor.length<=0){
                             return;
                         }
-                        $('#boxDevedor').removeClass('collapsed-box').slideDown();
                         $('#boxNaoDevedor').addClass('collapsed-box').slideUp();
+                        $('#boxDevedor').removeClass('collapsed-box').slideDown(1);
+
                         $('.rm').remove();
                         document.getElementById('tiluloMesDivida').innerHTML = mes;
-                        document.getElementById('MesAnoDivida').innerHTML = 'Devedores'+' '+mes+'-'+ano;
+                        document.getElementById('MesAnoDivida').innerHTML = 'Alunos Devedores'+' '+mes+'-'+ano;
                         $('MesAnoDivida').slideDown();
-                        for(var k =0; k < rs.ids.length; k++){
-                            $('<tr class="rm"><td>'+rs.ids[k].nomeAluno+' '+ rs.ids[k].apelido+'</td><td>'+rs.ids[k].nomeTurma+'</td></tr>').hide().appendTo('#tabelaDevedores').fadeIn(1000);
+                        for(var k =0; k < rs.devedor.length; k++){
+                            $('<tr class="rm"><td>'+rs.devedor[k].nomeAluno+' '+ rs.devedor[k].apelido+'</td><td>'+rs.devedor[k].nomeTurma+'</td></tr>').hide().appendTo('#tabelaCorpoDevedores').fadeIn(1000);
                         }
                     }
                 })
             });
             /*lista todos nao devedores*/
             $('.btn-nao-devedor').on('click', function () {
-                $('#boxDevedor').addClass('collapsed-box').slideUp();
-                $('#boxNaoDevedor').removeClass('collapsed-box').slideDown();
+
+                var mes= $(this).attr('data-mes');
+                $.ajax({
+                    url: '/api/getDevedoresMes',
+                    type: 'POST',
+                    data: {'mes': mes, 'ano': ano, 'tabela':'naodevedor'},
+                    success: function (rs) {
+                        if(rs.naodevedor.length<=0){
+                            return;
+                        }
+                        $('#boxDevedor').addClass('collapsed-box').slideUp();
+                        $('#boxNaoDevedor').removeClass('collapsed-box').slideDown();
+
+                        $('.rm2').remove();
+                        document.getElementById('tiluloMesPago').innerHTML = mes;
+                        document.getElementById('MesAnoNaoDivida').innerHTML = 'Alunos Nao Devedores'+' '+mes+'-'+ano;
+                        $('MesAnoNaoDivida').slideDown();
+                        for(var k =0; k < rs.naodevedor.length; k++){
+                            $('<tr class="rm2"><td>'+rs.naodevedor[k].nomeAluno+' '+ rs.naodevedor[k].apelido+'</td><td>'+rs.naodevedor[k].nomeTurma+'</td></tr>').hide().appendTo('#tabelaCorpoNaoDevedor').fadeIn(1000);
+                        }
+                    }
+                })
             });
 
-            /*Buscar Dados de Alunos*/
-            $('#inPutAluno').on('input',function () {
 
-                var op = $('option[value="'+$(this).val()+'"]');
-                var idAluno = op.length ? op.attr('id'):'';
-                if(idAluno === '' ||  $('#inPutAluno').val().length=== 0){
+            /*Exportacao de tabela de devedores para excel e pdf*/
+            $('#ExportExcelDevedor').click(function () {
+                var rowCountDev = document.getElementById('tabelaCorpoDevedores').rows.length;
+                if(rowCountDev <= 0){
+                    $('#alertExport').slideDown();
                     return;
                 }
-                var valorTotal = JSON.parse("{{json_encode($valorTotal)}}");
-                var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");
-
-                $.ajax({
-                    url: '/api/listarPorAluno',
-                    type: 'POST',
-                    data: {'idAluno':idAluno,'ano':ano},
-                    success: function (rs) {
-                        document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
-                        $('.tr').remove();
-                        $('.ss').remove();
-                        if(rs.mensal.length <=0){
-                            $('#divTabela2').append('<h1 class="centered ss">Ainda Sem Registo</h1>');
-                        }else {
-                            for (var j = 0; j < rs.mensal.length; j++) {
-                                $('#tabela2Corpo').append(" <tr class='tr'><td>" + rs.mensal[j].mes + "</td> <td>" + rs.mensal[j].dataP + "</td><td>" + rs.mensal[j].estado + "</td></tr>");
-                            }
-                        }
-                        var rk = document.getElementById('tabela2Corpo').rows.length;
-                        var prc = ((valorMensal*rk) * 100)/valorTotal;
-                        document.getElementById('valorPago').innerHTML = valorMensal*rk;
-                        document.getElementById('valorDivida').innerHTML = valorTotal-(valorMensal*rk);
-                        document.getElementById('percPago').innerHTML = prc.toFixed(2)+'%';
-                        document.getElementById('barWidth').style.width = prc+'%';
-                    }
-                });
+                $('#tabelaDevedores').tableExport({type:'excel',escape:'false'});
             });
 
+            $('#ExportPdfDevedor').click(function () {
+                var rowCountDev = document.getElementById('tabelaCorpoDevedores').rows.length;
+                if(rowCountDev <= 0){
+                    $('#alertExport').slideDown();
+                    return;
+                }
+                var mesDev =  document.getElementById('tiluloMesDivida').innerHTML;
+                window.location ='/'+'exportDevedoresPDF?mes='+mesDev+'&ano='+ano+'&tabela=devedor';
+            });
 
-            $('#ExportPdfDevedor').on('click',function () {
-                var mes =  document.getElementById('tiluloMesDivida').innerHTML;
-                window.location ='/'+'exportDevedoresPDF?mes='+mes+'&ano='+ano;
+            /*Exportacao de tabela no devedores para excel e pdf*/
+            $('#ExportExcelNaoDevedor').click(function () {
+                var rowCountDev = document.getElementById('tabelaCorpoNaoDevedor').rows.length;
+                if(rowCountDev <= 0){
+                    $('#alertExport').slideDown();
+                    return;
+                }
+                $('#tabelaNaoDevedores').tableExport({type:'excel',escape:'false'});
+            });
+
+            $('#ExportPdfNaoDevedor').click(function () {
+                var rowCountDev = document.getElementById('tabelaCorpoNaoDevedor').rows.length;
+                if(rowCountDev <= 0){
+                    $('#alertExport').slideDown();
+                    return;
+                }
+                var mesPago =  document.getElementById('tiluloMesPago').innerHTML;
+                window.location ='/'+'exportDevedoresPDF?mes='+mesPago+'&ano='+ano+'&tabela=naodevedor';
             });
         });
-
-
-
-
-                        /*Inicio Metodos de Listar por alunos*/
-
-
-            {{--$('#selectAno').change(function () {--}}
-                {{--ano = $(this).val()--}}
-            {{--});--}}
-
-            {{--for (var j = 0; j < meses.length; j++) {--}}
-                {{--$('#tabela').append(" <tr class='tr'><td>" + meses[j] + "</td> <td>--------------------------</td><td>--------</td><td>---------</td>");--}}
-            {{--}--}}
-
-            {{--var numAl = JSON.parse("{{json_encode($numAluno)}}");--}}
-            {{--for( var k = 0; k< numAl; k++){--}}
-                {{--$('#tabela2').append(" <tr class='tr2'><td>" + 'Aluno'+k+1 + "</td> <td>--------------------------</td><td>--------</td><td>---------</td>");--}}
-            {{--}--}}
-
-            {{--function getIdade(data) {--}}
-                {{--var dt = new Date(data).getFullYear();--}}
-                {{--var dh = new Date().getFullYear();--}}
-                {{--return dh - dt;--}}
-            {{--}--}}
-
-
-            /*Fim Metodos de Listar por alunos*/
-            /*Inicio Metodos de Listar por Mes*/
-
-//            $('.materialboxed').materialbox();
-//            $('.carousel').carousel();
-//        });
     </script>
 @endsection
