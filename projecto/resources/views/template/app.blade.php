@@ -169,23 +169,20 @@
             </footer>
         </div>
 
-        <script src="{!! asset('jquery/dist/jquery.min.js')!!}" type="text/javascript"></script>
-        <script src="{!! asset('bootstrap/dist/js/bootstrap.min.js')!!}"></script>
-        <script src="{!! asset('js/adminlte.min.js')!!}"></script>
-        <script src="{!! asset('charts/Chart.js')!!}"></script>
-        <script src="{!! asset('charts/raphael.min.js')!!}"></script>
-        <script src="{!! asset('charts/morris.min.js')!!}"></script>
-        <script src="{!! asset('select2/js/select2.full.min.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('jquery/dist/jquery.min.js')!!}" ></script>
+        <script type="text/javascript" src="{!! asset('bootstrap/dist/js/bootstrap.min.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('js/adminlte.min.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('charts/Chart.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('charts/raphael.min.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('charts/morris.min.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('select2/js/select2.full.min.js')!!}"></script>
 
-        <script src="{!! asset('export/tableExport.js')!!}"></script>
-        <script src="{!! asset('export/jquery.base64.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('export/tableExport.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('export/jquery.base64.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('export/libs/base64.js')!!}"></script>
 
-        <script src="{!! asset('export/libs/sprintf.js')!!}"></script>
-        <script src="{!! asset('export/jspdf.js')!!}"></script>
-        <script src="{!! asset('export/libs/base64.js')!!}"></script>
-
-        <script src="{!! asset('datatables.net/js/jquery.dataTables.min.js')!!}"></script>
-        <script src="{!! asset('datatables.net-bs/js/dataTables.bootstrap.min.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('datatables.net/js/jquery.dataTables.min.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('datatables.net-bs/js/dataTables.bootstrap.min.js')!!}"></script>
         <script>
 
 

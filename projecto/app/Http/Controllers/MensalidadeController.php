@@ -18,10 +18,12 @@ class MensalidadeController extends Controller{
 
     private $mensalidade;
     private $aluno;
+//    private $mesComeco;
     public function __construct(){
         $this->mensalidade = new Mensalidade();
         $this->aluno = new Aluno();
     }
+
 
     public function index(){
 //        $mensalidade = Mensalidade::all();
@@ -37,6 +39,7 @@ class MensalidadeController extends Controller{
         foreach ($def as $d){
             $valorTotal = ($d->intervalo+1)*$d->valormensal;
             $valorMensal = $d->valormensal;
+//            $this->mesComeco = $d->mescomeco;
         }
 
         $mesesPagos = Mensalidade::query()->distinct()->pluck('mes');
@@ -64,10 +67,10 @@ class MensalidadeController extends Controller{
     }
 
 
-    public function devedoresEnao(){
-        $naoDevedores = Mensalidade::query()->where('mes',$_POST['mes'])->count();
-        return response()->json(array('naoDevedores'=>$naoDevedores));
-    }
+//    public function devedoresEnao(){
+//        $naoDevedores = Mensalidade::query()->where('mes',$_POST['mes'])->count();
+//        return response()->json(array('naoDevedores'=>$naoDevedores));
+//    }
 
 
     public function listarPorAluno(){
@@ -77,21 +80,20 @@ class MensalidadeController extends Controller{
             ->join('pagamentos','pagamnto_mensalidades.idPagamento','=','pagamentos.id')
             ->join('alunos','pagamnto_mensalidades.idAluno','=','alunos.id')
             ->select('mensalidades.estado as mesEstado','alunos.*','mensalidades.*','pagamentos.*','pagamnto_mensalidades.*')->where('idAluno',$_POST['idAluno'])->where('anoPago',$_POST['ano'])->get();
-        return  response()->json(array('mensal'=> $mensalidade,'foto'=>$alun->foto));
+
+        /*Para registo de mensalidade*/
+        $mesesPagos = '';
+        $def = Def_Mensalidade::query()->join('mes','def__mensalidades.mescomeco','=','mes.numero')->select('mes.*')->where('ano',$_POST['ano'])->first();
+        foreach ($mensalidade as $ms){$mesesPagos = $mesesPagos.' '.$ms->mes;}
+        $mesNaoP = Mes::query()->select('nome')->whereNotIn('nome',explode(' ',trim(rtrim($mesesPagos))))->where('numero','>=',$def->numero)->get();
+        return  response()->json(array('mensal'=> $mensalidade,'foto'=>$alun->foto,'mesesNao'=>$mesNaoP));
     }
 
-//    public function listarPorMes(){
-//        $mensalidade = Mensalidade::query()
-//            ->join('alunos','mensalidades.idAluno','=','alunos.id')
-//            ->select('alunos.*','mensalidades.*')->where('ano',$_POST['ano'])->where('mes',$_POST['mes'])->get();
-//        return  response()->json(array('mensal'=> $mensalidade));
-//    }
+
 
     public function registarMensalidade(){
         $aluno = Aluno::all();
-        $meses = array('Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
-        return view('mensalidade.registar',['aluno'=>$aluno,'meses'=>$meses]);
-
+        return view('mensalidade.registar',['alu'=>$aluno]);
     }
 
     public function getDevedoresMes(){
@@ -112,7 +114,7 @@ class MensalidadeController extends Controller{
         }
     }
 
-    /*Retorna uma lista de todos o meses que aina ha foi feito pagamento*/
+    /*Retorna uma lista de todos o meses que ainda nao foi feito pagamento*/
     public function getMesAPagar($ano){
         $mesesApagar='';
         $defin =Def_Mensalidade::query()->where('ano',$ano)->get();

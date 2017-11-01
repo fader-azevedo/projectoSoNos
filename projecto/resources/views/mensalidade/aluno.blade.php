@@ -74,7 +74,7 @@
     <table id="tabela2" class="table-striped">
         <thead>
         <tr>
-            <th>Mes</th>
+            <th>Mês</th>
             <th>Data de Pagamento</th>
             <th>Estado</th>
             <th>Valor Pago</th>
@@ -102,10 +102,10 @@
             var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");
 
             $.ajax({
-                url: '/api/listarPorAluno',
-                type: 'POST',
-                data: {'idAluno':idAluno,'ano':ano},
-                success: function (rs) {
+                    url: '/api/listarPorAluno',
+                    type: 'POST',
+                    data: {'idAluno':idAluno,'ano':ano},
+                    success: function (rs) {
                     document.getElementById('idFotoAluno').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
                     $('.tr').remove();
                     $('.ss').remove();
@@ -127,43 +127,6 @@
                 }
             });
         });
- {{--$('#inPutAluno').on('input',function () {--}}
-            {{--var ano = document.getElementById('selectAno').value;--}}
-            {{--var op = $('option[value="'+$(this).val()+'"]');--}}
-            {{--var idAluno = op.length ? op.attr('id'):'';--}}
-            {{--if(idAluno === '' ||  $('#inPutAluno').val().length=== 0){--}}
-                {{--return;--}}
-            {{--}--}}
-            {{--var valorTotal = JSON.parse("{{json_encode($valorTotal)}}");--}}
-            {{--var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");--}}
-
-            {{--$.ajax({--}}
-                {{--url: '/api/listarPorAluno',--}}
-                {{--type: 'POST',--}}
-                {{--data: {'idAluno':idAluno,'ano':ano},--}}
-                {{--success: function (rs) {--}}
-                    {{--document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);--}}
-                    {{--$('.tr').remove();--}}
-                    {{--$('.ss').remove();--}}
-                    {{--if(rs.mensal.length <=0){--}}
-                        {{--$('#divTabela2').append('<h1 class="centered ss">Ainda Sem Registo</h1>');--}}
-                    {{--}else {--}}
-                        {{--for (var j = 0; j < rs.mensal.length; j++) {--}}
-                            {{--$('#tabela2Corpo').append(" <tr class='tr'><td>" + rs.mensal[j].mes + "</td> " +--}}
-                                {{--"<td>" + formatarData(new Date(rs.mensal[j].dataP)) + "</td><td>" + rs.mensal[j].mesEstado + "</td>" +--}}
-                                {{--"<td>"+rs.mensal[j].valorTotal+"</td><td>"+rs.mensal[j].divida+"</td></tr>");--}}
-                        {{--}--}}
-                    {{--}--}}
-                    {{--var rk = document.getElementById('tabela2Corpo').rows.length;--}}
-                    {{--var prc = ((valorMensal*rk) * 100)/valorTotal;--}}
-                    {{--document.getElementById('valorPago').innerHTML = valorMensal*rk;--}}
-                    {{--document.getElementById('valorDivida').innerHTML = valorTotal-(valorMensal*rk);--}}
-                    {{--document.getElementById('percPago').innerHTML = prc.toFixed(2)+'%';--}}
-                    {{--document.getElementById('barWidth').style.width = prc+'%';--}}
-                {{--}--}}
-            {{--});--}}
-        {{--});--}}
-
 
         function formatarData(date) {
             var meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];

@@ -5,6 +5,10 @@ Author: Carlos Alvarez
 Website: http://blacktie.co
 Premium: http://www.gridgum.com
 */
+
+.centered label{
+    font-size: 15px;
+}
 .anoExport{
     margin: -5px;
     padding: 0;
@@ -163,7 +167,7 @@ option{
     margin-left: -10px;
     margin-right: -10px;
     height: 35px;
-    width: 36px;
+    width: 40px;
     border-radius: 50%;
     position: relative;
 }
@@ -175,17 +179,23 @@ option{
     width: 36px;
     border-radius: 50%
 }
-.mesesPagos{
+.mes-pago{
     background-color: #76c3f0 !important;
-    margin: 10px 5px 0 0;
+}
+
+.mes-nao-pago{
+    background-color: #87939a !important;
+}
+.mes{
+    margin: 8px 5px 0 0;
     height: 15px;
     width: 12.5%;
 }
-.mesesNaoPagos{
-    background-color: #87939a !important;
-    margin: 10px 5px 0 0;
-    height: 15px;
-    width: 12.5%;
+.mes label{
+    float: right;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
 }
 
 .mesesAPagar{
