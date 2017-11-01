@@ -302,19 +302,19 @@ option{
     cursor: hand;
 }
 
-.top-menu ul li a{
-    height: 45px;
-    width: 50px;
-    line-height: 50px;
-    display: block;
-    text-align: center;
-    font-size: 25px;
-    position: relative;
-    border:1px solid #424a5d; ;
-    background-color: #424a5d;
-    cursor: hand;
-    /*color: white;*/
-}
+/*.top-menu ul li a{*/
+    /*height: 45px;*/
+    /*width: 50px;*/
+    /*line-height: 50px;*/
+    /*display: block;*/
+    /*text-align: center;*/
+    /*font-size: 25px;*/
+    /*position: relative;*/
+    /*border:1px solid #424a5d; ;*/
+    /*background-color: #424a5d;*/
+    /*cursor: hand;*/
+    /*!*color: white;*!*/
+/*}*/
 
 .top-menu-indicador{
     position: absolute;
@@ -522,18 +522,18 @@ ul li {
     list-style: none;
 }
 
-a, a:hover, a:focus {
-    text-decoration: none;
-    outline: none;
-}
-::selection {
-    background: #68dff0;
-    color: #fff;
-}
-::-moz-selection {
-    background: #68dff0;
-    color: #fff;
-}
+/*a, a:hover, a:focus {*/
+    /*text-decoration: none;*/
+    /*outline: none;*/
+/*}*/
+/*::selection {*/
+    /*background: #68dff0;*/
+    /*color: #fff;*/
+/*}*/
+/*::-moz-selection {*/
+    /*background: #68dff0;*/
+    /*color: #fff;*/
+/*}*/
 
 #container {
     width: 100%;

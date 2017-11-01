@@ -25,8 +25,8 @@
             <i class="fa fa-users"></i>
             <span>Alunos</span>
             <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
@@ -39,8 +39,8 @@
             <i class="fa fa-bar-chart-o"></i>
             <span>Estatísticas</span>
             <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-pencil"></i>Alunos</a></li>
@@ -53,8 +53,8 @@
             <i class="fa fa-history"></i>
             <span>Históricos</span>
             <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-users"></i> Alunos</a></li>
@@ -125,25 +125,18 @@
         </div>
         <div class="col-sm-8 col-md-8 col-lg-8">
             <div class="form-group">
-                <label>Multiple</label>
+                <label>Meses</label>
                 <select id="selectMes" class="form-control select2" multiple="multiple" data-placeholder="Selecione os meses a pagar" style="width: 100%;">
-                    <option>Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
                 </select>
             </div>
         </div>
-        <fieldset style="width: 100%">
+        <fieldset style="width: 100%; background-color: #f5f5f5">
             <legend class="centered">
                 Raking de Pagamento
             </legend>
-            <div class="row">
+            <div class="row" >
                <h6 class="centered">
-                   <label class="label label-info">pago</label>
+                   <label class="label label-info">Pago</label>
                    <label class="label label-warning">Adiantado</label>
                    <label class="label label-primary">Não pago</label>
                </h6>
@@ -182,8 +175,8 @@
                     success: function (rs) {
                         document.getElementById('idFotoAluno').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
                         $('.mes').remove();
-//                        $('.mesesNaoPagos').remove();
                         $('#actual').remove();
+                        $('.ms').remove();
 
                         for (var i=0; i < rs.mensal.length; i++){
                             if(rs.mensal[i].mesEstado =='pago') {
@@ -198,9 +191,17 @@
                             '<p style="color: #3a5fff" class="centered"><i  class="fa fa-check fa-2x"></i></p><span class="tooltippytext">'+mesess+'</span> </div>');
                         for(var m=0; m < rs.mesesNao.length; m++){
                             $('#DivMeses').append(' <div class="mes mes-nao-pago"><label class="label label-primary">'+rs.mesesNao[m].nome+'</label></div>');
+                            $('#selectMes').append('<option class="ms" value='+rs.mesesNao[m].nome+'>'+rs.mesesNao[m].nome+'</option>');
                         }
                     }
                 })
+            });
+
+            $('#selectMes').change(function () {
+
+                var l = $(this).val();
+
+
             });
 
 

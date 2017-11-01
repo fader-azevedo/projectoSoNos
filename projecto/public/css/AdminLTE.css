@@ -1298,7 +1298,8 @@ a:focus {
  * ---------------
  */
 .form-control {
-  border-radius: 0;
+  /*border-radius: 0;    */
+  border-radius: 4px;
   box-shadow: none;
   border-color: #d2d6de;
 }
@@ -4940,7 +4941,8 @@ table.text-center th {
 .select2-container--default .select2-selection--single,
 .select2-selection .select2-selection--single {
   border: 1px solid #d2d6de;
-  border-radius: 0;
+  /*border-radius: 0;*/
+  border-radius: 4px;
   padding: 6px 12px;
   height: 34px;
 }
