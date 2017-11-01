@@ -252,6 +252,10 @@ option{
     font-size:20px;
     font-weight:600;
 }
+
+.sm-st label{
+    font-size: 14px;
+}
 .stat-icon {
     text-align: center;
     margin-bottom: 5px;

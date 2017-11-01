@@ -128,8 +128,8 @@
                                     @foreach($mesesAPagar as $ot)
                                         <tr>
                                             <td>{{$ot}}</td>
-                                            <td><a data-mes="{{$ot}}" class="btn btn-info"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ot)->count()}}</a></td>
-                                            <td><a data-mes="{{$ot}}" class="btn btn-danger btn-devedor"><i class="zmdi zmdi-close"></i>&nbsp;{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ot)->count()}}</a></td>
+                                            <td><a disabled="disabled" data-mes="{{$ot}}" class="btn btn-default"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ot)->count()}}</a></td>
+                                            <td><a disabled="disabled" data-mes="{{$ot}}" class="btn btn-default"><i class="zmdi zmdi-close"></i>&nbsp;0&nbsp;</a></td>
                                             <td><a disabled="disabled" class="btn btn-default"><i class="zmdi zmdi-library"></i>&nbsp;&nbsp;Sem registo&nbsp;&nbsp;</a></td>
                                         </tr>
                                     @endforeach
@@ -152,9 +152,9 @@
                             </div>
 
                             {{--tabela Nao Devedores--}}
-                            <div class="box box-info" id="boxNaoDevedor">
+                            <div class="box box-info" id="boxNaoDevedor" style="position: relative">
                                 <div class="box-header with-border">
-                                    <h3 style="color: #00c0ef" class="box-title"><i class="fa fa-users"></i>&nbsp;Alunos Sem Divida</h3>
+                                    <h3 style="color: #00c0ef" class="box-title"><i class="fa fa-users"></i>&nbsp;Alunos não Devedores</h3>
 
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -197,7 +197,6 @@
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                         </button>
-                                        {{--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>--}}
                                     </div>
                                 </div>
                                 <div class="box-body" >
@@ -232,90 +231,7 @@
                         </section>
                     </div>
                     <div class="item row">
-                        {{--@section('filho')--}}
-                            @include('mensalidade.aluno')
-                        {{--@endsection--}}
-                        {{--<div class="col-md-4 col-sm-4 col-lg-4 ">--}}
-                            {{--<div class="input-field">--}}
-                                {{--<i class="zmdi zmdi-account-circle prefix"></i>--}}
-                                {{--<input id="inPutAluno" type="text" list="listaAluno">--}}
-                                {{--<datalist id="listaAluno">--}}
-                                    {{--@foreach($alu  as $a)--}}
-                                        {{--<option id="{{$a->id}}" value="{{$a->nome.' '.$a->apelido}}">{{$a->nome.' '.$a->apelido}}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</datalist>--}}
-                            {{--</div>--}}
-
-                            {{--<div class="box box-widget widget-user">--}}
-                                {{--<!-- Add the bg color to the header using any of the bg-* classes -->--}}
-                                {{--<div class="widget-user-header bg-aqua-active">--}}
-                                    {{--<p class="centered">Nome</p>--}}
-                                {{--</div>--}}
-                                {{--<div class="widget-user-image">--}}
-                                    {{--<img id="idFoto" class="img-circle" src="{!! asset('img/logo.jpg') !!}" alt="">--}}
-                                {{--</div>--}}
-                                {{--<div class="box-footer">--}}
-                                    {{--<div class="row">--}}
-                                        {{--<div class="col-sm-4 border-right">--}}
-                                            {{--<div class="description-block">--}}
-                                                {{--<div class="sm-st tooltipped" data-tooltip="Valor Pago">--}}
-                                                    {{--<p class="centered">--}}
-                                                        {{--<span class="sm-st-icon st-blue"><i class="fa fa-money"></i></span>--}}
-                                                    {{--</p>--}}
-                                                    {{--<div class="sm-st-info centered">--}}
-                                                        {{--<p id="valorPago">0</p>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-sm-4 border-right">--}}
-                                            {{--<div class="description-block">--}}
-                                                {{--<div class="sm-st  tooltipped"  data-tooltip="Divida">--}}
-                                                    {{--<p class="centered">--}}
-                                                        {{--<span class="sm-st-icon st-red"><i class="fa fa-money"></i></span>--}}
-                                                    {{--</p>--}}
-                                                    {{--<div class="sm-st-info centered">--}}
-                                                        {{--<p id="valorDivida">0</p>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-sm-4">--}}
-                                            {{--<div class="description-block">--}}
-                                                {{--<div class="sm-st tooltipped" data-tooltip="Total a Pagar" >--}}
-                                                    {{--<p class="centered">--}}
-                                                        {{--<span class="sm-st-icon st-violet"><i class="fa fa-money"></i></span>--}}
-                                                    {{--</p>--}}
-                                                    {{--<div class="sm-st-info centered">--}}
-                                                        {{--<p>{{$valorTotal}}</p>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-md-122 col-sm-12 col-log-12" style="padding-bottom: 0">--}}
-                                            {{--<div class="progress progress-striped ">--}}
-                                                {{--<div id="barWidth" class="progress-bar tooltipped"  role="progressbar"   aria-valuemin="0" aria-valuemax="100" data-tooltip="% de Pagamento Feito">--}}
-                                                    {{--<span class="centered" style="font-size: 13px;"  id="percPago"></span>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-md-8 col-sm-8 col-lg-8" id="divTabela2" style="padding-top: 15px;">--}}
-                            {{--<table id="tabela2" class="table-striped">--}}
-                                {{--<thead>--}}
-                                    {{--<tr>--}}
-                                        {{--<th>Mes</th>--}}
-                                        {{--<th>Data de Pagamento</th>--}}
-                                        {{--<th>Situação</th>--}}
-                                    {{--</tr>--}}
-                                {{--</thead>--}}
-                                {{--<tbody id="tabela2Corpo">--}}
-                                {{--</tbody>--}}
-                            {{--</table>--}}
-                        {{--</div>--}}
+                        @include('mensalidade.aluno')
                     </div>
                 </div>
             </div>
@@ -342,7 +258,7 @@
                             return;
                         }
                         $('#boxNaoDevedor').addClass('collapsed-box').slideUp();
-                        $('#boxDevedor').removeClass('collapsed-box').slideDown(1);
+                        $('#boxDevedor').removeClass('collapsed-box').slideDown(000001);
 
                         $('.rm').remove();
                         document.getElementById('tiluloMesDivida').innerHTML = mes;
@@ -356,7 +272,6 @@
             });
             /*lista todos nao devedores*/
             $('.btn-nao-devedor').on('click', function () {
-
                 var mes= $(this).attr('data-mes');
                 $.ajax({
                     url: '/api/getDevedoresMes',
