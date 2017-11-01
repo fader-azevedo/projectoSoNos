@@ -87,53 +87,72 @@
     </h5>
 
     <section class="row"  id="DivRegistarMensalidade">
-        <div class="row">
-            <div class="col-md-4 col-sm-4 col-lg-4 ">
-                <div class="input-field">
-                    <i class="zmdi zmdi-account-circle prefix"></i>
-                    <input id="selectAluno2" placeholder="Aluno"  type="text" list="listaAluno">
-                    <datalist id="listaAluno">
-                        @foreach($aluno  as $ms)
-                            <option id="{{$ms->id}}" value="{{$ms->nome}}">{{$ms->nome}}</option>
-                        @endforeach
-                    </datalist>
-                </div>
-                <div class=" alunuDetalhes row">
-                    <div class="col-md-12 col-sm-12 col-lg-12"  >
-                        <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class="materialboxed profile-user-img img-responsive img-circle" >
-                    </div>
-                </div>
-
-                <div class="alunuDetalhes row">
-                    <a class="dropdown-button btnn" data-activates="dropdown1">Disciplinas</a>
-                    <ul id="dropdown1" class="dropdown-content">
-                    </ul>
+        <div class="col-md-4 col-sm-4 col-lg-4 ">
+            <div class="input-field">
+                <i class="zmdi zmdi-account-circle prefix"></i>
+                <input id="selectAluno2" placeholder="Aluno"  type="text" list="listaAluno">
+                <datalist id="listaAluno">
+                    @foreach($aluno  as $ms)
+                        <option id="{{$ms->id}}" value="{{$ms->nome}}">{{$ms->nome}}</option>
+                    @endforeach
+                </datalist>
+            </div>
+            <div class=" alunuDetalhes row">
+                <div class="col-md-12 col-sm-12 col-lg-12"  >
+                    <img id="idFoto" src="{!! asset('img/logo.jpg')!!}" class="materialboxed profile-user-img img-responsive img-circle" >
                 </div>
             </div>
-            <div  class="col-md-3 col-sm-3 col-lg-3" >
-                <div class="input-field" style="background-color: #ffffff;">
-                    <i class="zmdi zmdi-format-list-numbered prefix"></i>
-                    <input id="numb" type="number" min="1" >
-                    <label for="numb">Meses</label>
-                </div>
 
-                <a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>
-                <ul class="mesesList">
+            <div class="alunuDetalhes row">
+                <a class="dropdown-button btnn" data-activates="dropdown1">Disciplinas</a>
+                <ul id="dropdown1" class="dropdown-content">
                 </ul>
             </div>
+        </div>
+        <div  class="col-md-3 col-sm-3 col-lg-3" >
+            <div class="input-field" style="background-color: #ffffff;">
+                <i class="zmdi zmdi-format-list-numbered prefix"></i>
+                <input id="numb" type="number" min="1" >
+                <label for="numb">Meses</label>
+            </div>
 
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <div class="form-group">
-                    <select id="Months" class="form-control select2" multiple="multiple" data-placeholder="Selecione os Meses">
-                    </select>
-                </div>
+            <a class="myIcon"><i class="zmdi zmdi-calendar"></i></a>
+            <ul class="mesesList">
+            </ul>
+        </div>
+
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="form-group">
+                <select id="Months" class="form-control select2" multiple="multiple" data-placeholder="Selecione os Meses">
+                    <option>um</option>
+                    <option>um</option>
+                    <option>dos</option>
+                    <option>um</option>
+                </select>
             </div>
-            <div class="col-md-12 col-sm-12 col-lg-12" style="padding-top: 10px;  border-radius: 6px; margin: 10px; background-color:#f2f2f2;height: 60px; display: flex">
-                <div class="inicio"><p style="color: #00b0ff" class="centered"><i class="fa fa-check fa-2x"></i></p></div>
-                <div id="DivMeses" style=" width: 100%; height: 100px;  display: flex">
-                </div>
-                <div class="fim tooltipped" data-tooltip=""><p style="color: #171eff" class="centered"><i class="fa fa-star fa-2x"></i></p></div>
+
+            <div class="">
+                <label>Minimal</label>
+                <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">Alabama</option>
+                    <option>Alaska</option>
+                    <option>California</option>
+                    <option>Delaware</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Washington</option>
+                </select>
             </div>
+        </div>
+
+
+
+        <div class="col-md-12 col-sm-12 col-lg-12" style="padding-top: 10px;  border-radius: 6px; margin: 10px; background-color:#f2f2f2;height: 60px; display: flex">
+            <div class="inicio"><p style="color: #00b0ff" class="centered"><i class="fa fa-check fa-2x"></i></p></div>
+            <div id="DivMeses" style=" width: 100%; height: 100px;  display: flex">
+            </div>
+            <div class="fim tooltipped" data-tooltip=""><p style="color: #171eff" class="centered"><i class="fa fa-star fa-2x"></i></p></div>
+        </div>
     </section>
 @endsection
 
@@ -141,6 +160,7 @@
 @section('scripts')
     <script type="text/javascript">
         $(document).ready(function() {
+            $('.select2').select2();
 
             for(var l = 0; l < meses.length; l++){
                 $('#DivMeses').append('<div class="mesesNaoPagos"></div>');
@@ -179,15 +199,15 @@
                             contaMeses +=1;
                         }
 
-
-                        $('#DivMeses').append('<div id="actual" class="tooltippy" data-tooltip="fader" >' +
-                            '<p style="color: #3a5fff" class="centered"><i  class="fa fa-check fa-2x"></i></p><span class="tooltippytext">'+mesess+'</span> </div>');
-                        for(var k = contaMeses; k < meses.length; k++){
-                            $('#DivMeses').append(' <div class="mesesNaoPagos"></div>');
-                           /*Lista Meses a pagar*/
-                            $('#Months').append('<option>' + meses[k] + '</option>');
-                            numMesesqFaltam +=1;
-                        }
+//
+//                        $('#DivMeses').append('<div id="actual" class="tooltippy" data-tooltip="fader" >' +
+//                            '<p style="color: #3a5fff" class="centered"><i  class="fa fa-check fa-2x"></i></p><span class="tooltippytext">'+mesess+'</span> </div>');
+//                        for(var k = contaMeses; k < meses.length; k++){
+//                            $('#DivMeses').append(' <div class="mesesNaoPagos"></div>');
+//                           /*Lista Meses a pagar*/
+//                            $('#Months').append('<option>' + meses[k] + '</option>');
+//                            numMesesqFaltam +=1;
+//                        }
 //                        for (var y=1;y<contaMeses+1; y++ ){
 ////                            document.getElementById('Mes'+y.toString()).setAttribute('disabled','disabled');
 ////                            document.getElementById('Mes'+y.toString()).append('<i class=""></i>');

@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="{!! asset('css/bootstrap.css') !!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.css')!!}"  />
         <link rel="stylesheet" type="text/css" href="{!! asset('ionicons/css/ionicons.min.css')!!}"  />
-{{--        <link rel="stylesheet" type="text/css" href="{!! asset('js/gritter/css/jquery.gritter.css')!!}" />--}}
+        <link rel="stylesheet" type="text/css" href="{!! asset('js/gritter/css/jquery.gritter.css')!!}" />
         <link rel="stylesheet" type="text/css" href="{!! asset('lineicons/style.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/AdminLTE.css')!!}"/>
 
@@ -175,7 +175,7 @@
         <script src="{!! asset('charts/Chart.js')!!}"></script>
         <script src="{!! asset('charts/raphael.min.js')!!}"></script>
         <script src="{!! asset('charts/morris.min.js')!!}"></script>
-        {{--<script src="{!! asset('select2/js/select2.full.min.js')!!}"></script>--}}
+        <script src="{!! asset('select2/js/select2.full.min.js')!!}"></script>
 
         <script src="{!! asset('export/tableExport.js')!!}"></script>
         <script src="{!! asset('export/jquery.base64.js')!!}"></script>

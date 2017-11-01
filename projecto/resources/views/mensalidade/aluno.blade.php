@@ -1,20 +1,22 @@
-<div class="col-md-4 col-sm-4 col-lg-4 ">
-    <div class="input-field">
-        <i class="zmdi zmdi-account-circle prefix"></i>
-        <input id="inPutAluno" type="text" list="listaAluno" placeholder="Selecione o aluno">
-        <datalist id="listaAluno">
+<div class="col-md-4 col-sm-4 col-lg-4">
+   <div style="display: flex; padding-top: 5px; margin-top: 15px">
+        <a style="color: #3f729b; font-size: 33px; margin-top: -5px">
+            <i class="zmdi zmdi-account-circle prefix"></i>
+        </a>
+        <select id="inPutAluno" class="select2">
+            <option selected="selected">Selecine o aluno</option>
             @foreach($alu  as $a)
                 <option id="{{$a->id}}" value="{{$a->nome.' '.$a->apelido}}">{{$a->nome.' '.$a->apelido}}</option>
             @endforeach
-        </datalist>
-    </div>
+        </select>
+   </div>
 
     <div class="box box-widget widget-user">
         <div class="widget-user-header bg-aqua-active">
             <p class="centered">Nome</p>
         </div>
         <div class="widget-user-image">
-            <img id="idFoto" class="img-circle" src="{!! asset('img/logo.jpg') !!}" alt="">
+            <img id="idFotoAluno" class="img-circle" src="{!! asset('img/logo.jpg') !!}" alt="">
         </div>
         <div class="box-footer">
             <div class="row">
@@ -86,8 +88,10 @@
 
 @section('scripts2')
     <script>
+        $('.select2').select2();
         /*Buscar Dados de Alunos*/
-        $('#inPutAluno').on('input',function () {
+        $('#inPutAluno').on('change',function () {
+
             var ano = document.getElementById('selectAno').value;
             var op = $('option[value="'+$(this).val()+'"]');
             var idAluno = op.length ? op.attr('id'):'';
@@ -102,7 +106,7 @@
                 type: 'POST',
                 data: {'idAluno':idAluno,'ano':ano},
                 success: function (rs) {
-                    document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
+                    document.getElementById('idFotoAluno').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
                     $('.tr').remove();
                     $('.ss').remove();
                     if(rs.mensal.length <=0){
@@ -123,6 +127,42 @@
                 }
             });
         });
+ {{--$('#inPutAluno').on('input',function () {--}}
+            {{--var ano = document.getElementById('selectAno').value;--}}
+            {{--var op = $('option[value="'+$(this).val()+'"]');--}}
+            {{--var idAluno = op.length ? op.attr('id'):'';--}}
+            {{--if(idAluno === '' ||  $('#inPutAluno').val().length=== 0){--}}
+                {{--return;--}}
+            {{--}--}}
+            {{--var valorTotal = JSON.parse("{{json_encode($valorTotal)}}");--}}
+            {{--var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");--}}
+
+            {{--$.ajax({--}}
+                {{--url: '/api/listarPorAluno',--}}
+                {{--type: 'POST',--}}
+                {{--data: {'idAluno':idAluno,'ano':ano},--}}
+                {{--success: function (rs) {--}}
+                    {{--document.getElementById('idFoto').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);--}}
+                    {{--$('.tr').remove();--}}
+                    {{--$('.ss').remove();--}}
+                    {{--if(rs.mensal.length <=0){--}}
+                        {{--$('#divTabela2').append('<h1 class="centered ss">Ainda Sem Registo</h1>');--}}
+                    {{--}else {--}}
+                        {{--for (var j = 0; j < rs.mensal.length; j++) {--}}
+                            {{--$('#tabela2Corpo').append(" <tr class='tr'><td>" + rs.mensal[j].mes + "</td> " +--}}
+                                {{--"<td>" + formatarData(new Date(rs.mensal[j].dataP)) + "</td><td>" + rs.mensal[j].mesEstado + "</td>" +--}}
+                                {{--"<td>"+rs.mensal[j].valorTotal+"</td><td>"+rs.mensal[j].divida+"</td></tr>");--}}
+                        {{--}--}}
+                    {{--}--}}
+                    {{--var rk = document.getElementById('tabela2Corpo').rows.length;--}}
+                    {{--var prc = ((valorMensal*rk) * 100)/valorTotal;--}}
+                    {{--document.getElementById('valorPago').innerHTML = valorMensal*rk;--}}
+                    {{--document.getElementById('valorDivida').innerHTML = valorTotal-(valorMensal*rk);--}}
+                    {{--document.getElementById('percPago').innerHTML = prc.toFixed(2)+'%';--}}
+                    {{--document.getElementById('barWidth').style.width = prc+'%';--}}
+                {{--}--}}
+            {{--});--}}
+        {{--});--}}
 
 
         function formatarData(date) {

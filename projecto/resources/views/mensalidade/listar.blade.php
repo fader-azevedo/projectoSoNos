@@ -105,7 +105,7 @@
             <!-- Morris chart - Sales -->
             <div id="carousellDiv" class="carousel slide" data-ride="carousel" data-interval="false">
                 <div  class="carousel-inner">
-                    <div id="" class="item active">
+                    <div id="" class="item ">
                         <section class="col-sm-7 col-md-7 col-lg-7" style="padding-top: 14px">
                             <table class="table-striped" id="tabela1">
                                 <thead>
@@ -230,7 +230,7 @@
                             </div>
                         </section>
                     </div>
-                    <div class="item row">
+                    <div class="item active row">
                         @include('mensalidade.aluno')
                     </div>
                 </div>
