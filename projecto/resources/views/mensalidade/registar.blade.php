@@ -7,7 +7,7 @@
         </a>
     </li>
 
-    <li class="treeview">
+    <li class="treeview active">
         <a href="#">
             <i class="fa fa-money"></i>
             <span>Mensalidades</span>
@@ -16,8 +16,8 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
-            <li><a href="{{url('/mensalidade')}}"><i class="fa fa-list"></i> Listar</a></li>
+            <li class="active"><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
+            <li><a href="{{'/mensalidade'}}"><i class="fa fa-list"></i> Listar</a></li>
         </ul>
     </li>
     <li class="treeview">
@@ -75,8 +75,6 @@
             <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
         </ul>
     </li>
-
-
 @endsection
 @section('content')
 
@@ -121,20 +119,24 @@
                             <div class="description-block">
                             </div>
                         </div>
-                        <div class="col-md-122 col-sm-12 col-log-12" style="padding-bottom: 0">
-                            <div class="progress progress-striped ">
-                                <div id="barWidth" class="progress-bar tooltipped"  role="progressbar"   aria-valuemin="0" aria-valuemax="100" data-tooltip="% de Pagamento Feito">
-                                    <span class="centered" style="font-size: 13px;"  id="percPago"></span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
+        <div class="col-sm-8 col-md-8 col-lg-8">
+            <div class="form-group">
+                <label>Multiple</label>
+                <select id="selectMes" class="form-control select2" multiple="multiple" data-placeholder="Selecione os meses a pagar" style="width: 100%;">
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>California</option>
+                    <option>Delaware</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Washington</option>
+                </select>
+            </div>
+        </div>
         <fieldset style="width: 100%">
             <legend class="centered">
                 Raking de Pagamento
@@ -197,26 +199,6 @@
                         for(var m=0; m < rs.mesesNao.length; m++){
                             $('#DivMeses').append(' <div class="mes mes-nao-pago"><label class="label label-primary">'+rs.mesesNao[m].nome+'</label></div>');
                         }
-
-
-//
-//                        for(var k = contaMeses; k < meses.length; k++){
-//                            $('#DivMeses').append(' <div class="mesesNaoPagos"></div>');
-//                           /*Lista Meses a pagar*/
-//                            $('#Months').append('<option>' + meses[k] + '</option>');
-//                            numMesesqFaltam +=1;
-//                        }
-//                        for (var y=1;y<contaMeses+1; y++ ){
-////                            document.getElementById('Mes'+y.toString()).setAttribute('disabled','disabled');
-////                            document.getElementById('Mes'+y.toString()).append('<i class=""></i>');
-//                        }
-
-                        /*Buscar dados de inscricao*/
-//                        for(var q=0; q < rs.inscricao.length;q++){
-////                            alert(rs.inscricao[q].valorMensal);
-//                            $('#dropdown1').append('<li class="li"> <a>'+rs.inscricao[q].nome+'</a> </li>');
-//                        }
-
                     }
                 })
             });

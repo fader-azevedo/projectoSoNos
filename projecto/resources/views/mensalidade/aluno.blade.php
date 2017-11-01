@@ -1,15 +1,16 @@
 <div class="col-md-4 col-sm-4 col-lg-4">
-   <div style="display: flex; padding-top: 5px; margin-top: 15px">
+
+    <div style="display: flex; padding-top: 5px; margin-top: 15px; width: 100%">
         <a style="color: #3f729b; font-size: 33px; margin-top: -5px">
             <i class="zmdi zmdi-account-circle prefix"></i>
         </a>
-        <select id="inPutAluno" class="select2">
+        <select id="inPutAluno" class="select2" style="width: 1000px">
             <option selected="selected">Selecine o aluno</option>
             @foreach($alu  as $a)
                 <option id="{{$a->id}}" value="{{$a->nome.' '.$a->apelido}}">{{$a->nome.' '.$a->apelido}}</option>
             @endforeach
         </select>
-   </div>
+    </div>
 
     <div class="box box-widget widget-user">
         <div class="widget-user-header bg-aqua-active">
@@ -102,10 +103,10 @@
             var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");
 
             $.ajax({
-                    url: '/api/listarPorAluno',
-                    type: 'POST',
-                    data: {'idAluno':idAluno,'ano':ano},
-                    success: function (rs) {
+                url: '/api/listarPorAluno',
+                type: 'POST',
+                data: {'idAluno':idAluno,'ano':ano},
+                success: function (rs) {
                     document.getElementById('idFotoAluno').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
                     $('.tr').remove();
                     $('.ss').remove();

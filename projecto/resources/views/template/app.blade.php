@@ -29,7 +29,7 @@
         <link rel="stylesheet" type="text/css" href="{!! asset('select2/css/select2.min.css')!!}"/>
     </head>
 <!-- sidebar-collapse-->
-    <body class="hold-transition skin-black sidebar-mini sidebar-collapse" >
+    <body class="hold-transition skin-black sidebar-mini" >
         <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->

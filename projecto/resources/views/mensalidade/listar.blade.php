@@ -7,7 +7,7 @@
         </a>
     </li>
 
-    <li class="treeview">
+    <li class="treeview active">
         <a href="#">
             <i class="fa fa-money"></i>
             <span>Mensalidades</span>
@@ -16,8 +16,8 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="{{url('/mensalidade/registar')}}"><i class="fa fa-pencil"></i> Registar</a></li>
-            <li><a href=""><i class="fa fa-list"></i> Listar</a></li>
+            <li><a href="{{'/mensalidade/registar'}}"><i class="fa fa-pencil"></i> Registar</a></li>
+            <li class="active"><a href=""><i class="fa fa-list"></i> Listar</a></li>
         </ul>
     </li>
     <li class="treeview">
@@ -105,7 +105,7 @@
             <!-- Morris chart - Sales -->
             <div id="carousellDiv" class="carousel slide" data-ride="carousel" data-interval="false">
                 <div  class="carousel-inner">
-                    <div id="" class="item ">
+                    <div class="item active ">
                         <section class="col-sm-7 col-md-7 col-lg-7" style="padding-top: 14px">
                             <table class="table-striped" id="tabela1">
                                 <thead>
@@ -230,7 +230,7 @@
                             </div>
                         </section>
                     </div>
-                    <div class="item active row">
+                    <div class="item row">
                         @include('mensalidade.aluno')
                     </div>
                 </div>

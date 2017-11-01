@@ -5,7 +5,9 @@ Author: Carlos Alvarez
 Website: http://blacktie.co
 Premium: http://www.gridgum.com
 */
-
+#inPutAluno{
+    width: 100%;
+}
 .centered label{
     font-size: 15px;
 }
