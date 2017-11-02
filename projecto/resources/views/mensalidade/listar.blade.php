@@ -1,6 +1,6 @@
 @extends('template.app')
 @section('menu')
-    <li class="treeview">
+    <li>
         <a href="{{url('/')}}">
             <i class="fa fa-home"></i>
             <span>Inicio</span>
@@ -280,7 +280,6 @@
                     }
                 })
             });
-
 
             /*Exportacao de tabela de devedores para excel e pdf*/
             $('#ExportExcelDevedor').click(function () {

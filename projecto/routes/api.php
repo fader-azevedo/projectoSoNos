@@ -16,11 +16,16 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*Home*/
+Route::post('getlist','HomeController@getlist')->name('getlist');
+
+/*Mensalidades*/
 Route::post('listarTodasMensalidades','MensalidadeController@listarTodasMensalidades')->name('listarTodasMensalidades');
 Route::post('getDevedoresMes','MensalidadeController@getDevedoresMes')->name('getDevedoresMes');
 Route::post('listarPorAluno','MensalidadeController@listarPorAluno')->name('listarPorAluno');
-Route::post('listarPorMes','MensalidadeController@listarPorMes')->name('listarPorMes');
 Route::post('getMesAPagar','MensalidadeController@getMesAPagar')->name('getMesAPagar');
 Route::post('exportaDevedores','MensalidadeController@exportaDevedores')->name('exportaDevedores');
+
 //Route::get('/fact','MensalidadeController@factura');
 

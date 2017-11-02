@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Aluno;
+use App\Curso;
 use App\Disciplina;
 use App\Mensalidade;
+use App\Mes;
 
 class HomeController extends Controller{
 
@@ -12,7 +14,17 @@ class HomeController extends Controller{
         $numMensal = Mensalidade::all()->count();
         $numAluno = Aluno::all()->count();
         $numDisc = Disciplina::all()->count();
-        return view('home',['numMensal'=>$numMensal, 'numAlunos' => $numAluno,'numDisc'=>$numDisc]);
+        $numCuro = Curso::all()->count();
+
+//        $meses = Mes::all();
+//        $ms = response()->json(array($meses));
+
+        return view('template.home',['numMensal'=>$numMensal, 'numAlunos' => $numAluno,'numDisc'=>$numDisc,'numCursos'=>$numCuro]);
+    }
+
+    public function getlist(){
+        $meses = Mes::all();
+        return response()->json(array('meses'=>$meses));
     }
 
     public function lock(){

@@ -1,6 +1,6 @@
 @extends('template.app')
 @section('menu')
-    <li class="" href="">
+    <li>
         <a href="{{url('/')}}">
             <i class="fa fa-home"></i>
             <span >Inicio</span>

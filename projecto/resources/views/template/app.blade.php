@@ -30,7 +30,7 @@
 
     </head>
 <!-- sidebar-collapse-->
-    <body class="hold-transition skin-black sidebar-mini" >
+    <body class="hold-transition skin-black sidebar-mini">
         <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->
