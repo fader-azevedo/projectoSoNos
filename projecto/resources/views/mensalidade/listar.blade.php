@@ -118,9 +118,9 @@
                                 <tbody id="tabela1Corpo">
                                     @foreach($mesesPagos  as $ms)
                                         <tr>
-                                            <td class="">{{$ms}}</td>
-                                            <td><a data-mes="{{$ms}}" class="btn btn-info btn-nao-devedor"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ms)->count()}}</a></td>
-                                            <td><a data-mes="{{$ms}}" class="btn btn-danger btn-devedor"><i class="zmdi zmdi-close"></i>&nbsp;{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ms)->count()}}</a></td>
+                                            <td class="">{{$ms->mes}}</td>
+                                            <td><a data-mes="{{$ms->mes}}" class="btn btn-info btn-nao-devedor"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ms->mes)->count()}}</a></td>
+                                            <td><a data-mes="{{$ms->mes}}" class="btn btn-danger btn-devedor"><i class="zmdi zmdi-close"></i>&nbsp;{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ms->mes)->count()}}</a></td>
                                             <td><a class="btn btn-primary"><i class="zmdi zmdi-library"></i>&nbsp;Mais detalhes </a></td>
                                         </tr>
                                     @endforeach
@@ -128,8 +128,8 @@
                                     @foreach($mesesAPagar as $ot)
                                         <tr>
                                             <td>{{$ot}}</td>
-                                            <td><a disabled="disabled" data-mes="{{$ot}}" class="btn btn-default"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ot)->count()}}</a></td>
-                                            <td><a disabled="disabled" data-mes="{{$ot}}" class="btn btn-default"><i class="zmdi zmdi-close"></i>&nbsp;0&nbsp;</a></td>
+                                            <td><a disabled="disabled" class="btn btn-default"><i class="fa fa-check"></i>&nbsp;0</a></td>
+                                            <td><a disabled="disabled" class="btn btn-default"><i class="zmdi zmdi-close"></i>&nbsp;0&nbsp;</a></td>
                                             <td><a disabled="disabled" class="btn btn-default"><i class="zmdi zmdi-library"></i>&nbsp;&nbsp;Sem registo&nbsp;&nbsp;</a></td>
                                         </tr>
                                     @endforeach
@@ -137,20 +137,6 @@
                             </table>
                         </section>
                         <section class=" col-sm-5 col-md-5 col-lg-5 ">
-
-                            <div class="box box-danger" id="alertExport" style="background-color: #ff8e87; color: white">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Erro</h3>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="box-body">
-
-                                </div>
-                            </div>
-
                             {{--tabela Nao Devedores--}}
                             <div class="box box-info" id="boxNaoDevedor" style="position: relative">
                                 <div class="box-header with-border">

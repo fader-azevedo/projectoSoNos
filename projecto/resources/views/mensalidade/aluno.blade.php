@@ -24,7 +24,7 @@
                 <div class="col-sm-4 border-right">
                     <div class="description-block">
                         <div class="sm-st tooltipped" data-tooltip="Valor Pago">
-                            <label class="label label-success">Valor pago</label>
+                            <label class="label label-success">Pago</label>
                             <p class="centered">
                                 <span class="sm-st-icon st-green"><i class="fa fa-money"></i></span>
                             </p>

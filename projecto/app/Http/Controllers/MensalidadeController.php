@@ -18,59 +18,35 @@ class MensalidadeController extends Controller{
 
     private $mensalidade;
     private $aluno;
-//    private $mesComeco;
+    private $valorTotal;
+    private $valorMensal;
+    private $anos;
+    private $anoDefido;
+    private $numAlunos;
     public function __construct(){
         $this->mensalidade = new Mensalidade();
         $this->aluno = new Aluno();
-    }
+        $this->numAlunos = Aluno::all()->count();
 
+
+        $anoActual = date('Y');
+        $this->anos = Def_Mensalidade::query()->pluck('ano');
+        $def = Def_Mensalidade::query()->where('ano',$anoActual)->get();
+        foreach ($def as $d){
+            $this->valorTotal = ($d->intervalo+1)*$d->valormensal;
+            $this->valorMensal = $d->valormensal;
+            $this->anoDefido = $d->ano;
+        }
+    }
 
     public function index(){
-//        $mensalidade = Mensalidade::all();
         $alunos = Aluno::all();
-// :query()->distinct()->pluck('mes');
-//        $anos = Mensalidade::query()->distinct()->pluck('ano');
-//        $meses = Mensalidade::query()->distinct()->pluck('mes');
-//        return view('mensalidade.listar',['mensalidade'=>$mensalidade, 'alunos' => $aluno,'anos'=>$anos,'meses'=>$meses,'numAluno'=>$aluno->count()]);
-//
-        /*Mes que pelo menos um aluno pagou mensalidade*/
-        $def = Def_Mensalidade::query()->where('ano',2017)->get();
-        $valorTotal=0; $valorMensal=0;
-        foreach ($def as $d){
-            $valorTotal = ($d->intervalo+1)*$d->valormensal;
-            $valorMensal = $d->valormensal;
-//            $this->mesComeco = $d->mescomeco;
-        }
-
-        $mesesPagos = Mensalidade::query()->distinct()->pluck('mes');
-        $mensalidade = Mensalidade::all();
-        $anos  = Def_Mensalidade::query()->pluck('ano');
-        return view('mensalidade.listar',['valorMensal'=>$valorMensal,'valorTotal'=>$valorTotal,'alu'=>$alunos,'anos'=>$anos,'mesesPagos'=>$mesesPagos,'mensalidade'=>$mensalidade,'mesesAPagar'=>$this->getMesAPagar($anos->first())]);
+        $mesesPagos = $this->getMesesPagos($this->anoDefido);
+        $mesesAPagar = $this->getMesAPagar($this->anoDefido);
+        $anosPay = $this->anos;
+        return view('mensalidade.listar',['valorMensal'=>$this->valorMensal,'valorTotal'=>$this->valorTotal,
+            'alu'=>$alunos,'numAlunos'=>$this->numAlunos,'anos'=>$anosPay,'mesesPagos'=>$mesesPagos,'mesesAPagar'=>$mesesAPagar]);
     }
-
-    public function listarTodasMensalidades(){
-//        $mensalidade = Mensalidade::all();
-//        $aluno = Aluno::all();
-//        $anos = Mensalidade::query()->distinct()->pluck('ano');
-//        $meses = Mensalidade::query()->distinct()->pluck('mes');
-//        return view('mensalidade.listar',['mensalidade'=>$mensalidade, 'alunos' => $aluno,'anos'=>$anos,'meses'=>$meses,'numAluno'=>$aluno->count()]);
-//
-//        $rowMensal = Mensalidade::all()->count();
-        //        $mensalidade = PagamntoMensalidade::query()->join('pagamentos','pagamnto_mensalidades.idPagamento','=','pagamentos.id')
-//         ->join('mensalidades','pagamnto_mensalidades.idMensalidade','=','mensalidades.id')
-//         ->join('alunos','mensalidades.idAluno','=','alunos.id')
-//         ->select('pagamnto_mensalidades.*','mensalidades.*','alunos.nome')->get();
-
-
-//        $mensalidade = Mensalidade::query()->distinct()->pluck('mes');
-//        return response()->json(array('mensalidade' => $mensalidade));
-    }
-
-
-//    public function devedoresEnao(){
-//        $naoDevedores = Mensalidade::query()->where('mes',$_POST['mes'])->count();
-//        return response()->json(array('naoDevedores'=>$naoDevedores));
-//    }
 
 
     public function listarPorAluno(){
@@ -90,10 +66,9 @@ class MensalidadeController extends Controller{
     }
 
 
-
     public function registarMensalidade(){
         $aluno = Aluno::all();
-        return view('mensalidade.registar',['alu'=>$aluno]);
+        return view('mensalidade.registar',['alu'=>$aluno,'valorMensal'=>$this->valorMensal,'valorTotal'=>$this->valorTotal]);
     }
 
     public function getDevedoresMes(){
@@ -123,14 +98,18 @@ class MensalidadeController extends Controller{
             $mesIncial = $df->mescomeco;
             $mesFim = $df->mesfim;
 
-            for ($b =$mesIncial+$mesesKexis;$b<=$mesFim;$b++){
-                $getMeses = Mes::query()->where('numero',$b)->get();
+            for ($numMes = $mesIncial+$mesesKexis; $numMes <= $mesFim; $numMes++){
+                $getMeses = Mes::query()->where('numero',$numMes)->get();
                 foreach ($getMeses as $r){
                     $mesesApagar = $mesesApagar.' '.$r->nome;
                 }
             }
         }
-        $mesesAP = explode(' ',trim(rtrim($mesesApagar)));
-        return $mesesAP;
+        return explode(' ',trim(rtrim($mesesApagar)));
+    }
+
+    public function getMesesPagos($ano){
+        $mesesPagos = Mensalidade::query()->distinct()->select('mes')->where('ano',$ano)->get();
+        return $mesesPagos;
     }
 }

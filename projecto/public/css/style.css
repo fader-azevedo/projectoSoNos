@@ -21,6 +21,11 @@ Premium: http://www.gridgum.com
     color: #00a65a;
 }
 
+p span{
+    margin-left: 2px;
+    font-size: 12px;
+}
+
 li a{
     color: #00c5de;
     font-size: 16px;
@@ -267,6 +272,7 @@ option{
 
 .sm-st label{
     font-size: 14px;
+    margin: auto;
 }
 .stat-icon {
     text-align: center;

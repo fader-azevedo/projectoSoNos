@@ -18,15 +18,15 @@
         <link rel="stylesheet" type="text/css" href="{!! asset('css/style.css')!!}" />
         {{--<link rel="stylesheet" type="text/css" href="{!! asset('css/style-responsive.css')!!}"/>--}}
 
-        <link rel="stylesheet" type="text/css" href="{!! asset('css/materialize.min.css')!!}"/>
-        <link rel="stylesheet" type="text/css" href="{!! asset('css/normalize.css')!!}"/>
-        <link rel="stylesheet" type="text/css" href="{!! asset('css/material-design-iconic-font.min.css')!!}"/>
-
 
         <link rel="stylesheet" type="text/css" href="{!! asset('css/_all-skins.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('charts/morris.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('select2/css/select2.min.css')!!}"/>
         <link rel="stylesheet" type="text/css" href="{!! asset('css/AdminLTE.css')!!}"/>
+
+        <link rel="stylesheet" type="text/css" href="{!! asset('css/materialize.min.css')!!}"/>
+        <link rel="stylesheet" type="text/css" href="{!! asset('css/normalize.css')!!}"/>
+        <link rel="stylesheet" type="text/css" href="{!! asset('css/material-design-iconic-font.min.css')!!}"/>
 
     </head>
 <!-- sidebar-collapse-->
@@ -174,6 +174,7 @@
         <script type="text/javascript" src="{!! asset('bootstrap/dist/js/bootstrap.min.js')!!}"></script>
         <script type="text/javascript" src="{!! asset('js/adminlte.min.js')!!}"></script>
         <script type="text/javascript" src="{!! asset('charts/Chart.js')!!}"></script>
+        <script type="text/javascript" src="{!! asset('js/materialize.min.js')!!}"></script>
         <script type="text/javascript" src="{!! asset('charts/raphael.min.js')!!}"></script>
         <script type="text/javascript" src="{!! asset('charts/morris.min.js')!!}"></script>
         <script type="text/javascript" src="{!! asset('select2/js/select2.full.min.js')!!}"></script>
