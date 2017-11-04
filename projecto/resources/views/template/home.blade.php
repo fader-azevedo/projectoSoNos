@@ -16,8 +16,8 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="{{'/mensalidade/registar'}}"><i class="fa fa-pencil"></i> Registar</a></li>
-            <li><a href="{{'/mensalidade'}}"><i class="fa fa-list"></i> Listar</a></li>
+            <li><a href="{{'/mensalidade/registar'}}"><i class="fa fa-pencil"></i> Registar Mensalidade</a></li>
+            <li><a href="{{'/mensalidade'}}"><i class="fa fa-list"></i> Listar Mensalidades</a></li>
         </ul>
     </li>
     <li class="treeview">
@@ -147,8 +147,8 @@
                     <h3 class="box-title">Mensalidades</h3>
                 </div>
                 <div class="box-body">
-                    <div class="chart">
-                        <canvas id="barChart" style="height:290px"></canvas>
+                    <div class="chart" id="bar-chart"  style="height:290px">
+                        {{--<canvas id="barChart" style="height:290px"></canvas>--}}
                     </div>
                 </div>
             </div>
@@ -177,101 +177,125 @@
 @section('scripts')
     <script type="text/javascript">
         $(document).ready(function() {
-
-            var a ='';
-            $.ajax({
-                url: '/api/getlist',
-                type: 'POST',
-                success: function (data) {
-                    for (var i = 0; i < data.meses.length; i++) {
-//                        alert();
-                       a = a +"'"+ data.meses[i].nome+"'" +',';
-                       document.getElementById('inputMes').value =a;
-                    }
-                }
-            });
-
-            var meh = document.getElementById('inputMes').value;
-            var s = meh.split(',');
-            alert(meh);
-            var areaChartData = {
-//                labels: ['January', 'February', 'March', 'April', 'May', 'Junho', 'July', 'Agosto',],
-                labels: [meh],
-                datasets: [
-                    {
-                        label: 'Electronics',
-                        fillColor: 'rgba(210, 214, 222, 1)',
-                        strokeColor: 'rgba(210, 214, 222, 1)',
-                        pointColor: 'rgba(210, 214, 222, 1)',
-                        pointStrokeColor: '#c1c7d1',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [50, 29, 40, 21, 56, 55, 40, 11]
-                    },
-                    {
-                        label: 'Digital Goods',
-                        fillColor: 'rgba(60,141,188,0.9)',
-                        strokeColor: 'rgba(60,141,188,0.8)',
-                        pointColor: '#3b8bba',
-                        pointStrokeColor: 'rgba(60,141,188,1)',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(60,141,188,1)',
-                        data: [28, 48, 40, 19, 46, 27, 30, 40]
-                    }
-                ]
-            };
-
-
-            var barChartCanvas = $('#barChart').get(0).getContext('2d');
-            var barChart = new Chart(barChartCanvas);
-            var barChartData = areaChartData;
-            barChartData.datasets[1].fillColor = '#00a65a';
-            barChartData.datasets[1].strokeColor = '#00a65a';
-            barChartData.datasets[1].pointColor = '#00a65a';
-            var barChartOptions = {
-                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-                scaleBeginAtZero: true,
-                //Boolean - Whether grid lines are shown across the chart
-                scaleShowGridLines: true,
-                //String - Colour of the grid lines
-                scaleGridLineColor: 'rgba(0,0,0,.05)',
-                //Number - Width of the grid lines
-                scaleGridLineWidth: 1,
-                //Boolean - Whether to show horizontal lines (except X axis)
-                scaleShowHorizontalLines: true,
-                //Boolean - Whether to show vertical lines (except Y axis)
-                scaleShowVerticalLines: true,
-                //Boolean - If there is a stroke on each bar
-                barShowStroke: true,
-                //Number - Pixel width of the bar stroke
-                barStrokeWidth: 2,
-                //Number - Spacing between each of the X value sets
-                barValueSpacing: 5,
-                //Number - Spacing between data sets within X values
-                barDatasetSpacing: 1,
-                //String - A legend template
-                {{--legendTemplate          : '<ul class='<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',--}}
-                //Boolean - whether to make the chart responsive
-                responsive: true,
-                maintainAspectRatio: true
-            };
-
-            barChartOptions.datasetFill = false;
-            barChart.Bar(barChartData, barChartOptions)
-
-
-            /*grafico de alunos*/
-
-            var donut = new Morris.Donut({
-                element: 'sales-chart',
+            /*Mensalidades*/
+            var bar = new Morris.Bar({
+                element: 'bar-chart',
                 resize: true,
-                colors: ["#3c8dbc", "#f56954", "#00a65a"],
                 data: [
-                    {label: "Alunos Não Devedores", value: 40},
-                    {label: "Alunos Devedores", value: 60}
+                    {y: 'Janeiro', a: 100, b: 90},
+                    {y: 'Fevereiro', a: 75, b: 65},
+                    {y: 'Março', a: 50, b: 40},
+                    {y: '2009', a: 75, b: 65},
+                    {y: '2010', a: 50, b: 40},
+                    {y: '2011', a: 75, b: 65},
+                    {y: '2012', a: 100, b: 90}
                 ],
+                barColors: ['#00a65a', '#f56954'],
+                xkey: 'y',
+                ykeys: ['a', 'b'],
+                labels: ['Feito', 'Divida'],
                 hideHover: 'auto'
             });
-        });
+
+            /*Alunos*/
+            var donut = new Morris.Donut({
+            element: 'sales-chart',
+            resize: true,
+            colors: ["#3c8dbc", "#f56954", "#00a65a"],
+            data: [
+            {label: "Alunos Não Devedores", value: 40},
+            {label: "Alunos Devedores", value: 60}
+            ],
+            hideHover: 'auto'
+            });
+
+
+
+
+//            var chart = Morris.Bar({
+//
+//                ele
+//            });
+
+//            var areaChartData ={};
+            {{--$.ajax({--}}
+                {{--url: '/api/getlist',--}}
+                {{--type: 'POST',--}}
+                {{--success: function (data) {--}}
+                    {{--for (var i = 0; i < data.length; i++) {--}}
+                    {{--}--}}
+                    {{--var areaChartData = {--}}
+                         {{--labels: ['January', 'February', 'March', 'April', 'May', 'Junho', 'July', 'Agosto'],--}}
+{{--//                        labels: [data.meses[1], data.meses[2], data.meses[3]],--}}
+{{--//                        labels: [data.meses],--}}
+                        {{--datasets: [--}}
+                            {{--{--}}
+                                {{--label: 'Electronics',--}}
+                                {{--fillColor: 'rgba(210, 214, 222, 1)',--}}
+                                {{--strokeColor: 'rgba(210, 214, 222, 1)',--}}
+                                {{--pointColor: 'rgba(210, 214, 222, 1)',--}}
+                                {{--pointStrokeColor: '#c1c7d1',--}}
+                                {{--pointHighlightFill: '#fff',--}}
+                                {{--pointHighlightStroke: 'rgba(220,220,220,1)',--}}
+                                {{--data: [50, 29, 40, 21, 56, 55, 40, 11]--}}
+                            {{--},--}}
+                            {{--{--}}
+                                {{--label: 'Digital Goods',--}}
+                                {{--fillColor: 'rgba(60,141,188,0.9)',--}}
+                                {{--strokeColor: 'rgba(60,141,188,0.8)',--}}
+                                {{--pointColor: '#3b8bba',--}}
+                                {{--pointStrokeColor: 'rgba(60,141,188,1)',--}}
+                                {{--pointHighlightFill: '#fff',--}}
+                                {{--pointHighlightStroke: 'rgba(60,141,188,1)',--}}
+                                {{--data: [28, 48, 40, 19, 46, 27, 30, 40]--}}
+                            {{--}--}}
+                        {{--]--}}
+                    {{--};--}}
+
+{{--//                    areaChartData.setData(data.meses);--}}
+
+                    {{--var barChartCanvas = $('#barChart').get(0).getContext('2d');--}}
+                    {{--var barChart = new Chart(barChartCanvas);--}}
+                    {{--var barChartData = areaChartData;--}}
+                    {{--barChartData.datasets[1].fillColor = '#00a65a';--}}
+                    {{--barChartData.datasets[1].strokeColor = '#00a65a';--}}
+                    {{--barChartData.datasets[1].pointColor = '#00a65a';--}}
+                    {{--var barChartOptions = {--}}
+                        {{--//Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value--}}
+                        {{--scaleBeginAtZero: true,--}}
+                        {{--//Boolean - Whether grid lines are shown across the chart--}}
+                        {{--scaleShowGridLines: true,--}}
+                        {{--//String - Colour of the grid lines--}}
+                        {{--scaleGridLineColor: 'rgba(0,0,0,.05)',--}}
+                        {{--//Number - Width of the grid lines--}}
+                        {{--scaleGridLineWidth: 1,--}}
+                        {{--//Boolean - Whether to show horizontal lines (except X axis)--}}
+                        {{--scaleShowHorizontalLines: true,--}}
+                        {{--//Boolean - Whether to show vertical lines (except Y axis)--}}
+                        {{--scaleShowVerticalLines: true,--}}
+                        {{--//Boolean - If there is a stroke on each bar--}}
+                        {{--barShowStroke: true,--}}
+                        {{--//Number - Pixel width of the bar stroke--}}
+                        {{--barStrokeWidth: 2,--}}
+                        {{--//Number - Spacing between each of the X value sets--}}
+                        {{--barValueSpacing: 5,--}}
+                        {{--//Number - Spacing between data sets within X values--}}
+                        {{--barDatasetSpacing: 1,--}}
+                        {{--//String - A legend template--}}
+                        {{--legendTemplate          : '<ul class='<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',--}}
+                        {{--//Boolean - whether to make the chart responsive--}}
+                        {{--responsive: true,--}}
+                        {{--maintainAspectRatio: true--}}
+                    {{--};--}}
+
+                    {{--barChartOptions.datasetFill = false;--}}
+                    {{--barChart.Bar(barChartData, barChartOptions)--}}
+
+
+                    {{--/*grafico de alunos*/--}}
+
+                {{--}--}}
+            {{--});--}}
+        })
     </script>
 @endsection

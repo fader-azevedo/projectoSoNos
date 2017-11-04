@@ -16,8 +16,8 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li class="active"><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
-            <li><a href="{{'/mensalidade'}}"><i class="fa fa-list"></i> Listar</a></li>
+            <li class="active"><a href=""><i class="fa fa-pencil"></i> Registar Mensalidade</a></li>
+            <li><a href="{{'/mensalidade'}}"><i class="fa fa-list"></i> Listar Mensalidades</a></li>
         </ul>
     </li>
     <li class="treeview">
@@ -124,60 +124,72 @@
             </div>
         </div>
         <div class="col-sm-8 col-md-8 col-lg-8">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
+            {{--<div class="row">--}}
+                <div style=" width: 100%; display: flex">
+                    <div class="form-group" style="width: 70%">
                         {{--<h6>Meses a pagar</h6>--}}
                         <select id="selectMes" class=" select2" multiple="multiple" data-placeholder="Selecione os meses a pagar" style="width: 100%;">
                         </select>
                     </div>
+                    <div style="width: 30%; margin-left: 5px; display: flex">
+                        <a class="btn btn-app">
+                            <span class="badge bg-blue">{{$valorMensal}}</span>
+                            <i class="fa fa-money"></i> Valor por Mês
+                        </a>
 
-                    <div style="display: flex">
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="sm-st">
-                                <p s class=" label-info centered">Por Mes</p>
-                                <p class="centered">
-                                    <span class="sm-st-icon st-blue"><i class="fa fa-money"></i></span>
-                                </p>
-                                <div class="sm-st-info centered">
-                                    <p>{{$valorMensal}}<span>Mt</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="sm-st">
-                                <p s class=" label-primary centered">Valor a pagar</p>
-                                <p class="centered">
-                                    <span class="sm-st-icon st-violet"><i class="fa fa-money"></i></span>
-                                </p>
-                                <div class="sm-st-info centered">
-                                    <p id="valorAPagar"><span>Mt</span></p>
-                                    <input id="valorP" type="hidden">
-                                </div>
-                            </div>
-                        </div>
+                        <a class="btn btn-app">
+                            <span class="badge bg-green" id="valorAPagar">0 Mt</span>
+                            <i class="fa li_stack"></i> Valor a pagar
+                            <input id="valorP" type="hidden">
+                        </a>
                     </div>
                 </div>
 
-                <div class="col-sm-6">
+                {{--<div class="col-sm-6">--}}
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Pafamento</h3>
+                            <i class="fa fa-money" style="color:#00b0ff;"></i>
+                            <h3 class="box-title">Pagamento</h3>
                             <div class="box-tools pull-right">
                                 {{--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>--}}
                             </div>
                         </div>
                         <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <fieldset>
+                                        <legend class="centered">Forma de pagamento</legend>
+                                        <input id="numerico" type="radio" checked name="tipoPagamento">
+                                        <label for="numerico" >Numerico</label>
+                                        {{--input responsavel em armazenar o valor de divida--}}
+                                        <input type="hidden" id="valorDivida">
+                                        <input id="bank" type="radio" name="tipoPagamento">
+                                        <label class="pull-right" for="bank" >Deposito Bancário</label>
+                                    </fieldset>
+                                </div>
 
-                            <div class="input-field">
-                                <input type="number" id="valorPay">
-                                <label>Valor entrgue</label>
-                            </div>
-
-                            <div class="input-field">
-                                <input type="number" value="0.0" id="valorTrocos">
-                                <label>Trocos</label>
+                                <div id="carouPay" class="carousel slide col-sm-6" data-ride="carousel" data-interval="false">
+                                    <div class="carousel-inner" style="max-height: 100px">
+                                        <div class="item active">
+                                            <div style="display:flex;">
+                                                <div class="input-field" style="margin-right: 10px">
+                                                    <input type="number" id="valorPay">
+                                                    <label for="valorPay">Valor entrgue</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <input type="number" value="0.0" id="valorTrocos">
+                                                    <label for="valorTrocos">Trocos</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="input-field">
+                                                <input id="numRecibo" type="text">
+                                                <label for="numRecibo">Numero de Recibo</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="box-footer">
@@ -185,8 +197,8 @@
                             <button class="btn btn-success pull-right">&nbsp;&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
                         </div>
                     </div>
-                </div>
-            </div>
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
         <fieldset style="width: 100%; background-color: #f5f5f5">
             <legend class="centered">
@@ -196,7 +208,7 @@
                <h6 class="centered">
                    <label class="label label-success">Pago</label>
                    <label class="label label-warning">Adiantado</label>
-                   <label class="label label-primary">Não pago</label>
+                   <label class="label label-danger">Não pago</label>
                </h6>
             </div>
             <div class="col-md-12 col-sm-12 col-lg-12" style="padding-top: 10px;  border-radius: 6px;  background-color:#f2f2f2;height: 60px; display: flex">
@@ -220,7 +232,6 @@
             var valorAPagar=0;
 
 //            alert(valorMensal);
-            var valorDivida=0;
             $('#inPutAluno').on('change',function () {
 //                var ano = document.getElementById('selectAno').value;
                 var op = $('option[value="'+$(this).val()+'"]');
@@ -241,56 +252,77 @@
 
                         /*Inicio de raking de pagamento*/
                         var mesAdiantado ='';
+                        var valorDivida=0;
                         for (var i=0; i < rs.mensal.length; i++){
                             if(rs.mensal[i].mesEstado ==='pago') {
                                 $('#DivMeses').append(' <div class="mes"><label class="label label-success">' + rs.mensal[i].mes + '</label></div>');
                                 mesess += rs.mensal[i].mes + ' ' + '<i style="color: #33de0c" class="fa fa-check"></i><br/>';
+                                document.getElementById('valorDivida').value=0;
                             }else if (rs.mensal[i].mesEstado === 'adiantado'){
                                 $('#DivMeses').append(' <div class="mes tooltippy"> <span style="color:#f39c12;" class="tooltippytext">Divida:'+' '+rs.mensal[i].divida+' '+'Mt</span> <label class="label label-warning">' + rs.mensal[i].mes + '</label></div>');
                                 mesAdiantado = rs.mensal[i].mes;
                                 mesess += rs.mensal[i].mes + ' ' + '<i style="color: #f39c12" class="fa fa-check"></i><br/>';
                                 valorDivida = rs.mensal[i].divida;
+                                document.getElementById('valorDivida').value=valorDivida;
                             }
                         }
                         $('#DivMeses').append('<div id="actual" class="tooltippy">' + '<p style="color:#3a5fff" class="centered"><i  class="fa fa-check fa-2x"></i></p><span class="tooltippytext">'+mesess+'</span> </div>');
-                        $('#DivMeses').append('<div class="mes"><label class="label label-primary">'+rs.mesesNao[0].nome+'</label></div>');
+                        $('#DivMeses').append('<div class="mes"><label class="label label-danger">'+rs.mesesNao[0].nome+'</label></div>');
                         /*Fimo do ranking de pagamento de mensalidades*/
 
                         /*Adicona mes adiantado no input dos mes a pagar*/
                         if(mesAdiantado !== '') {
-                            $('#selectMes').append('<option  selected="selected" id=' + mesAdiantado + ' class="ms" value=' + mesAdiantado + '>' + mesAdiantado + '</option>');
+                            $('#selectMes').append('<option  selected="selected"  class="ms" value=' + mesAdiantado + '>' + mesAdiantado + '</option>');
                             document.getElementById('valorAPagar').innerHTML = valorMensal+valorDivida +' '+'Mt';
                         }else{
                             document.getElementById('valorAPagar').innerHTML = valorMensal +' '+'Mt' ;
                         }
                         document.getElementById('valorP').value = valorMensal+valorDivida;
-                        /*dciona os restantes meses a pagar*/
-                        $('#selectMes').append('<option  selected="selected" id=' + rs.mesesNao[0].nome + ' class="ms" value=' + rs.mesesNao[0].nome + '>' + rs.mesesNao[0].nome + '</option>');
+                        /*adiciona os restantes meses a pagar*/
+                        $('#selectMes').append('<option  selected="selected"  class="ms" value=' + rs.mesesNao[0].nome + '>' + rs.mesesNao[0].nome + '</option>');
                         for(var m=1; m < rs.mesesNao.length; m++){
-                            $('#DivMeses').append(' <div class="mes mes-nao-pago"><label class="label label-primary">'+rs.mesesNao[m].nome+'</label></div>');
-                            $('#selectMes').append('<option id='+rs.mesesNao[m].nome+' class="ms" value='+rs.mesesNao[m].nome+'>'+rs.mesesNao[m].nome+'</option>');
+                            $('#DivMeses').append(' <div class="mes"><label class="label label-danger">'+rs.mesesNao[m].nome+'</label></div>');
+                            $('#selectMes').append('<option  class="ms" value='+rs.mesesNao[m].nome+'>'+rs.mesesNao[m].nome+'</option>');
                         }
                     }
                 });
-//                valorAPagar =  valorMensal*numMes+valorDivida;
             });
 
             $('#selectMes').change(function () {
-                var numMes= $('#selectMes option:selected').length;
-                document.getElementById('valorAPagar').innerHTML = valorMensal*numMes+valorDivida +' '+'Mt' ;
-                document.getElementById('valorP').value = valorMensal*numMes+valorDivida;
+                var numMes = $('#selectMes option:selected').length;
+                var valrDivida = parseFloat(document.getElementById('valorDivida').value);
+                if(numMes === 0){
+                    document.getElementById('valorAPagar').innerHTML = 0+ ' ' + 'Mt';
+                    document.getElementById('valorP').value = 0;
+                }else if(numMes ===1 && valrDivida !== 0) {
+                    document.getElementById('valorAPagar').innerHTML = valrDivida   + ' ' + 'Mt';
+                    document.getElementById('valorP').value = valrDivida;
+                }else if(numMes ===1 && valrDivida === 0){
+                    document.getElementById('valorAPagar').innerHTML = valorMensal   + ' ' + 'Mt';
+                    document.getElementById('valorP').value = valorMensal;
+                } else if(numMes >0){
+                    document.getElementById('valorAPagar').innerHTML = (valorMensal * numMes+parseFloat(valrDivida))  + ' ' + 'Mt';
+                    document.getElementById('valorP').value = valorMensal * numMes + parseFloat(valrDivida);
+                }
             });
 
             $('#valorPay').on('input',function () {
                 var vl = $(this).val();
-                var valorP = document.getElementById('valorP').value;
+                var valorP = parseFloat(document.getElementById('valorP').value);
                 if(vl-valorP >= 0){
-                    document.getElementById('valorTrocos').value = vl-valorP;
+                    document.getElementById('valorTrocos').value = (vl-valorP).toFixed(2);
                 }else{
                     document.getElementById('valorTrocos').value ='';
                 }
             });
 
+            $('#bank').click(function () {
+                $('#carouPay').carousel(1);
+            });
+
+            $('#numerico').click(function () {
+                $('#carouPay').carousel(0);
+            })
         })
     </script>
 @endsection

@@ -55,7 +55,8 @@ class MensalidadeController extends Controller{
             ->join('mensalidades','pagamnto_mensalidades.idMensalidade','=','mensalidades.id')
             ->join('pagamentos','pagamnto_mensalidades.idPagamento','=','pagamentos.id')
             ->join('alunos','pagamnto_mensalidades.idAluno','=','alunos.id')
-            ->select('mensalidades.estado as mesEstado','alunos.*','mensalidades.*','pagamentos.*','pagamnto_mensalidades.*')->where('idAluno',$_POST['idAluno'])->where('anoPago',$_POST['ano'])->get();
+            ->select('mensalidades.estado as mesEstado','alunos.*','mensalidades.*','pagamentos.*','pagamnto_mensalidades.*')
+            ->where('idAluno',$_POST['idAluno'])->where('anoPago',$_POST['ano'])->get();
 
         /*Para registo de mensalidade*/
         $mesesPagos = '';

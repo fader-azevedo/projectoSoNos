@@ -23,7 +23,7 @@ class HomeController extends Controller{
     }
 
     public function getlist(){
-        $meses = Mes::all();
+        $meses = Mes::query()->where('id',2)->pluck('nome');
         return response()->json(array('meses'=>$meses));
     }
 
