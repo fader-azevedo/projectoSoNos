@@ -109,10 +109,14 @@
                     <div class="row">
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
+                                <h5 class="description-header">Cruso</h5>
+                                <span class="description-text" id="textCurso">SALES</span>
                             </div>
                         </div>
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
+                                <h5 class="description-header">Turma</h5>
+                                <span class="description-text">Turma</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -133,14 +137,14 @@
                     </div>
                     <div style="width: 30%; margin-left: 5px; display: flex">
                         <a class="btn btn-app">
-                            <span class="badge bg-blue">{{$valorMensal}}</span>
+                            <span class="badge bg-blue" id="valorMensalPay">0</span>
                             <i class="fa fa-money"></i> Valor por Mês
                         </a>
 
                         <a class="btn btn-app">
                             <span class="badge bg-green" id="valorAPagar">0 Mt</span>
                             <i class="fa li_stack"></i> Valor a pagar
-                            <input id="valorP" type="hidden">
+                            <input id="valorP"  type="hidden">
                         </a>
                     </div>
                 </div>
@@ -200,7 +204,9 @@
                 {{--</div>--}}
             {{--</div>--}}
         </div>
+
         <fieldset style="width: 100%; background-color: #f5f5f5">
+            <input type="text" id="valorMensal">
             <legend class="centered">
                 Raking de Pagamento
             </legend>
@@ -227,8 +233,8 @@
         $(document).ready(function() {
             $('.select2').select2();
 
-            var valorTotal = JSON.parse("{{json_encode($valorTotal)}}");
-            var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");
+            {{--var valorTotal = JSON.parse("{{json_encode($valorTotal)}}");--}}
+            {{--var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");--}}
             var valorAPagar=0;
 
 //            alert(valorMensal);
@@ -245,6 +251,11 @@
                     type: 'POST',
                     data: {'idAluno':idAluno,'ano':2017},
                     success: function (rs) {
+                        var valorMensal = rs.curso[0].valormensal;
+
+                        document.getElementById('textCurso').innerHTML = rs.curso[0].nome;
+                        document.getElementById('valorMensal').value =valorMensal;
+                        document.getElementById('valorMensalPay').innerHTML =valorMensal;
                         document.getElementById('idFotoAluno').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
                         $('.mes').remove();
                         $('#actual').remove();
@@ -289,6 +300,7 @@
             });
 
             $('#selectMes').change(function () {
+                var valorMensal= parseFloat(document.getElementById('valorMensal').value);
                 var numMes = $('#selectMes option:selected').length;
                 var valrDivida = parseFloat(document.getElementById('valorDivida').value);
                 if(numMes === 0){
@@ -300,10 +312,19 @@
                 }else if(numMes ===1 && valrDivida === 0){
                     document.getElementById('valorAPagar').innerHTML = valorMensal   + ' ' + 'Mt';
                     document.getElementById('valorP').value = valorMensal;
-                } else if(numMes >0){
-                    document.getElementById('valorAPagar').innerHTML = (valorMensal * numMes+parseFloat(valrDivida))  + ' ' + 'Mt';
-                    document.getElementById('valorP').value = valorMensal * numMes + parseFloat(valrDivida);
+                } else if(numMes >1  && valrDivida !== 0 ){
+                    document.getElementById('valorAPagar').innerHTML = (valorMensal* numMes +parseFloat(valrDivida))  + ' ' + 'Mt';
+                    document.getElementById('valorP').value = (valorMensal* (numMes-1) + parseFloat(valrDivida));
+                }else if(numMes >1  && valrDivida === 0 ){
+                    document.getElementById('valorAPagar').innerHTML = (valorMensal* numMes +parseFloat(valrDivida))  + ' ' + 'Mt';
+                    document.getElementById('valorP').value = (valorMensal*numMes + parseFloat(valrDivida));
                 }
+//                else if(numMes >0){
+//                    document.getElementById('valorAPagar').innerHTML = (valorMensal * numMes+parseFloat(valrDivida))  + ' ' + 'Mt';
+//                    document.getElementById('valorP').value = valorMensal * numMes + parseFloat(valrDivida);
+//                }
+                document.getElementById('valorPay').value = 0;
+                document.getElementById('valorTrocos').value = 0;
             });
 
             $('#valorPay').on('input',function () {

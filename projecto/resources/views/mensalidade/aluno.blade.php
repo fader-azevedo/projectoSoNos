@@ -100,13 +100,16 @@
                 return;
             }
             var valorTotal = JSON.parse("{{json_encode($valorTotal)}}");
-            var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");
+            {{--var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");--}}
 
             $.ajax({
                 url: '/api/listarPorAluno',
                 type: 'POST',
                 data: {'idAluno':idAluno,'ano':ano},
                 success: function (rs) {
+                    var curso = rs.curso[0].nome;
+                    var valorMensal = rs.curso[0].valormensal;
+                    alert(valorMensal);
                     document.getElementById('idFotoAluno').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
                     $('.tr').remove();
                     $('.ss').remove();

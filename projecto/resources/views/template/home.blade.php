@@ -188,7 +188,7 @@
                     new Morris.Donut({
                         element: 'payVSdivida',
                         resize: true,
-                        colors: ["#3c8dbc", "#f56954", "#00a65a"],
+                        colors: ["#00a65a", "#f56954", "#00a65a"],
                         data: [
                             {label: "Pagemtos", value: arr[1]},
                             {label: "Dívidas", value: arr[2]}

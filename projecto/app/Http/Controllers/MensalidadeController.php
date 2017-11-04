@@ -44,8 +44,7 @@ class MensalidadeController extends Controller{
         $mesesPagos = $this->getMesesPagos($this->anoDefido);
         $mesesAPagar = $this->getMesAPagar($this->anoDefido);
         $anosPay = $this->anos;
-        return view('mensalidade.listar',['valorMensal'=>$this->valorMensal,'valorTotal'=>$this->valorTotal,
-            'alu'=>$alunos,'numAlunos'=>$this->numAlunos,'anos'=>$anosPay,'mesesPagos'=>$mesesPagos,'mesesAPagar'=>$mesesAPagar]);
+        return view('mensalidade.listar',['valorMensal'=>$this->valorMensal,'valorTotal'=>$this->valorTotal, 'alu'=>$alunos,'numAlunos'=>$this->numAlunos,'anos'=>$anosPay,'mesesPagos'=>$mesesPagos,'mesesAPagar'=>$mesesAPagar]);
     }
 
     public function listarPorAluno(){
@@ -57,12 +56,16 @@ class MensalidadeController extends Controller{
             ->select('mensalidades.estado as mesEstado','alunos.*','mensalidades.*','pagamentos.*','pagamnto_mensalidades.*')
             ->where('idAluno',$_POST['idAluno'])->where('anoPago',$_POST['ano'])->get();
 
+        $this->valorMensal =40;
         /*Para registo de mensalidade*/
         $mesesPagos = '';
         $def = Def_Mensalidade::query()->join('mes','def__mensalidades.mescomeco','=','mes.numero')->select('mes.*')->where('ano',$_POST['ano'])->first();
         foreach ($mensalidade as $ms){$mesesPagos = $mesesPagos.' '.$ms->mes;}
         $mesNaoP = Mes::query()->select('nome')->whereNotIn('nome',explode(' ',trim(rtrim($mesesPagos))))->where('numero','>=',$def->numero)->get();
-        return  response()->json(array('mensal'=> $mensalidade,'foto'=>$alun->foto,'mesesNao'=>$mesNaoP));
+        $inscricao = Inscricao::query()->join('alunos','inscricaos.idAluno','=','alunos.id')
+            ->join('cursos','inscricaos.idCurso','=','cursos.id')->select('cursos.*')
+            ->where('idAluno',$_POST['idAluno'])->where('ano',$_POST['ano'])->get();
+        return  response()->json(array('mensal'=> $mensalidade,'foto'=>$alun->foto,'mesesNao'=>$mesNaoP,'curso'=>$inscricao));
     }
 
 
