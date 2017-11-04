@@ -25,8 +25,8 @@
             <i class="fa fa-users"></i>
             <span>Alunos</span>
             <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-pencil"></i> Registar</a></li>
@@ -39,8 +39,8 @@
             <i class="fa fa-bar-chart-o"></i>
             <span>Estatísticas</span>
             <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-pencil"></i>Alunos</a></li>
@@ -67,8 +67,8 @@
             <i class="fa fa-book"></i>
             <span>Extras</span>
             <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-lock"></i> Bloquear Tela</a></li>
@@ -113,7 +113,7 @@
     </div>
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-gray">
+        <div class="small-box bg-blue-gradient">
             <div class="inner">
                 <h3>{{$numCursos}}</h3>
                 <p>Cursos</p>
@@ -144,7 +144,7 @@
             <div class="box box-success">
                 <div class="box-header with-border">
                     <i class="fa fa-bar-chart-o"></i>
-                    <h3 class="box-title">Mensalidades</h3>
+                    <h3 class="box-title">Pagamento de Mensalidades</h3>
                 </div>
                 <div class="box-body">
                     <div class="chart" id="bar-chart"  style="height:290px">
@@ -157,57 +157,76 @@
         <section class="col-lg-3 connectedSortable">
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <i class="fa fa-users"></i>
-                    <h3 class="box-title">Alunos</h3>
 
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
+                    <i style="color: #00a65a" class="fa fa-money"></i>
+                    <h3 style="color: #00a65a" class="box-title">Pagamento</h3>
+                    <i class="fa fa-times"></i>
+                    <i style="color: red" class="fa fa-money"></i>
+                    <h3 style="color: red" class="box-title">Dividas</h3>
+
                 </div>
                 <div class="box-body chart-responsive">
-                    <div class="chart" id="sales-chart" style="height: 300px;"></div>
+                    <div class="chart" id="payVSdivida" style="height: 300px;"></div>
                 </div>
             </div>
         </section>
     </div>
-    <input type="text" id="inputMes">
 @endsection
 
 @section('scripts')
     <script type="text/javascript">
         $(document).ready(function() {
             /*Mensalidades*/
-            var bar = new Morris.Bar({
+            $.ajax({
+                url: '/api/graficoMensalidade',
+                type: 'POST',
+                success: function (data) {
+
+                    var arr = data.split('$&');
+                    bar.setData(JSON.parse(arr[0]));
+
+                    new Morris.Donut({
+                        element: 'payVSdivida',
+                        resize: true,
+                        colors: ["#3c8dbc", "#f56954", "#00a65a"],
+                        data: [
+                            {label: "Pagemtos", value: arr[1]},
+                            {label: "Dívidas", value: arr[2]}
+                        ],
+                        hideHover: 'auto'
+                    });
+                }
+            });
+            var bar =  Morris.Bar({
                 element: 'bar-chart',
                 resize: true,
-                data: [
-                    {y: 'Janeiro', a: 100, b: 90},
-                    {y: 'Fevereiro', a: 75, b: 65},
-                    {y: 'Março', a: 50, b: 40},
-                    {y: '2009', a: 75, b: 65},
-                    {y: '2010', a: 50, b: 40},
-                    {y: '2011', a: 75, b: 65},
-                    {y: '2012', a: 100, b: 90}
-                ],
                 barColors: ['#00a65a', '#f56954'],
-                xkey: 'y',
-                ykeys: ['a', 'b'],
-                labels: ['Feito', 'Divida'],
+                xkey: 'mes',
+                ykeys: ['naoDevs','devs'],
+                labels: ['Concluido','Não concluido'],
                 hideHover: 'auto'
             });
 
+//            var bar = new Morris.Bar({
+//                element: 'bar-chart',
+//                resize: true,
+//                data: [
+//                    {y: 'Janeiro', a: 100, b: 90},
+//                    {y: 'Fevereiro', a: 75, b: 65},
+//                    {y: 'Março', a: 50, b: 40},
+//                    {y: '2009', a: 75, b: 65},
+//                    {y: '2010', a: 50, b: 40},
+//                    {y: '2011', a: 75, b: 65},
+//                    {y: '2012', a: 100, b: 90}
+//                ],
+//                barColors: ['#00a65a', '#f56954'],
+//                xkey: 'y',
+//                ykeys: ['a', 'b'],
+//                labels: ['Feito', 'Divida'],
+//                hideHover: 'auto'
+//            });
+
             /*Alunos*/
-            var donut = new Morris.Donut({
-            element: 'sales-chart',
-            resize: true,
-            colors: ["#3c8dbc", "#f56954", "#00a65a"],
-            data: [
-            {label: "Alunos Não Devedores", value: 40},
-            {label: "Alunos Devedores", value: 60}
-            ],
-            hideHover: 'auto'
-            });
 
 
 

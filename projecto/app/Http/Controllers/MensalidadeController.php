@@ -48,7 +48,6 @@ class MensalidadeController extends Controller{
             'alu'=>$alunos,'numAlunos'=>$this->numAlunos,'anos'=>$anosPay,'mesesPagos'=>$mesesPagos,'mesesAPagar'=>$mesesAPagar]);
     }
 
-
     public function listarPorAluno(){
         $alun = Aluno::query()->where('id',$_POST['idAluno'])->first();
         $mensalidade = PagamntoMensalidade::query()
