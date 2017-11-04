@@ -82,6 +82,40 @@
                     Laravel
                 </div>
 
+
+                <table border="2" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Turma</th>
+                        <th>Curso</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td style="height: 200px">Devedores</td>
+                            <td>
+                                turma <br/>
+                                turma2<br/>
+                                turma3<br/>
+                                turma <br/>
+                                turma2<br/>
+                                turma3<br/>turma <br/>
+                                turma2<br/>
+                                turma3<br/>
+                            </td>
+                            <td>curso 2</td>
+                        </tr>
+
+                        <tr>
+                            <td style="height: 200px">Nao Devedores</td>
+                            <td>turma</td>
+                            <td>curso 4</td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>

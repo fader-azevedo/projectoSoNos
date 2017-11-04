@@ -100,27 +100,22 @@
 
             <div class="box box-widget widget-user">
                 <div class="widget-user-header bg-aqua-active">
-                    <p class="centered">Nome</p>
                 </div>
                 <div class="widget-user-image">
                     <img id="idFotoAluno" class="img-circle" src="{!! asset('img/logo.jpg') !!}" alt="">
                 </div>
                 <div class="box-footer">
                     <div class="row">
-                        <div class="col-sm-4 border-right">
+                        <div class="col-sm-6 border-right">
                             <div class="description-block">
                                 <h5 class="description-header">Cruso</h5>
-                                <span class="description-text" id="textCurso">SALES</span>
+                                <label class="description-text" id="textCurso">curso</label>
                             </div>
                         </div>
-                        <div class="col-sm-4 border-right">
+                        <div class="col-sm-6">
                             <div class="description-block">
-                                <h5 class="description-header">Turma</h5>
-                                <span class="description-text">Turma</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="description-block">
+                                <h5 class="description-header">Valor por Mês</h5>
+                                <label class="description-text" id="txtValorMensal">valor</label>
                             </div>
                         </div>
                     </div>
@@ -128,103 +123,93 @@
             </div>
         </div>
         <div class="col-sm-8 col-md-8 col-lg-8">
-            {{--<div class="row">--}}
-                <div style=" width: 100%; display: flex">
-                    <div class="form-group" style="width: 70%">
-                        {{--<h6>Meses a pagar</h6>--}}
-                        <select id="selectMes" class=" select2" multiple="multiple" data-placeholder="Selecione os meses a pagar" style="width: 100%;">
-                        </select>
-                    </div>
-                    <div style="width: 30%; margin-left: 5px; display: flex">
-                        <a class="btn btn-app">
-                            <span class="badge bg-blue" id="valorMensalPay">0</span>
-                            <i class="fa fa-money"></i> Valor por Mês
-                        </a>
-
-                        <a class="btn btn-app">
-                            <span class="badge bg-green" id="valorAPagar">0 Mt</span>
-                            <i class="fa li_stack"></i> Valor a pagar
-                            <input id="valorP"  type="hidden">
-                        </a>
-                    </div>
+            <div style=" width: 100%; display: flex">
+                <div class="form-group" style="width: 85%">
+                    <select id="selectMes" class=" select2" multiple="multiple" data-placeholder="Selecione os meses a pagar" style="width: 100%;">
+                    </select>
                 </div>
+                <div style="width: 15%; margin-left: 5px;">
+                    <a class="btn btn-app">
+                        <span style="font-size: 14px" class="badge bg-green" id="valorAPagar">0 Mt</span>
+                        <i class="fa li_stack"></i> Valor a pagar
+                    </a>
+                </div>
+            </div>
 
-                {{--<div class="col-sm-6">--}}
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <i class="fa fa-money" style="color:#00b0ff;"></i>
-                            <h3 class="box-title">Pagamento</h3>
-                            <div class="box-tools pull-right">
-                                {{--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>--}}
-                            </div>
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <i class="fa fa-money" style="color:#00b0ff;"></i>
+                    <h3 class="box-title">Pagamento</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <fieldset>
+                                <legend class="centered">Forma de pagamento</legend>
+                                <input id="numerico" type="radio" checked name="tipoPagamento">
+                                <label for="numerico" >Numerico</label>
+
+                                {{--input responsavel em armazenar o valor de divida--}}
+                                <input type="hidden" id="valorDivida">
+                                {{--/*input responsavel por armazenar o valor a pagar de cada mensalidade*/--}}
+                                <input type="hidden" id="valorMensal">
+                                {{--input de vvalor a pagar no momento de pagamento--}}
+                                <input type="hidden" id="valorP"  >
+
+                                <input id="bank" type="radio" name="tipoPagamento">
+                                <label class="pull-right" for="bank" >Deposito Bancário</label>
+                            </fieldset>
                         </div>
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <fieldset>
-                                        <legend class="centered">Forma de pagamento</legend>
-                                        <input id="numerico" type="radio" checked name="tipoPagamento">
-                                        <label for="numerico" >Numerico</label>
-                                        {{--input responsavel em armazenar o valor de divida--}}
-                                        <input type="hidden" id="valorDivida">
-                                        <input id="bank" type="radio" name="tipoPagamento">
-                                        <label class="pull-right" for="bank" >Deposito Bancário</label>
-                                    </fieldset>
-                                </div>
 
-                                <div id="carouPay" class="carousel slide col-sm-6" data-ride="carousel" data-interval="false">
-                                    <div class="carousel-inner" style="max-height: 100px">
-                                        <div class="item active">
-                                            <div style="display:flex;">
-                                                <div class="input-field" style="margin-right: 10px">
-                                                    <input type="number" id="valorPay">
-                                                    <label for="valorPay">Valor entrgue</label>
-                                                </div>
-                                                <div class="input-field">
-                                                    <input type="number" value="0.0" id="valorTrocos">
-                                                    <label for="valorTrocos">Trocos</label>
-                                                </div>
-                                            </div>
+                        <div id="carouPay" class="carousel slide col-sm-6" data-ride="carousel" data-interval="false">
+                            <div class="carousel-inner" style="max-height: 100px">
+                                <div class="item active">
+                                    <div style="display:flex;">
+                                        <div class="input-field" style="margin-right: 10px">
+                                            <input type="number" id="valorPay">
+                                            <label for="valorPay">Valor entrgue</label>
                                         </div>
-                                        <div class="item">
-                                            <div class="input-field">
-                                                <input id="numRecibo" type="text">
-                                                <label for="numRecibo">Numero de Recibo</label>
-                                            </div>
+                                        <div class="input-field">
+                                            <input type="number" value="0.0" id="valorTrocos">
+                                            <label for="valorTrocos">Trocos</label>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="input-field">
+                                        <input id="numRecibo" type="text">
+                                        <label for="numRecibo">Numero de Recibo</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="box-footer">
-                            <button class="btn btn-danger">Cancelar</button>
-                            <button class="btn btn-success pull-right">&nbsp;&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
-                        </div>
                     </div>
-                {{--</div>--}}
-            {{--</div>--}}
-        </div>
-
-        <fieldset style="width: 100%; background-color: #f5f5f5">
-            <input type="text" id="valorMensal">
-            <legend class="centered">
-                Raking de Pagamento
-            </legend>
-            <div class="row" >
-               <h6 class="centered">
-                   <label class="label label-success">Pago</label>
-                   <label class="label label-warning">Adiantado</label>
-                   <label class="label label-danger">Não pago</label>
-               </h6>
-            </div>
-            <div class="col-md-12 col-sm-12 col-lg-12" style="padding-top: 10px;  border-radius: 6px;  background-color:#f2f2f2;height: 60px; display: flex">
-                <div class="inicio"><p style="color: #00b0ff" class="centered"><i class="fa fa-check fa-2x"></i></p></div>
-                <div id="DivMeses" style=" width: 100%; height: 100px;  display: flex">
                 </div>
-                <div class="fim tooltipped" data-tooltip=""><p style="color: #171eff" class="centered"><i class="fa fa-star fa-2x"></i></p></div>
+                <div class="box-footer">
+                    <div class="pull-right">
+                        <button class="btn btn-danger">Cancelar</button>
+                        <button class="btn btn-success">&nbsp;&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                    </div>
+                </div>
             </div>
-        </fieldset>
+        </div>
     </section>
+
+    <div style="width: 100%;">
+        <div class="row" >
+            <h6 class="centered">
+                <label class="label label-success">Pago</label>
+                <label class="label label-warning">Adiantado</label>
+                <label class="label label-danger">Não pago</label>
+            </h6>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-12" style="padding-top: 10px;  border-radius: 6px;  background-color:#f2f2f2;height: 60px; display: flex">
+            <div class="inicio"><p style="color: #00b0ff" class="centered"><i class="fa fa-check fa-2x"></i></p></div>
+            <div id="DivMeses" style=" width: 100%; height: 100px;  display: flex">
+            </div>
+            <div class="fim tooltipped" data-tooltip=""><p style="color: #171eff" class="centered"><i class="fa fa-star fa-2x"></i></p></div>
+        </div>
+    </div>
 @endsection
 
 
@@ -232,14 +217,9 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('.select2').select2();
-
-            {{--var valorTotal = JSON.parse("{{json_encode($valorTotal)}}");--}}
-            {{--var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");--}}
             var valorAPagar=0;
 
-//            alert(valorMensal);
             $('#inPutAluno').on('change',function () {
-//                var ano = document.getElementById('selectAno').value;
                 var op = $('option[value="'+$(this).val()+'"]');
                 var idAluno = op.length ? op.attr('id'):'';
                 if(idAluno === '' ||  $('#inPutAluno').val().length=== 0){
@@ -254,8 +234,8 @@
                         var valorMensal = rs.curso[0].valormensal;
 
                         document.getElementById('textCurso').innerHTML = rs.curso[0].nome;
+                        document.getElementById('txtValorMensal').innerHTML =valorMensal+' Mt';
                         document.getElementById('valorMensal').value =valorMensal;
-                        document.getElementById('valorMensalPay').innerHTML =valorMensal;
                         document.getElementById('idFotoAluno').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
                         $('.mes').remove();
                         $('#actual').remove();
@@ -313,16 +293,12 @@
                     document.getElementById('valorAPagar').innerHTML = valorMensal   + ' ' + 'Mt';
                     document.getElementById('valorP').value = valorMensal;
                 } else if(numMes >1  && valrDivida !== 0 ){
-                    document.getElementById('valorAPagar').innerHTML = (valorMensal* numMes +parseFloat(valrDivida))  + ' ' + 'Mt';
+                    document.getElementById('valorAPagar').innerHTML = (valorMensal* (numMes-1) +parseFloat(valrDivida))  + ' ' + 'Mt';
                     document.getElementById('valorP').value = (valorMensal* (numMes-1) + parseFloat(valrDivida));
                 }else if(numMes >1  && valrDivida === 0 ){
-                    document.getElementById('valorAPagar').innerHTML = (valorMensal* numMes +parseFloat(valrDivida))  + ' ' + 'Mt';
-                    document.getElementById('valorP').value = (valorMensal*numMes + parseFloat(valrDivida));
+                    document.getElementById('valorAPagar').innerHTML = (valorMensal* numMes)+ ' ' + 'Mt';
+                    document.getElementById('valorP').value = (valorMensal*numMes);
                 }
-//                else if(numMes >0){
-//                    document.getElementById('valorAPagar').innerHTML = (valorMensal * numMes+parseFloat(valrDivida))  + ' ' + 'Mt';
-//                    document.getElementById('valorP').value = valorMensal * numMes + parseFloat(valrDivida);
-//                }
                 document.getElementById('valorPay').value = 0;
                 document.getElementById('valorTrocos').value = 0;
             });

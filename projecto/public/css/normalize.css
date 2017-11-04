@@ -437,4 +437,7 @@ thead tr th{
   /*background-color: #f0408f;*/
   border-radius: 0;
 }
-
+thead tr .anoExport{
+  height: 10px;
+  font-size: 0px;
+}

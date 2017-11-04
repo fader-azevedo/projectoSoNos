@@ -23,6 +23,10 @@ class HomeController extends Controller{
         return view('template.home',['numMensal'=>$numMensal, 'numAlunos' => $numAluno,'numDisc'=>$numDisc,'numCursos'=>$numCuro]);
     }
 
+    public function wel(){
+        return view('welcome');
+    }
+
     public function graficoMensalidade(){
         $ano = date('Y');
         $numAluno = Aluno::all()->count();

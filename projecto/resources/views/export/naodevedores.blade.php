@@ -14,6 +14,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Turma</th>
+                <th>Curso</th>
             </tr>
             </thead>
 
@@ -21,10 +22,12 @@
                 @foreach($dados as $alu)
                     <tr>
                         <td>{{$alu->nomeAluno.' '.$alu->apelido}}</td>
-                        <td>{{$alu->nomeTurma}}</td>
+                        <td>{{$alu->turma}}</td>
+                        <td>{{$alu->curso}}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        <h4 style="text-align: center;"><?php echo date('d/m/Y').' - '?>Sistema de Controlo de Mensalidades</h4>
     </body>
 </html>

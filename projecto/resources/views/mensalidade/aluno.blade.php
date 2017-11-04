@@ -55,7 +55,7 @@
                                 <span class="sm-st-icon st-blue"><i class="fa fa-money"></i></span>
                             </p>
                             <div class="sm-st-info centered">
-                                <p>{{$valorTotal}}</p>
+                                <p id="txtValorTotal">0</p>
                             </div>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
             if(idAluno === '' ||  $('#inPutAluno').val().length=== 0){
                 return;
             }
-            var valorTotal = JSON.parse("{{json_encode($valorTotal)}}");
+            var intervalo = JSON.parse("{{json_encode($intervalo)}}");
             {{--var valorMensal = JSON.parse("{{json_encode($valorMensal)}}");--}}
 
             $.ajax({
@@ -109,7 +109,7 @@
                 success: function (rs) {
                     var curso = rs.curso[0].nome;
                     var valorMensal = rs.curso[0].valormensal;
-                    alert(valorMensal);
+                    var valorTotal = valorMensal*(intervalo+1);
                     document.getElementById('idFotoAluno').src = '{{asset('img/upload/')}}'.concat('/' + rs.foto);
                     $('.tr').remove();
                     $('.ss').remove();
@@ -124,6 +124,7 @@
                     }
                     var rk = document.getElementById('tabela2Corpo').rows.length;
                     var prc = ((valorMensal*rk) * 100)/valorTotal;
+                    document.getElementById('txtValorTotal').innerHTML = valorTotal;
                     document.getElementById('valorPago').innerHTML = valorMensal*rk;
                     document.getElementById('valorDivida').innerHTML = valorTotal-(valorMensal*rk);
                     document.getElementById('percPago').innerHTML = prc.toFixed(2)+'%';
@@ -138,7 +139,6 @@
             var dia = date.getDate();
             var mesIndex = date.getMonth();
             var ano = date.getFullYear();
-
             return dia+'-'+meses[mesIndex]+'-'+ano;
         }
     </script>

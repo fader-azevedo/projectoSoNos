@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 /*Home*/
 Route::post('graficoMensalidade','HomeController@graficoMensalidade')->name('graficoMensalidade');
+Route::post('getModal','MensalidadeController@getModal')->name('getModal');
 
 /*Mensalidades*/
 Route::post('listarTodasMensalidades','MensalidadeController@listarTodasMensalidades')->name('listarTodasMensalidades');

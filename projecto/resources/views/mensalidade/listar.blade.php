@@ -39,8 +39,8 @@
             <i class="fa fa-bar-chart-o"></i>
             <span>Estatísticas</span>
             <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-pencil"></i>Alunos</a></li>
@@ -67,8 +67,8 @@
             <i class="fa fa-book"></i>
             <span>Extras</span>
             <span class="pull-right-container">
-                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-lock"></i> Bloquear Tela</a></li>
@@ -107,6 +107,10 @@
                 <div  class="carousel-inner">
                     <div class="item active ">
                         <section class="col-sm-7 col-md-7 col-lg-7" style="padding-top: 14px">
+                            <button type="button"  class="btn btn-info" data-toggle="modal" data-target="#ModalDetalhes">
+                                Launch Info Modal
+                            </button>
+
                             <table class="table-striped" id="tabela1">
                                 <thead>
                                     <tr>
@@ -121,7 +125,7 @@
                                             <td class="">{{$ms->mes}}</td>
                                             <td><a data-mes="{{$ms->mes}}" class="btn btn-info btn-nao-devedor"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ms->mes)->count()}}</a></td>
                                             <td><a data-mes="{{$ms->mes}}" class="btn btn-danger btn-devedor"><i class="zmdi zmdi-close"></i>&nbsp;{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ms->mes)->count()}}</a></td>
-                                            <td><a class="btn btn-primary"><i class="zmdi zmdi-library"></i>&nbsp;Mais detalhes </a></td>
+                                            <td><a class="btn btn-primary btn-detalhes" data-code="1"><i class="zmdi zmdi-library"></i>&nbsp;Mais detalhes </a></td>
                                         </tr>
                                     @endforeach
 
@@ -162,13 +166,14 @@
                                     </div>
                                     <table class="striped" id="tabelaNaoDevedores" >
                                         <thead>
-                                        <tr>
-                                            <th id="MesAnoNaoDivida" class="anoExport"></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Nome do Aluno</th>
-                                            <th>Turma</th>
-                                        </tr>
+                                            <tr>
+                                                <th id="MesAnoNaoDivida" class="anoExport"></th>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 40%">Nome</th>
+                                                <th style="width: 30%">Turma</th>
+                                                <th style="width: 30%">Curso</th>
+                                            </tr>
                                         </thead>
                                         <tbody id="tabelaCorpoNaoDevedor">
                                         </tbody>
@@ -205,8 +210,10 @@
                                                 <th id="MesAnoDivida" class="anoExport"></th>
                                             </tr>
                                             <tr>
-                                                <th>Nome do Aluno</th>
-                                                <th>Turma</th>
+                                                <th style="width: 35%">Nome</th>
+                                                <th style="width: 20%">Turma</th>
+                                                <th style="width: 25%">Curso</th>
+                                                <th style="width: 20%">Valor</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tabelaCorpoDevedores">
@@ -223,6 +230,57 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="ModalDetalhes" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Mes</h4>
+                </div>
+                <div class="modal-body" id="ModalDetalhesCorpo">
+                    <p>One fine body&hellip;</p>
+                    <table border="2" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Turma</th>
+                            <th>Curso</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td style="height: 200px">Devedores</td>
+                            <td>
+                                turma <br/>
+                                turma2<br/>
+                                turma3<br/>
+                                turma <br/>
+                                turma2<br/>
+                                turma3<br/>turma <br/>
+                                turma2<br/>
+                                turma3<br/>
+                            </td>
+                            <td>curso 2</td>
+                        </tr>
+
+                        <tr>
+                            <td style="height: 200px">Nao Devedores</td>
+                            <td>turma</td>
+                            <td>curso 4</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -234,6 +292,9 @@
 
             /*Lista todos Devedores de um mes especifico */
             $('.btn-devedor').on('click', function(){
+                $('#boxNaoDevedor').addClass('collapsed-box').slideUp();
+                $('#boxDevedor').removeClass('collapsed-box').slideDown();
+
                 var mes= $(this).attr('data-mes');
                 $.ajax({
                     url: '/api/getDevedoresMes',
@@ -243,21 +304,23 @@
                         if(rs.devedor.length<=0){
                             return;
                         }
-                        $('#boxNaoDevedor').addClass('collapsed-box').slideUp();
-                        $('#boxDevedor').removeClass('collapsed-box').slideDown(000001);
 
                         $('.rm').remove();
                         document.getElementById('tiluloMesDivida').innerHTML = mes;
                         document.getElementById('MesAnoDivida').innerHTML = 'Alunos Devedores'+' '+mes+'-'+ano;
                         $('MesAnoDivida').slideDown();
                         for(var k =0; k < rs.devedor.length; k++){
-                            $('<tr class="rm"><td>'+rs.devedor[k].nomeAluno+' '+ rs.devedor[k].apelido+'</td><td>'+rs.devedor[k].nomeTurma+'</td></tr>').hide().appendTo('#tabelaCorpoDevedores').fadeIn(1000);
+                            $('<tr class="rm"><td>'+rs.devedor[k].nomeAluno+' '+ rs.devedor[k].apelido+'</td><td>'+rs.devedor[k].turma+'</td><td>'+rs.devedor[k].curso+'</td><td>'+(rs.devedor[k].divida).toFixed(2)+' Mt'+'</td></tr>').hide().appendTo('#tabelaCorpoDevedores').fadeIn(1000);
                         }
                     }
                 })
             });
             /*lista todos nao devedores*/
             $('.btn-nao-devedor').on('click', function () {
+
+                $('#boxDevedor').addClass('collapsed-box').slideUp();
+                $('#boxNaoDevedor').removeClass('collapsed-box').slideDown();
+
                 var mes= $(this).attr('data-mes');
                 $.ajax({
                     url: '/api/getDevedoresMes',
@@ -267,15 +330,13 @@
                         if(rs.naodevedor.length<=0){
                             return;
                         }
-                        $('#boxDevedor').addClass('collapsed-box').slideUp();
-                        $('#boxNaoDevedor').removeClass('collapsed-box').slideDown();
 
                         $('.rm2').remove();
                         document.getElementById('tiluloMesPago').innerHTML = mes;
                         document.getElementById('MesAnoNaoDivida').innerHTML = 'Alunos Nao Devedores'+' '+mes+'-'+ano;
                         $('MesAnoNaoDivida').slideDown();
                         for(var k =0; k < rs.naodevedor.length; k++){
-                            $('<tr class="rm2"><td>'+rs.naodevedor[k].nomeAluno+' '+ rs.naodevedor[k].apelido+'</td><td>'+rs.naodevedor[k].nomeTurma+'</td></tr>').hide().appendTo('#tabelaCorpoNaoDevedor').fadeIn(1000);
+                            $('<tr class="rm2"><td>'+rs.naodevedor[k].nomeAluno+' '+ rs.naodevedor[k].apelido+'</td><td>'+rs.naodevedor[k].turma+'</td><td>'+rs.naodevedor[k].curso+'</td></tr>').hide().appendTo('#tabelaCorpoNaoDevedor').fadeIn(1000);
                         }
                     }
                 })
@@ -318,8 +379,28 @@
                     return;
                 }
                 var mesPago =  document.getElementById('tiluloMesPago').innerHTML;
-                window.location ='/'+'exportDevedoresPDF?mes='+mesPago+'&ano='+ano+'&tabela=naodevedor';
+                window.location ='/exportDevedoresPDF?mes='+mesPago+'&ano='+ano+'&tabela=naodevedor';
             });
+            
+            
+            /*Mais detalhes*/
+            $('.btn-detalhes').click(function () {
+                var code =$(this).attr('data-code');
+                $.ajax({
+                    url:'/api/getModal',
+                    type: 'POST',
+                    data: 'code='+code,
+                    success:function(data){
+                        $('#ModalDetalhesCorpo').html(data);
+                        $('#ModalDetalhes').modal({
+                            show: true,
+                            backdrop: "static"
+                        });
+                    }
+                });
+                return false;
+            })
+
         });
     </script>
 @endsection

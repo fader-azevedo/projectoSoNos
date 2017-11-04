@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Aluno;
+use App\Curso;
 use App\Def_Mensalidade;
 use App\Mensalidade;
 use App\Inscricao;
@@ -23,6 +24,7 @@ class MensalidadeController extends Controller{
     private $anos;
     private $anoDefido;
     private $numAlunos;
+    private $intervalo;
     public function __construct(){
         $this->mensalidade = new Mensalidade();
         $this->aluno = new Aluno();
@@ -36,6 +38,7 @@ class MensalidadeController extends Controller{
             $this->valorTotal = ($d->intervalo+1)*$d->valormensal;
             $this->valorMensal = $d->valormensal;
             $this->anoDefido = $d->ano;
+            $this->intervalo = $d->intervalo;
         }
     }
 
@@ -44,7 +47,7 @@ class MensalidadeController extends Controller{
         $mesesPagos = $this->getMesesPagos($this->anoDefido);
         $mesesAPagar = $this->getMesAPagar($this->anoDefido);
         $anosPay = $this->anos;
-        return view('mensalidade.listar',['valorMensal'=>$this->valorMensal,'valorTotal'=>$this->valorTotal, 'alu'=>$alunos,'numAlunos'=>$this->numAlunos,'anos'=>$anosPay,'mesesPagos'=>$mesesPagos,'mesesAPagar'=>$mesesAPagar]);
+        return view('mensalidade.listar',['valorMensal'=>$this->valorMensal,'valorTotal'=>$this->valorTotal, 'alu'=>$alunos,'numAlunos'=>$this->numAlunos,'anos'=>$anosPay,'mesesPagos'=>$mesesPagos,'mesesAPagar'=>$mesesAPagar,'intervalo'=>$this->intervalo]);
     }
 
     public function listarPorAluno(){
@@ -63,7 +66,8 @@ class MensalidadeController extends Controller{
         foreach ($mensalidade as $ms){$mesesPagos = $mesesPagos.' '.$ms->mes;}
         $mesNaoP = Mes::query()->select('nome')->whereNotIn('nome',explode(' ',trim(rtrim($mesesPagos))))->where('numero','>=',$def->numero)->get();
         $inscricao = Inscricao::query()->join('alunos','inscricaos.idAluno','=','alunos.id')
-            ->join('cursos','inscricaos.idCurso','=','cursos.id')->select('cursos.*')
+            ->join('cursos','inscricaos.idCurso','=','cursos.id')
+            ->select('cursos.*')
             ->where('idAluno',$_POST['idAluno'])->where('ano',$_POST['ano'])->get();
         return  response()->json(array('mensal'=> $mensalidade,'foto'=>$alun->foto,'mesesNao'=>$mesNaoP,'curso'=>$inscricao));
     }
@@ -79,15 +83,34 @@ class MensalidadeController extends Controller{
         $tabela =$_POST['tabela'];
         $idAlunos = PagamntoMensalidade::query()->join('mensalidades','pagamnto_mensalidades.idMensalidade','=','mensalidades.id')->select('idAluno')->where('mes',$_POST['mes'])->get();
         $ids='';
+//        $valorDivida=0;
         foreach ($idAlunos as $i){
             $ids = $i->idAluno.' '.$ids;
         }
         $arrayIds = explode(' ',trim(rtrim($ids)));
         if($tabela == 'devedor'){
-            $devedores = Aluno::query()->join('turma_alunos','turma_alunos.idAluno','=','alunos.id')->join('turmas','turma_alunos.idTurma','=','turmas.id')->select('turmas.nome as nomeTurma','alunos.nome as nomeAluno','alunos.*')->whereNotIn('idAluno',$arrayIds)->where('ano','=',$_POST['ano'])->get();
+//            $devedores = Aluno::query()->join('turma_alunos','turma_alunos.idAluno','=','alunos.id')
+//                ->join('turmas','turma_alunos.idTurma','=','turmas.id')
+//                ->select('turmas.nome as nomeTurma','alunos.nome as nomeAluno','alunos.*','cursos.nome as curso')
+//                ->whereNotIn('idAluno',$arrayIds)->where('ano','=',$_POST['ano'])->get();
+//
+//
+
+            $devedores = Inscricao::query()
+                ->join('alunos','alunos.id','=','inscricaos.idAluno')
+                ->join('cursos','cursos.id','=','inscricaos.idCurso')
+                ->join('turmas','turmas.idCurso','=','inscricaos.idCurso')
+                ->select('alunos.nome as nomeAluno','alunos.*','cursos.nome as curso','cursos.valormensal as divida','turmas.nome as turma')
+                ->whereNotIn('inscricaos.idAluno',$arrayIds)->where('inscricaos.ano','=',$_POST['ano'])->get();
             return response()->json(array('devedor'=>$devedores));
         }elseif ($tabela == 'naodevedor'){
-            $naddevedores = Aluno::query()->join('turma_alunos','turma_alunos.idAluno','=','alunos.id')->join('turmas','turma_alunos.idTurma','=','turmas.id')->select('turmas.nome as nomeTurma','alunos.nome as nomeAluno','alunos.*')->whereIn('idAluno',$arrayIds)->where('ano','=',$_POST['ano'])->get();
+
+            $naddevedores = Inscricao::query()
+                ->join('alunos','alunos.id','=','inscricaos.idAluno')
+                ->join('cursos','cursos.id','=','inscricaos.idCurso')
+                ->join('turmas','turmas.idCurso','=','inscricaos.idCurso')
+                ->select('alunos.nome as nomeAluno','alunos.*','cursos.nome as curso','cursos.valormensal as divida','turmas.nome as turma')
+                ->whereIn('inscricaos.idAluno',$arrayIds)->where('inscricaos.ano','=',$_POST['ano'])->get();
             return response()->json(array('naodevedor'=>$naddevedores));
         }
     }
@@ -114,5 +137,10 @@ class MensalidadeController extends Controller{
     public function getMesesPagos($ano){
         $mesesPagos = Mensalidade::query()->distinct()->select('mes')->where('ano',$ano)->get();
         return $mesesPagos;
+    }
+
+    public function getModal(){
+
+        return view('mensalidade.modal');
     }
 }
