@@ -62,9 +62,9 @@ class MensalidadeController extends Controller{
         $this->valorMensal =40;
         /*Para registo de mensalidade*/
         $mesesPagos = '';
-        $def = Def_Mensalidade::query()->join('mes','def__mensalidades.mescomeco','=','mes.numero')->select('mes.*')->where('ano',$_POST['ano'])->first();
+        $def = Def_Mensalidade::query()->join('mes','def__mensalidades.mescomeco','=','mes.numero')->select('mes.*','def__mensalidades.mesfim')->where('ano',$_POST['ano'])->first();
         foreach ($mensalidade as $ms){$mesesPagos = $mesesPagos.' '.$ms->mes;}
-        $mesNaoP = Mes::query()->select('nome')->whereNotIn('nome',explode(' ',trim(rtrim($mesesPagos))))->where('numero','>=',$def->numero)->get();
+        $mesNaoP = Mes::query()->select('nome')->whereNotIn('nome',explode(' ',trim(rtrim($mesesPagos))))->where('numero','>=',$def->numero)->where('numero','<=',$def->mesfim)->get();
         $inscricao = Inscricao::query()->join('alunos','inscricaos.idAluno','=','alunos.id')
             ->join('cursos','inscricaos.idCurso','=','cursos.id')
             ->select('cursos.*')
