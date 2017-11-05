@@ -5,6 +5,15 @@ Author: Carlos Alvarez
 Website: http://blacktie.co
 Premium: http://www.gridgum.com
 */
+
+
+
+.myP{
+    border-bottom: 2px solid #89ccdf;
+}
+.myP:last-child{
+    border: none;
+}
 #inPutAluno{
     width: 100%;
 }

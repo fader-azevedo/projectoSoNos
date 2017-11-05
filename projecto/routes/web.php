@@ -41,36 +41,36 @@ Route::get('exportDevedoresPDF',function (){
     $mesAno = $_GET['mes'].'-'.$_GET['ano'];
     $arrayIds = explode(' ',trim(rtrim($ids)));
 
-    if($tabela == 'devedor'){
-        $dados = Inscricao::query()
-            ->join('alunos','alunos.id','=','inscricaos.idAluno')
-            ->join('cursos','cursos.id','=','inscricaos.idCurso')
-            ->join('turmas','turmas.id','=','inscricaos.idCurso')
-            ->select('alunos.nome as nomeAluno','alunos.*','cursos.nome as curso','cursos.valormensal as divida','turmas.nome as turma')
-            ->whereNotIn('inscricaos.idAluno',$arrayIds)->where('inscricaos.ano','=',$_GET['ano'])->get();
+    $dados = Inscricao::query()
+        ->join('alunos','alunos.id','=','inscricaos.idAluno')
+        ->join('cursos','cursos.id','=','inscricaos.idCurso')
+        ->join('turmas','turmas.id','=','inscricaos.idCurso')
+        ->select('alunos.nome as nomeAluno','alunos.*','cursos.nome as curso','cursos.valormensal as divida','turmas.nome as turma')
+        ->whereNotIn('inscricaos.idAluno',$arrayIds)->where('inscricaos.ano','=',$_GET['ano'])->get();
 
-            $pdf = PDF::loadView('export.devedores',['dados'=>$dados,'mesAno'=>$mesAno]);
+
+    $dados2 = Inscricao::query()
+        ->join('alunos','alunos.id','=','inscricaos.idAluno')
+        ->join('cursos','cursos.id','=','inscricaos.idCurso')
+        ->join('turmas','turmas.idCurso','=','inscricaos.idCurso')
+        ->select('alunos.nome as nomeAluno','alunos.*','cursos.nome as curso','cursos.valormensal as divida','turmas.nome as turma')
+        ->whereIn('inscricaos.idAluno',$arrayIds)->where('inscricaos.ano','=',$_GET['ano'])->get();
+
+    if($tabela == 'devedor'){
+
+        $pdf = PDF::loadView('export.devedores',['dados'=>$dados,'mesAno'=>$mesAno]);
             return $pdf->download('deveores_'.$mesAno.'.pdf');
     }elseif ($tabela == 'naodevedor'){
-
-        $dados = Inscricao::query()
-            ->join('alunos','alunos.id','=','inscricaos.idAluno')
-            ->join('cursos','cursos.id','=','inscricaos.idCurso')
-            ->join('turmas','turmas.idCurso','=','inscricaos.idCurso')
-            ->select('alunos.nome as nomeAluno','alunos.*','cursos.nome as curso','cursos.valormensal as divida','turmas.nome as turma')
-            ->whereIn('inscricaos.idAluno',$arrayIds)->where('inscricaos.ano','=',$_GET['ano'])->get();
-
-        $pdf = PDF::loadView('export.naodevedores',['dados'=>$dados,'mesAno'=>$mesAno]);
+        $pdf = PDF::loadView('export.naodevedores',['dados'=>$dados2,'mesAno'=>$mesAno]);
         return $pdf->download('naoDeveores_'.$mesAno.'.pdf');
+    }elseif ($tabela == 'todos'){
+        $pdf = PDF::loadView('export.devsenao',['devedores'=>$dados,'honestos'=>$dados2,'mesAno'=>$mesAno]);
+        return $pdf->download('todosDeveNa_'.$mesAno.'.pdf');
     }
 });
 
 
 
-Route::get('modal',function () {
-
-    return view('mensalidade.modal');
-});
 
 Auth::routes();
 

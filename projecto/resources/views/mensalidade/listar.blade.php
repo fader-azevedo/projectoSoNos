@@ -107,10 +107,6 @@
                 <div  class="carousel-inner">
                     <div class="item active ">
                         <section class="col-sm-7 col-md-7 col-lg-7" style="padding-top: 14px">
-                            <button type="button"  class="btn btn-info" data-toggle="modal" data-target="#ModalDetalhes">
-                                Launch Info Modal
-                            </button>
-
                             <table class="table-striped" id="tabela1">
                                 <thead>
                                     <tr>
@@ -125,7 +121,7 @@
                                             <td class="">{{$ms->mes}}</td>
                                             <td><a data-mes="{{$ms->mes}}" class="btn btn-info btn-nao-devedor"><i class="fa fa-check"></i>&nbsp;{{\App\Mensalidade::query()->where('mes',$ms->mes)->count()}}</a></td>
                                             <td><a data-mes="{{$ms->mes}}" class="btn btn-danger btn-devedor"><i class="zmdi zmdi-close"></i>&nbsp;{{\App\Aluno::all()->count()-\App\Mensalidade::query()->where('mes',$ms->mes)->count()}}</a></td>
-                                            <td><a class="btn btn-primary btn-detalhes" data-code="1"><i class="zmdi zmdi-library"></i>&nbsp;Mais detalhes </a></td>
+                                            <td><a data-mes="{{$ms->mes}}" class="btn btn-primary btn-detalhes" data-code="1"><i class="zmdi zmdi-library"></i>&nbsp;Mais detalhes </a></td>
                                         </tr>
                                     @endforeach
 
@@ -231,53 +227,9 @@
         </div>
     </div>
 
-    <div class="modal fade" id="ModalDetalhes" data-backdrop="static">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Mes</h4>
-                </div>
-                <div class="modal-body" id="ModalDetalhesCorpo">
-                    <p>One fine body&hellip;</p>
-                    <table border="2" style="width: 100%">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Turma</th>
-                            <th>Curso</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr>
-                            <td style="height: 200px">Devedores</td>
-                            <td>
-                                turma <br/>
-                                turma2<br/>
-                                turma3<br/>
-                                turma <br/>
-                                turma2<br/>
-                                turma3<br/>turma <br/>
-                                turma2<br/>
-                                turma3<br/>
-                            </td>
-                            <td>curso 2</td>
-                        </tr>
-
-                        <tr>
-                            <td style="height: 200px">Nao Devedores</td>
-                            <td>turma</td>
-                            <td>curso 4</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline">Save changes</button>
-                </div>
+    <div class="modal modal-primary fade" id="ModalDetalhes" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="ModalDetalhesItems">
             </div>
         </div>
     </div>
@@ -299,7 +251,7 @@
                 $.ajax({
                     url: '/api/getDevedoresMes',
                     type: 'POST',
-                    data: {'mes': mes, 'ano': ano, 'tabela':'devedor'},
+                    data: {'mes': mes, 'ano': ano, 'tabela':'devedor','tipo':'naoModal'},
                     success: function (rs) {
                         if(rs.devedor.length<=0){
                             return;
@@ -325,7 +277,7 @@
                 $.ajax({
                     url: '/api/getDevedoresMes',
                     type: 'POST',
-                    data: {'mes': mes, 'ano': ano, 'tabela':'naodevedor'},
+                    data: {'mes': mes, 'ano': ano, 'tabela':'naodevedor','tipo':'naoModal'},
                     success: function (rs) {
                         if(rs.naodevedor.length<=0){
                             return;
@@ -381,17 +333,18 @@
                 var mesPago =  document.getElementById('tiluloMesPago').innerHTML;
                 window.location ='/exportDevedoresPDF?mes='+mesPago+'&ano='+ano+'&tabela=naodevedor';
             });
-            
+
             
             /*Mais detalhes*/
             $('.btn-detalhes').click(function () {
-                var code =$(this).attr('data-code');
+                var mes= $(this).attr('data-mes');
+
                 $.ajax({
-                    url:'/api/getModal',
+                    url: '/api/getDevedoresMes',
                     type: 'POST',
-                    data: 'code='+code,
+                    data: {'mes': mes, 'ano': ano, 'tabela':'todasTabelas','tipo':'simModel'},
                     success:function(data){
-                        $('#ModalDetalhesCorpo').html(data);
+                        $('#ModalDetalhesItems').html(data);
                         $('#ModalDetalhes').modal({
                             show: true,
                             backdrop: "static"
